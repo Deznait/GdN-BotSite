@@ -96,6 +96,7 @@ const linksList = [
 ];
 
 import { defineComponent, ref } from 'vue'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -105,6 +106,7 @@ export default defineComponent({
   },
 
   setup () {
+    const $q = useQuasar()
     const leftDrawerOpen = ref(false)
 
     return {
