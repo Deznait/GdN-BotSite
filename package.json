@@ -1,12 +1,13 @@
 {
   "name": "gdn-botsite",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "GdN BotSite",
+  "description": "Vue website for the Gremio de Nordrassil guild on Sanguino-EU",
+  "productName": "Gremio de Nordrassil - BotSite",
   "author": "Alvaro Olea Rojas <alvaroolear@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "quasar dev",
+    "dev:win": "cross-env QENV=DEV quasar dev",
     "build": "quasar build",
     "build:pwa": "quasar build -m pwa",
     "lint": "eslint --ext .js,.vue ./",
@@ -16,12 +17,15 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "firebase": "^8.7.0",
     "quasar": "^2.0.0",
     "vue-i18n": "^9.0.0-beta.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
     "@quasar/app": "^3.0.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^7.0.0",

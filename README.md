@@ -1,6 +1,6 @@
-# GdN BotSite (gdn-botsite)
+# Gremio de Nordrassil (gdn-botsite)
 
-A Quasar Framework app
+Vue website for the Gremio de Nordrassil guild on Sanguino-EU
 
 ## Install the dependencies
 ```bash

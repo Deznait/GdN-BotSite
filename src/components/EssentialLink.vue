@@ -2,8 +2,8 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
-    :href="link"
+    target="_self"
+    :to="link"
   >
     <q-item-section
       v-if="icon"
@@ -19,6 +19,7 @@
       </q-item-label>
     </q-item-section>
   </q-item>
+  <q-separator v-if="separator" />
 </template>
 
 <script>
@@ -45,6 +46,11 @@ export default defineComponent({
     icon: {
       type: String,
       default: ''
+    },
+
+    separator: {
+      type: Boolean,
+      default: false
     }
   }
 })

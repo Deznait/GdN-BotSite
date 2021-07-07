@@ -139,9 +139,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `GdN BotSite`,
-        short_name: `GdN BotSite`,
-        description: `A Quasar Framework app`,
+        name: `Gremio de Nordrassil`,
+        short_name: `Gremio de Nordrassil`,
+        description: `Vue website for the Gremio de Nordrassil guild on Sanguino-EU`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
