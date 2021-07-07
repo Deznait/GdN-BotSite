@@ -149,31 +149,6 @@ const linksList = [
         icon: "chat",
         link: "https://chat.quasar.dev",
     },
-    {
-        title: "Forum",
-        caption: "forum.quasar.dev",
-        icon: "record_voice_over",
-        link: "https://forum.quasar.dev",
-    },
-    {
-        title: "Twitter",
-        caption: "@quasarframework",
-        icon: "rss_feed",
-        link: "https://twitter.quasar.dev",
-    },
-    {
-        title: "Facebook",
-        caption: "@QuasarFramework",
-        icon: "public",
-        link: "https://facebook.quasar.dev",
-        separator: true,
-    },
-    {
-        title: "Quasar Awesome",
-        caption: "Community Quasar projects",
-        icon: "favorite",
-        link: "https://awesome.quasar.dev",
-    },
 ];
 
 import { defineComponent, ref } from "vue";
@@ -185,7 +160,6 @@ export default defineComponent({
     components: {
         EssentialLink,
     },
-
     setup() {
         const $q = useQuasar();
         const leftDrawerOpen = ref(false);
@@ -198,14 +172,16 @@ export default defineComponent({
             },
         };
     },
+    methods: {
+        logOut() {
+            console.log("logOut");
+            console.log("TEST");
+        }
+    }
 });
 </script>
 
 <style lang="scss" scoped>
-.fixed-bottom {
-
-}
-
 #avatar {
     padding: 20px;
 }
@@ -214,13 +190,5 @@ export default defineComponent({
     height: 130px;
     padding: 20px;
     background-color: #009688;
-}
-
-#user-name {
-
-}
-
-#user-actions {
-
 }
 </style>

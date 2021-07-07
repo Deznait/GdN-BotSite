@@ -9,6 +9,7 @@
 /* eslint-env node */
 const ESLintPlugin = require('eslint-webpack-plugin')
 const { configure } = require('quasar/wrappers');
+const env = require('quasar-dotenv').config();
 
 module.exports = configure(function (ctx) {
   return {
@@ -24,6 +25,7 @@ module.exports = configure(function (ctx) {
     boot: [
       'i18n',
       'axios',
+      'firebase',
     ],
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -48,7 +50,7 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
-
+      env: env,
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
