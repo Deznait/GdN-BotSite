@@ -1,80 +1,75 @@
 <template>
     <q-page padding>
-        <span> {{ testprocess }} </span>
         <div class="row">
-            <p class="col-12">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Reprehenderit hic tempora voluptas corrupti cumque dolorem
-                maiores cupiditate non explicabo, saepe pariatur quae dicta
-                adipisci a, officiis odit placeat vitae recusandae.
-            </p>
-        </div>
-        <div class="row">
-            <p class="col-12 col-sm-6">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Tempore, ducimus sunt totam beatae inventore excepturi fugiat
-                obcaecati ratione, deserunt, commodi nesciunt minus tenetur iure
-                quasi ut! Iste hic rem non.
-            </p>
-            <p class="col-12 col-sm-6">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Tempore, ducimus sunt totam beatae inventore excepturi fugiat
-                obcaecati ratione, deserunt, commodi nesciunt minus tenetur iure
-                quasi ut! Iste hic rem non.
-            </p>
-        </div>
-        <div class="row">
-            <p class="col">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati cumque quas expedita minus ullam tempora aut
-                reiciendis tenetur aperiam, vero eligendi beatae. Non, quia!
-                Ipsam provident velit deleniti amet laborum.
-            </p>
-            <p class="col">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati cumque quas expedita minus ullam tempora aut
-                reiciendis tenetur aperiam, vero eligendi beatae. Non, quia!
-                Ipsam provident velit deleniti amet laborum.
-            </p>
-            <p class="col">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati cumque quas expedita minus ullam tempora aut
-                reiciendis tenetur aperiam, vero eligendi beatae. Non, quia!
-                Ipsam provident velit deleniti amet laborum.
-            </p>
-        </div>
-        <div class="row">
-            <p class="col bg-warning">Lorem, ipsum dolor.</p>
-            <p>Lorem, ipsum dolor.</p>
-        </div>
-
-        <div class="row items-center bg-dark text-white" style="height: 300px">
-            <div class="col bg-positive">One of three cols</div>
-            <div class="col bg-positive">One of three cols</div>
-            <div class="col bg-positive">One of three cols</div>
+            <div class="q-pa-md">
+                <q-table
+                    title="Treats"
+                    :rows="members"
+                    :columns="columns"
+                    row-key="name"
+                    :pagination="initialPagination"
+                >
+                    <template v-slot:body-cell-class="props">
+                        <q-td class="vertical-middle" :props="props">
+                            <ClassIcon :classid="props.row.character.playable_class.id"/>
+                        </q-td>
+                    </template>
+                </q-table>
+            </div>
         </div>
     </q-page>
 </template>
 
 <script>
+import ClassIcon from "components/ClassIcon";
+
 import { defineComponent } from "vue";
+import dataext from "src/members.json";
 
 export default defineComponent({
     name: "PageMembers",
-    computed: {
-        testprocess() {
-            return [
-                process.env.API_URL,
-                process.env.FIREBASE_APIKEY,
-                process.env.FIREBASE_AUTHDOMAIN,
-                process.env.FIREBASE_DATABASEURL,
-                process.env.FIREBASE_PROJECTID,
-                process.env.FIREBASE_STORAGEBUCKET,
-                process.env.FIREBASE_MESSAGINGSENDERID,
-                process.env.FIREBASE_APPID,
-                process.env.FIREBASE_MEASUREMENTID,
-            ];
-        },
+    components: {
+        ClassIcon,
     },
+    data() {
+        return {
+            members: dataext.members,
+            initialPagination: {
+                sortBy: 'name',
+                descending: false,
+                page: 1,
+                rowsPerPage: 50
+            },
+            columns: [
+                {
+                    name: "name",
+                    required: true,
+                    label: "Nombre",
+                    align: "left",
+                    field: (row) => row.character.name,
+                    format: (val) => `${val}`,
+                    sortable: true,
+                },
+                {
+                    name: "class",
+                    required: true,
+                    label: "Clase",
+                    align: "center",
+                    field: (row) => row.character.playable_class.id,
+                    sortable: true,
+                },
+                { name: "realm", label: "Reino", field: (row) => row.character.realm.slug },
+                { name: "points", label: "Puntos", field: "fat", sortable: true },
+                {
+                    name: "calcium",
+                    label: "Calcium (%)",
+                    field: "calcium",
+                    sortable: true,
+                    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+                },
+            ],
+        };
+    },
+    computed: {},
 });
 </script>

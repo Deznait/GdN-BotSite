@@ -1,6 +1,7 @@
 <template>
   <q-item
     clickable
+    exact
     tag="a"
     target="_self"
     :to="link"

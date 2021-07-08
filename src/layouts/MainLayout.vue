@@ -14,7 +14,7 @@
                 <q-toolbar-title>
                     <q-avatar>
                         <q-img
-                            src="/logo.png"
+                            src="~assets/logo.png"
                             spinner-color="white"
                             :ratio="1"
                         />
@@ -35,31 +35,6 @@
                         icon="help"
                     >
                         <q-tooltip>Ayuda</q-tooltip>
-                    </q-btn>
-
-                    <q-btn
-                        to="/profile"
-                        v-if="$route.path !== '/profile'"
-                        round
-                        dense
-                        flat
-                        color="text-grey-7"
-                    >
-                        <q-avatar size="28px">
-                            <img src="/icons/favicon-32x32.png" />
-                        </q-avatar>
-                        <q-tooltip>Perfil de Usuario</q-tooltip>
-                    </q-btn>
-                    <q-btn
-                        to="/logout"
-                        round
-                        dense
-                        flat
-                        color="text-grey-7"
-                        size="16px"
-                        icon="logout"
-                    >
-                        <q-tooltip>Salir</q-tooltip>
                     </q-btn>
                 </div>
             </q-toolbar>
@@ -137,17 +112,7 @@ const linksList = [
     {
         title: "Miembros",
         icon: "groups",
-        link: "/members",
-    },
-    {
-        title: "Roles",
-        icon: "code",
-        link: "https://github.com/quasarframework",
-    },
-    {
-        title: "Acciones",
-        icon: "chat",
-        link: "https://chat.quasar.dev",
+        link: "/miembros",
     },
 ];
 
@@ -174,8 +139,7 @@ export default defineComponent({
     },
     methods: {
         logOut() {
-            console.log("logOut");
-            console.log("TEST");
+            console.log("logOut TEST");
         }
     }
 });
