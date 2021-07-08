@@ -87,9 +87,8 @@ export default {
 
         function fn(e) {
             for (var i=tooltip.length; i--;) {
-                console.log(e);
-                tooltip[i].style.left = e.pageX + 'px';
-                tooltip[i].style.top = e.pageY + 'px';
+                tooltip[i].style.left = e.layerX + 'px';
+                tooltip[i].style.top = e.layerY + 'px';
             }
         }
     },
