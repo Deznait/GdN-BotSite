@@ -169,10 +169,10 @@ export default {
     }
 
     .ClassIcon-tooltip {
-        //display: none;
+        display: none;
         background: #211510;
         color: #FFFFFF;
-        margin-left: 28px;
+        margin-left: 20px;
         padding: 10px;
         position: absolute;
         z-index: 1000;
