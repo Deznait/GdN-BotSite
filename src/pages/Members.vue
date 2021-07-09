@@ -46,7 +46,7 @@ const realmNames = {
     zuljin: "Zul'Jin",
     uldum: "Uldum",
     sanguino: "Sanguino",
-    "shendralar	": "Shen'dralar",
+    shendralar: "Shen'dralar",
 };
 
 export default defineComponent({
@@ -99,6 +99,7 @@ export default defineComponent({
                     label: "Puntos",
                     field: "fat",
                     sortable: true,
+                    format: (val) => `60`,
                 },
             ],
         };
