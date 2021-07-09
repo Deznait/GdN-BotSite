@@ -1,7 +1,7 @@
 <template>
     <q-page padding>
         <div class="row">
-            <div class="q-pa-md">
+            <div class="col q-pa-md">
                 <q-table
                     title="Treats"
                     :rows="members"

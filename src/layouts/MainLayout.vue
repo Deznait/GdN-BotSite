@@ -25,17 +25,41 @@
                 <q-space />
 
                 <div class="q-gutter-sm row items-center no-wrap">
-                    <q-btn
-                        v-if="$route.path !== '/help'"
-                        round
-                        dense
-                        flat
-                        color="yellow"
-                        size="16px"
-                        icon="help"
-                    >
-                        <q-tooltip>Ayuda</q-tooltip>
-                    </q-btn>
+                    <a href="https://www.youtube.com/user/kachicho100" target="_blank">
+                        <q-btn
+                            dense
+                            flat
+                            color="white"
+                            size="16px"
+                            icon="mdi-youtube"
+                        >
+                            <q-tooltip>Síguenos en Youtube</q-tooltip>
+                        </q-btn>
+                    </a>
+
+                    <a href="https://twitter.com/gremionord" target="_blank">
+                        <q-btn
+                            dense
+                            flat
+                            color="white"
+                            size="16px"
+                            icon="mdi-twitter"
+                        >
+                            <q-tooltip>Síguenos en Twitter</q-tooltip>
+                        </q-btn>
+                    </a>
+
+                    <a href="https://www.facebook.com/gremionord" target="_blank">
+                        <q-btn
+                            dense
+                            flat
+                            color="white"
+                            size="16px"
+                            icon="mdi-facebook"
+                        >
+                            <q-tooltip>Síguenos en Facebook</q-tooltip>
+                        </q-btn>
+                    </a>
                 </div>
             </q-toolbar>
         </q-header>
