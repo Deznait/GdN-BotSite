@@ -135,6 +135,7 @@ export default defineComponent({
     data() {
         return {
             members: dataext.members,
+            memberSQL: "",
             initialPagination: {
                 sortBy: "name",
                 descending: false,
@@ -181,7 +182,21 @@ export default defineComponent({
             ],
         };
     },
-    mounted() {},
+    mounted() {
+        let attributes = ["id","name","class","realm","rank","points"];
+        this.members.forEach(member => {
+            let sql = "("
+            + member.id + ", "
+            + "'" + member.name + "', "
+            + member.class + ", "
+            + "'" +  member.realm + "', "
+            + member.rank + ", "
+            + member.points
+            + "),";
+
+            this.memberSQL += sql;
+        });
+    },
     methods: {
         rankName: function (value) {
             return rankNames[value];

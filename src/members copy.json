@@ -59,19 +59,9 @@
                     "class": 11,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 88928568,
-            "name": "Druidii",
-            "class": 11,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 121961753,
@@ -105,8 +95,7 @@
                     "class": 9,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 154615191,
@@ -114,8 +103,7 @@
                     "class": 7,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 175260392,
@@ -123,8 +111,7 @@
                     "class": 1,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 133870121,
@@ -132,46 +119,9 @@
                     "class": 11,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 133409276,
-            "name": "Pyrujo",
-            "class": 9,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 154615191,
-            "name": "Souck",
-            "class": 7,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 175260392,
-            "name": "Lexkar",
-            "class": 1,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 133870121,
-            "name": "Seyck",
-            "class": 11,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 134762502,
@@ -187,8 +137,7 @@
                     "class": 10,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 151838540,
@@ -196,8 +145,7 @@
                     "class": 3,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 151104512,
@@ -205,8 +153,7 @@
                     "class": 1,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 144386241,
@@ -214,8 +161,7 @@
                     "class": 4,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 139240206,
@@ -223,8 +169,7 @@
                     "class": 12,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 140144016,
@@ -232,8 +177,7 @@
                     "class": 8,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 150635828,
@@ -241,8 +185,7 @@
                     "class": 9,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 139001834,
@@ -250,8 +193,7 @@
                     "class": 11,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 151511123,
@@ -259,8 +201,7 @@
                     "class": 6,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 134875898,
@@ -268,8 +209,7 @@
                     "class": 2,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 141489397,
@@ -277,109 +217,9 @@
                     "class": 5,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 151104463,
-            "name": "Adepthos",
-            "class": 10,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 151838540,
-            "name": "Antídothos",
-            "class": 3,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 151104512,
-            "name": "Jexthos",
-            "class": 1,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 144386241,
-            "name": "Hurthos",
-            "class": 4,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 139240206,
-            "name": "Ilícithos",
-            "class": 12,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 140144016,
-            "name": "Arcannthos",
-            "class": 8,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 150635828,
-            "name": "Conflicthos",
-            "class": 9,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 139001834,
-            "name": "Delithos",
-            "class": 11,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 151511123,
-            "name": "Nekrathos",
-            "class": 6,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 134875898,
-            "name": "Pathos",
-            "class": 2,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 141489397,
-            "name": "Zanzu",
-            "class": 5,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 134776037,
@@ -404,8 +244,7 @@
                     "class": 11,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 134735770,
@@ -413,8 +252,7 @@
                     "class": 1,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 137757287,
@@ -422,37 +260,9 @@
                     "class": 12,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 135575259,
-            "name": "Chacrack",
-            "class": 11,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 134735770,
-            "name": "Orcrack",
-            "class": 1,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 137757287,
-            "name": "Vilcrack",
-            "class": 12,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 134948437,
@@ -593,19 +403,9 @@
                     "class": 11,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 158770450,
-            "name": "Pumø",
-            "class": 11,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 145782878,
@@ -657,8 +457,7 @@
                     "class": 2,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 151588181,
@@ -666,8 +465,7 @@
                     "class": 11,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 139174261,
@@ -675,37 +473,9 @@
                     "class": 1,
                     "rank": 2,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 139365462,
-            "name": "Zelles",
-            "class": 2,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 151588181,
-            "name": "Kroxrog",
-            "class": 11,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 139174261,
-            "name": "Warkrox",
-            "class": 1,
-            "rank": 2,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 154057409,
@@ -730,8 +500,7 @@
                     "class": 7,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 128502651,
@@ -739,8 +508,7 @@
                     "class": 3,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 133042941,
@@ -748,8 +516,7 @@
                     "class": 6,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 137682653,
@@ -757,46 +524,9 @@
                     "class": 12,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 156073238,
-            "name": "Surâx",
-            "class": 7,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 128502651,
-            "name": "Surax",
-            "class": 3,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 133042941,
-            "name": "Suraa",
-            "class": 6,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 137682653,
-            "name": "Suräx",
-            "class": 12,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 154370279,
@@ -812,19 +542,9 @@
                     "class": 12,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 175445678,
-            "name": "Nyxhema",
-            "class": 12,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 155127617,
@@ -934,6 +654,15 @@
             "alts": ""
         },
         {
+            "id": 163991818,
+            "name": "Armordrak",
+            "class": 8,
+            "rank": 3,
+            "realm": "sanguino",
+            "points": 0,
+            "alts": ""
+        },
+        {
             "id": 163994969,
             "name": "Armor",
             "class": 12,
@@ -947,8 +676,7 @@
                     "class": 12,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 178422133,
@@ -956,8 +684,7 @@
                     "class": 5,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 175311419,
@@ -965,8 +692,7 @@
                     "class": 1,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 163991818,
@@ -974,46 +700,9 @@
                     "class": 8,
                     "rank": 3,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 178724124,
-            "name": "Armordps",
-            "class": 12,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 178422133,
-            "name": "Armør",
-            "class": 5,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 175311419,
-            "name": "Notarmor",
-            "class": 1,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 163991818,
-            "name": "Armordrak",
-            "class": 8,
-            "rank": 3,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 174471010,
@@ -1029,19 +718,9 @@
                     "class": 3,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 175940442,
-            "name": "Kaigrez",
-            "class": 3,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 174678766,
@@ -1084,8 +763,7 @@
                     "class": 7,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 163101504,
@@ -1093,28 +771,9 @@
                     "class": 12,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 177314907,
-            "name": "Mokoman",
-            "class": 7,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 163101504,
-            "name": "Mokoto",
-            "class": 12,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 175390032,
@@ -1130,8 +789,7 @@
                     "class": 11,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 176018683,
@@ -1139,8 +797,7 @@
                     "class": 2,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 176215556,
@@ -1148,37 +805,9 @@
                     "class": 4,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 178742384,
-            "name": "Docvanzaløl",
-            "class": 11,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 176018683,
-            "name": "Thørian",
-            "class": 2,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 176215556,
-            "name": "Esteizam",
-            "class": 4,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 175407192,
@@ -1293,8 +922,7 @@
                     "class": 9,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 178235878,
@@ -1302,28 +930,9 @@
                     "class": 5,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 178283991,
-            "name": "Imril",
-            "class": 9,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 178235878,
-            "name": "Ieda",
-            "class": 5,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 176808052,
@@ -1411,8 +1020,7 @@
                     "class": 12,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 177625089,
@@ -1420,28 +1028,9 @@
                     "class": 3,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 178719916,
-            "name": "Souta",
-            "class": 12,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 177625089,
-            "name": "Sxut",
-            "class": 3,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 177671659,
@@ -1484,8 +1073,7 @@
                     "class": 7,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 177211309,
@@ -1493,8 +1081,7 @@
                     "class": 1,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 },
                 {
                     "id": 178728057,
@@ -1502,37 +1089,9 @@
                     "class": 5,
                     "rank": 6,
                     "realm": "sanguino",
-                    "points": 0,
-                    "alts": ""
+                    "points": 0
                 }
             ]
-        },
-        {
-            "id": 176721743,
-            "name": "Gëne",
-            "class": 7,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 177211309,
-            "name": "Gëné",
-            "class": 1,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
-        },
-        {
-            "id": 178728057,
-            "name": "Gënë",
-            "class": 5,
-            "rank": 6,
-            "realm": "sanguino",
-            "points": 0,
-            "alts": ""
         },
         {
             "id": 178222795,
