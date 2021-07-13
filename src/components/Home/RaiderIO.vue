@@ -34,7 +34,7 @@
                             class="
                                 RaidProgress-difficulties
                                 flex flex-center
-                                q-ma-md
+                                q-my-md
                             "
                         >
                             <div class="RaidProgress-difficulty-name">
