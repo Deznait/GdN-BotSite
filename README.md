@@ -1,6 +1,6 @@
-# Gremio de Nordrassil (gdn-botsite)
+# Gremio de Nordrassil (gdn-botsite) ![v0.1.0](https://img.shields.io/badge/version-v0.1.0-%23f58142)
 
-Vue website for the Gremio de Nordrassil guild on Sanguino-EU
+Vue website for the Gremio de Nordrassil guild on Sanguino-EU. It's a work in progress.
 
 ## Install the dependencies
 ```bash

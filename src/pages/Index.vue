@@ -1,17 +1,37 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
-  </q-page>
+    <q-page padding>
+        <div class="row">
+            <div class="col">
+                <RaiderIO></RaiderIO>
+            </div>
+            <div class="col">
+                <span>Block2</span>
+            </div>
+            <div class="col">
+                <span>Block3</span>
+            </div>
+        </div>
+        <div class="row" style="height:100%">
+            <div class="col flex flex-center">
+                <img
+                    alt="Gremio de Nordrassil logo"
+                    src="~assets/logo.png"
+                    style="width: 200px; height: 200px"
+                />
+            </div>
+        </div>
+    </q-page>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import RaiderIO from "src/components/Home/RaiderIO.vue";
+
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'PageIndex'
-})
+    name: "PageIndex",
+    components: {
+        RaiderIO,
+    },
+});
 </script>
