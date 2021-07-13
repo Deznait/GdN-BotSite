@@ -1,13 +1,13 @@
 <template>
     <q-page padding>
         <div class="row">
-            <div class="col">
+            <div class="col-12 col-md-4">
                 <RaiderIO></RaiderIO>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-4">
                 <span>Block2</span>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-4">
                 <span>Block3</span>
             </div>
         </div>
