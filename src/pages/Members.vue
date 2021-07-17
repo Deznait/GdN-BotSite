@@ -173,12 +173,6 @@ export default defineComponent({
                     field: (row) => row.realm,
                     format: (val) => this.realmName(val),
                 },
-                {
-                    name: "points",
-                    label: "Puntos",
-                    field: (row) => row.points,
-                    sortable: true,
-                },
             ],
         };
     },
