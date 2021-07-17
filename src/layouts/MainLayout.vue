@@ -138,6 +138,11 @@ const linksList = [
         icon: "groups",
         link: "/miembros",
     },
+    {
+        title: "Puntos",
+        icon: "format_list_numbered",
+        link: "/puntos",
+    },
 ];
 
 import { defineComponent, ref } from "vue";
