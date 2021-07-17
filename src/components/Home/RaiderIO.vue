@@ -1,5 +1,5 @@
 <template>
-    <div class="q-py-md">
+    <div class="RaiderIO q-py-md">
         <div class="q-gutter-y-md">
             <q-card>
                 <q-tabs
@@ -80,6 +80,9 @@
                             label="Más info en RaiderIO"
                         />
                     </a>
+                    <q-btn dense flat color="grey" size="12px" icon="autorenew" @click="callAPI" v-if="1==0">
+                        <q-tooltip>Recargar</q-tooltip>
+                    </q-btn>
                 </div>
             </q-card>
         </div>
@@ -88,7 +91,6 @@
 
 <script>
 import axios from "axios";
-import { ref } from "vue";
 import { useQuasar } from "quasar";
 
 const realmNames = {
@@ -102,20 +104,31 @@ export default {
     data() {
         return {
             guildInfo: "",
+            raidTab: "sanctum-of-domination",
         };
     },
-    setup() {
-        
-
-        return {
-            raidTab: ref("sanctum-of-domination"),
-        };
-    },
+    setup() {},
     mounted() {
         const $q = useQuasar();
         const savedGuildInfo = $q.localStorage.getItem("savedGuildInfo");
 
-        if(savedGuildInfo === null){
+        if (savedGuildInfo === null) {
+            this.callAPI();
+        } else {
+            const date = new Date();
+            const Difference_In_Days = (date.getTime() - savedGuildInfo.date_fetched) / (1000 * 3600 * 24);
+
+            if (Difference_In_Days >= 2.0) {
+                this.callAPI();
+            }
+
+            this.guildInfo = savedGuildInfo;
+        }
+    },
+    methods: {
+        async callAPI() {
+            const $q = useQuasar();
+
             // Send a POST request
             axios({
                 method: "get",
@@ -129,7 +142,7 @@ export default {
             }).then(
                 (response) => {
                     let guild_info = this.processInfo(response);
-                    $q.localStorage.set("savedGuildInfo", guild_info)
+                    $q.localStorage.set("savedGuildInfo", guild_info);
                     this.guildInfo = guild_info;
                 },
                 (error) => {
@@ -137,11 +150,7 @@ export default {
                     console.log(error);
                 }
             );
-        }else {
-            this.guildInfo = savedGuildInfo;
-        }
-    },
-    methods: {
+        },
         processInfo(response) {
             let guild_info = {
                 name: response.data.name,
@@ -149,6 +158,7 @@ export default {
                 realm: response.data.realm,
                 region: response.data.region,
                 raids: {},
+                date_fetched: new Date().getTime(),
             };
 
             // Add the raid to the object, and add the guild progression
@@ -223,69 +233,75 @@ export default {
 </script>
 
 <style lang="scss">
-.RaidProgress-difficulties {
-    line-height: 1.5;
-    text-transform: uppercase;
-
-    .RaidProgress-difficulty-name {
-        width: 80px;
+.RaiderIO {
+    .q-tab-panel {
+        padding: 16px 16px 0 16px;
     }
 
-    .Progressbar {
-        width: calc(100% - 80px);
-        border: 1px solid hsla(0, 0%, 100%, 0.2);
-        position: relative;
+    .RaidProgress-difficulties {
+        line-height: 1.5;
+        text-transform: uppercase;
 
-        .q-linear-progress__track {
-            background: #181818 !important;
-        }
-        .q-linear-progress__model {
-            color: transparent;
+        .RaidProgress-difficulty-name {
+            width: 80px;
         }
 
-        .Progressbar-fraction {
-            text-shadow: 0 0 1px transparent, 0 1px 2px rgba(0, 0, 0, 0.8);
-        }
+        .Progressbar {
+            width: calc(100% - 80px);
+            border: 1px solid hsla(0, 0%, 100%, 0.2);
+            position: relative;
 
-        &.progresslevel_low {
-            .q-linear-progress__model {
-                background: #99755c;
-                background: -webkit-gradient(
-                    linear,
-                    left top,
-                    right top,
-                    from(#69503f),
-                    to(#99755c)
-                );
-                background: linear-gradient(90deg, #69503f 0, #99755c);
+            .q-linear-progress__track {
+                background: #181818 !important;
             }
-        }
-
-        &.progresslevel_medium {
             .q-linear-progress__model {
-                background: #c76700;
-                background: -webkit-gradient(
-                    linear,
-                    left top,
-                    right top,
-                    from(#7b3f00),
-                    to(#c76700)
-                );
-                background: linear-gradient(90deg, #7b3f00 0, #c76700);
+                color: transparent;
             }
-        }
 
-        &.progresslevel_high {
-            .q-linear-progress__model {
-                background: #1b9601;
-                background: -webkit-gradient(
-                    linear,
-                    left top,
-                    right top,
-                    from(#0d4a00),
-                    to(#1b9601)
-                );
-                background: linear-gradient(90deg, #0d4a00 0, #1b9601);
+            .Progressbar-fraction {
+                text-shadow: 0 0 1px transparent, 0 1px 2px rgba(0, 0, 0, 0.8);
+            }
+
+            &.progresslevel_low {
+                .q-linear-progress__model {
+                    background: #99755c;
+                    background: -webkit-gradient(
+                        linear,
+                        left top,
+                        right top,
+                        from(#69503f),
+                        to(#99755c)
+                    );
+                    background: linear-gradient(90deg, #69503f 0, #99755c);
+                }
+            }
+
+            &.progresslevel_medium {
+                .q-linear-progress__model {
+                    background: #c76700;
+                    background: -webkit-gradient(
+                        linear,
+                        left top,
+                        right top,
+                        from(#7b3f00),
+                        to(#c76700)
+                    );
+                    background: linear-gradient(90deg, #7b3f00 0, #c76700);
+                }
+            }
+
+            &.progresslevel_high {
+                .q-linear-progress__model {
+                    background: #1b9601;
+                    background: -webkit-gradient(
+                        linear,
+                        left top,
+                        right top,
+                        from(#0d4a00),
+                        to(#1b9601)
+                    );
+                    background: linear-gradient(90deg, #0d4a00 0, #1b9601);
+                }
             }
         }
     }
