@@ -1,11 +1,11 @@
 <template>
-  <q-page padding>
-    <!-- content -->
-  </q-page>
+    <q-page id="PagePuntos" padding>
+        <!-- content -->
+    </q-page>
 </template>
 
 <script>
 export default {
-  // name: 'PageName',
-}
+    name: 'PagePuntos',
+};
 </script>

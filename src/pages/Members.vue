@@ -1,8 +1,9 @@
 <template>
-    <q-page padding>
+    <q-page id="PageMembers" padding>
         <div class="row">
             <div class="col q-pa-md">
                 <q-table
+                    id="members-table"
                     title="Miembros"
                     :rows="members"
                     :columns="columns"
@@ -10,6 +11,7 @@
                     :pagination="initialPagination"
                     rows-per-page-label="Por página"
                     :rows-per-page-options="[10, 25, 50]"
+                    :loading="loadingTable"
                 >
                     <template v-slot:header="props">
                         <q-tr :props="props">
@@ -24,6 +26,14 @@
                         </q-tr>
                     </template>
 
+                    <template v-slot:top-right>
+                        <q-input borderless dense debounce="300" v-model="filter" placeholder="Buscar">
+                        <template v-slot:append>
+                            <q-icon name="search" />
+                        </template>
+                        </q-input>
+                    </template>
+                    
                     <template v-slot:body="props">
                         <q-tr
                             :props="props"
@@ -60,7 +70,10 @@
                             <q-td colspan="100%">
                                 <div class="text-left">
                                     Más info para este pj: {{ props.row.name }}.
-                                    <q-list v-if="props.row.alts.length" bordered>
+                                    <q-list
+                                        v-if="props.row.alts.length"
+                                        bordered
+                                    >
                                         <q-item
                                             v-for="alt in props.row.alts"
                                             :key="alt.id"
@@ -69,7 +82,9 @@
                                             v-ripple
                                         >
                                             <q-item-section avatar>
-                                                <ClassIcon :classid="alt.class" />
+                                                <ClassIcon
+                                                    :classid="alt.class"
+                                                />
                                             </q-item-section>
 
                                             <q-item-section>
@@ -95,6 +110,10 @@
                         <q-td class="vertical-middle" :props="props">
                             <ClassIcon :classid="props.row.class" />
                         </q-td>
+                    </template>
+
+                    <template v-slot:loading>
+                        <q-inner-loading showing color="primary" />
                     </template>
                 </q-table>
             </div>
@@ -134,13 +153,15 @@ export default defineComponent({
     },
     data() {
         return {
+            loadingTable: false,
+            filter: "",
             members: dataext.members,
             memberSQL: "",
             initialPagination: {
                 sortBy: "name",
                 descending: false,
                 page: 1,
-                rowsPerPage: 50,
+                rowsPerPage: 25,
             },
             columns: [
                 {
@@ -177,16 +198,24 @@ export default defineComponent({
         };
     },
     mounted() {
-        let attributes = ["id","name","class","realm","rank","points"];
-        this.members.forEach(member => {
-            let sql = "("
-            + member.id + ", "
-            + "'" + member.name + "', "
-            + member.class + ", "
-            + "'" +  member.realm + "', "
-            + member.rank + ", "
-            + member.points
-            + "),";
+        let attributes = ["id", "name", "class", "realm", "rank", "points"];
+        this.members.forEach((member) => {
+            let sql =
+                "(" +
+                member.id +
+                ", " +
+                "'" +
+                member.name +
+                "', " +
+                member.class +
+                ", " +
+                "'" +
+                member.realm +
+                "', " +
+                member.rank +
+                ", " +
+                member.points +
+                "),";
 
             this.memberSQL += sql;
         });
@@ -201,3 +230,15 @@ export default defineComponent({
     },
 });
 </script>
+
+<style lang="scss" scoped>
+#PageMembers {
+    #members-table {
+        .q-table__middle { 
+            .q-tr {
+                cursor: pointer;
+            }
+        }
+    }
+}
+</style>
