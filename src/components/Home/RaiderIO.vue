@@ -1,5 +1,5 @@
 <template>
-    <div class="RaiderIO q-py-md">
+    <div class="RaiderIO">
         <div class="q-gutter-y-md">
             <q-card>
                 <q-tabs

@@ -1,11 +1,11 @@
 <template>
     <q-page padding>
-        <div class="row">
+        <div class="row q-col-gutter-md">
             <div class="col-12 col-md-4">
                 <RaiderIO></RaiderIO>
             </div>
             <div class="col-12 col-md-4">
-                <span>Block2</span>
+                <WoWProgress></WoWProgress>
             </div>
             <div class="col-12 col-md-4">
                 <span>Block3</span>
@@ -25,6 +25,7 @@
 
 <script>
 import RaiderIO from "src/components/Home/RaiderIO.vue";
+import WoWProgress from "src/components/Home/WoWProgress.vue";
 
 import { defineComponent } from "vue";
 
@@ -32,6 +33,7 @@ export default defineComponent({
     name: "PageIndex",
     components: {
         RaiderIO,
+        WoWProgress,
     },
 });
 </script>
