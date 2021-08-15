@@ -5,6 +5,7 @@
     tag="a"
     target="_self"
     :to="link"
+    
   >
     <q-item-section
       v-if="icon"

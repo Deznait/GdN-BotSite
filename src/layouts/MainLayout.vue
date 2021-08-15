@@ -69,7 +69,7 @@
             show-if-above
             bordered
             side="left"
-            class="bg-grey-3"
+            class="bg-primary text-white"
         >
             <div id="profile" class="row">
                 <div class="col-4">
@@ -100,7 +100,7 @@
             </div>
 
             <q-list>
-                    <q-item-label header class="text-grey-8">
+                    <q-item-label header class="text-white">
                         Navegación
                     </q-item-label>
 
@@ -115,12 +115,6 @@
         <q-page-container>
             <router-view />
         </q-page-container>
-
-        <q-footer elevated class="bg-grey-6 text-white">
-            <q-toolbar>
-                <q-toolbar-title>Footer</q-toolbar-title>
-            </q-toolbar>
-        </q-footer>
     </q-layout>
 </template>
 
