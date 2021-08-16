@@ -1,6 +1,6 @@
 <template>
     <q-layout view="hHh lpR fFf">
-        <q-header elevated class="text-white" :class="$q.dark.isActive ? 'header_dark' : 'header_normal'">
+        <q-header elevated class="text-white">
             <q-toolbar>
                 <q-btn
                     flat
@@ -75,10 +75,9 @@
         <q-drawer
             v-model="drawer"
             show-if-above
-            bordered
+            elevated
             side="left"
-            class="left-navigation text-white"
-            :class="$q.dark.isActive ? 'drawer_dark' : 'drawer_normal'"
+            class="text-white"
         >
             <div id="profile" class="row" v-if="true == false">
                 <div class="col-4">
@@ -118,7 +117,15 @@
         </q-drawer>
 
         <q-page-container>
-            <router-view />
+            <q-page class="row no-wrap">
+                <div class="col">
+                    <div class="full-height">
+                        <q-scroll-area class="col q-pr-sm full-height" visible>
+                            <router-view />
+                        </q-scroll-area>
+                    </div>
+                </div>
+            </q-page>
         </q-page-container>
     </q-layout>
 </template>

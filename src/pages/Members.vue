@@ -23,7 +23,7 @@
                                     :props="props"
                                 >
                                     {{ col.label }}
-                                </q-th>
+                                </q-th> 
                             </q-tr>
                         </template>
 
