@@ -140,8 +140,7 @@ export default {
                     this.guildInfo = guild_info;
                 },
                 (error) => {
-                    console.log("error");
-                    console.log(error);
+                    console.error(error);
                 }
             );
         },

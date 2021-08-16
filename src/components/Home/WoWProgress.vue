@@ -239,12 +239,9 @@ export default {
                     let guild_info = this.processInfo(response);
                     this.$q.localStorage.set("savedGuildProgress", guild_info);
                     this.guildInfo = guild_info;
-                    console.log("this.guildInfo");
-                    console.log(this.guildInfo);
                 },
                 (error) => {
-                    console.log("error");
-                    console.log(error);
+                    console.error(error);
                 }
             );
         },
