@@ -11,7 +11,7 @@
                         row-key="name"
                         :pagination="initialPagination"
                         rows-per-page-label="Por página"
-                        :rows-per-page-options="[10, 25, 50]"
+                        :rows-per-page-options="[10, 20, 40, 100]"
                         :loading="loadingTable"
                     >
                         <template v-slot:header="props">
@@ -163,7 +163,7 @@ export default defineComponent({
                 sortBy: "name",
                 descending: false,
                 page: 1,
-                rowsPerPage: 25,
+                rowsPerPage: 20,
             },
             columns: [
                 {
