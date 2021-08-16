@@ -171,7 +171,7 @@ export default defineComponent({
     },
     methods: {
         logOut() {
-            console.log("logOut TEST");
+            console.warn("logOut TEST");
         }
     }
 });
