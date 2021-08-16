@@ -1,9 +1,9 @@
 // app global css in SCSS form
+body {
+    background: $body-bg !important;
+}
+
 .q-item.q-router-link--active, .q-item--active{
     color: #FFFFFF;
-    
-    .q-focus-helper {  
-        background: currentColor; 
-        opacity: 0.15;
-    }
+    background: rgba(255, 255, 255, 0.15); 
 }

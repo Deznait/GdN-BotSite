@@ -1,121 +1,123 @@
 <template>
-    <q-page id="PageMembers" padding>
-        <div class="row">
-            <div class="col q-pa-md">
-                <q-table
-                    id="members-table"
-                    title="Miembros"
-                    :rows="members"
-                    :columns="columns"
-                    row-key="name"
-                    :pagination="initialPagination"
-                    rows-per-page-label="Por página"
-                    :rows-per-page-options="[10, 25, 50]"
-                    :loading="loadingTable"
-                >
-                    <template v-slot:header="props">
-                        <q-tr :props="props">
-                            <q-th auto-width />
-                            <q-th
-                                v-for="col in props.cols"
-                                :key="col.name"
-                                :props="props"
-                            >
-                                {{ col.label }}
-                            </q-th>
-                        </q-tr>
-                    </template>
-
-                    <template v-slot:top-right>
-                        <q-input borderless dense debounce="300" v-model="filter" placeholder="Buscar">
-                        <template v-slot:append>
-                            <q-icon name="search" />
+    <q-page class="q-pt-xs">
+        <div class="q-ma-md">
+            <div class="row q-my-md">
+                <div class="col">
+                    <q-table
+                        id="members-table"
+                        title="Miembros"
+                        :rows="members"
+                        :columns="columns"
+                        row-key="name"
+                        :pagination="initialPagination"
+                        rows-per-page-label="Por página"
+                        :rows-per-page-options="[10, 25, 50]"
+                        :loading="loadingTable"
+                    >
+                        <template v-slot:header="props">
+                            <q-tr :props="props">
+                                <q-th auto-width />
+                                <q-th
+                                    v-for="col in props.cols"
+                                    :key="col.name"
+                                    :props="props"
+                                >
+                                    {{ col.label }}
+                                </q-th>
+                            </q-tr>
                         </template>
-                        </q-input>
-                    </template>
-                    
-                    <template v-slot:body="props">
-                        <q-tr
-                            :props="props"
-                            @click="props.expand = !props.expand"
-                        >
-                            <q-td auto-width>
-                                <q-btn
-                                    size="md"
-                                    text-color="grey"
-                                    unelevated
-                                    flat
-                                    dense
-                                    :icon="
-                                        props.expand
-                                            ? 'expand_less'
-                                            : 'expand_more'
-                                    "
-                                />
-                            </q-td>
-                            <q-td
-                                v-for="col in props.cols"
-                                :key="col.name"
+
+                        <template v-slot:top-right>
+                            <q-input borderless dense debounce="300" v-model="filter" placeholder="Buscar">
+                            <template v-slot:append>
+                                <q-icon name="search" />
+                            </template>
+                            </q-input>
+                        </template>
+                        
+                        <template v-slot:body="props">
+                            <q-tr
                                 :props="props"
+                                @click="props.expand = !props.expand"
                             >
-                                <ClassIcon
-                                    v-if="col.name === 'class'"
-                                    :classid="props.row.class"
-                                />
-                                <span v-else>{{ col.value }}</span>
-                            </q-td>
-                        </q-tr>
-                        <q-tr v-show="props.expand" :props="props">
-                            <q-td auto-width></q-td>
-                            <q-td colspan="100%">
-                                <div class="text-left">
-                                    Más info para este pj: {{ props.row.name }}.
-                                    <q-list
-                                        v-if="props.row.alts.length"
-                                        bordered
-                                    >
-                                        <q-item
-                                            v-for="alt in props.row.alts"
-                                            :key="alt.id"
-                                            class="q-my-sm"
-                                            clickable
-                                            v-ripple
+                                <q-td auto-width>
+                                    <q-btn
+                                        size="md"
+                                        text-color="grey"
+                                        unelevated
+                                        flat
+                                        dense
+                                        :icon="
+                                            props.expand
+                                                ? 'expand_less'
+                                                : 'expand_more'
+                                        "
+                                    />
+                                </q-td>
+                                <q-td
+                                    v-for="col in props.cols"
+                                    :key="col.name"
+                                    :props="props"
+                                >
+                                    <ClassIcon
+                                        v-if="col.name === 'class'"
+                                        :classid="props.row.class"
+                                    />
+                                    <span v-else>{{ col.value }}</span>
+                                </q-td>
+                            </q-tr>
+                            <q-tr v-show="props.expand" :props="props">
+                                <q-td auto-width></q-td>
+                                <q-td colspan="100%">
+                                    <div class="text-left">
+                                        Más info para este pj: {{ props.row.name }}.
+                                        <q-list
+                                            v-if="props.row.alts.length"
+                                            bordered
                                         >
-                                            <q-item-section avatar>
-                                                <ClassIcon
-                                                    :classid="alt.class"
-                                                />
-                                            </q-item-section>
+                                            <q-item
+                                                v-for="alt in props.row.alts"
+                                                :key="alt.id"
+                                                class="q-my-sm"
+                                                clickable
+                                                v-ripple
+                                            >
+                                                <q-item-section avatar>
+                                                    <ClassIcon
+                                                        :classid="alt.class"
+                                                    />
+                                                </q-item-section>
 
-                                            <q-item-section>
-                                                <q-item-label>{{
-                                                    alt.name
-                                                }}</q-item-label>
-                                                <q-item-label
-                                                    caption
-                                                    lines="1"
-                                                    >{{
-                                                        alt.email
-                                                    }}</q-item-label
-                                                >
-                                            </q-item-section>
-                                        </q-item>
-                                    </q-list>
-                                </div>
+                                                <q-item-section>
+                                                    <q-item-label>{{
+                                                        alt.name
+                                                    }}</q-item-label>
+                                                    <q-item-label
+                                                        caption
+                                                        lines="1"
+                                                        >{{
+                                                            alt.email
+                                                        }}</q-item-label
+                                                    >
+                                                </q-item-section>
+                                            </q-item>
+                                        </q-list>
+                                    </div>
+                                </q-td>
+                            </q-tr>
+                        </template>
+
+                        <template v-slot:body-cell-class="props">
+                            <q-td class="vertical-middle" :props="props">
+                                <ClassIcon :classid="props.row.class" />
                             </q-td>
-                        </q-tr>
-                    </template>
+                        </template>
 
-                    <template v-slot:body-cell-class="props">
-                        <q-td class="vertical-middle" :props="props">
-                            <ClassIcon :classid="props.row.class" />
-                        </q-td>
-                    </template>
-
-                    <template v-slot:loading>
-                        <q-inner-loading showing color="primary" />
-                    </template>
-                </q-table>
+                        <template v-slot:loading>
+                            <q-inner-loading showing color="primary" />
+                        </template>
+                    </q-table>
+                </div>
             </div>
         </div>
     </q-page>
@@ -232,7 +234,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-#PageMembers {
     #members-table {
         .q-table__middle { 
             .q-tr {
@@ -240,5 +241,4 @@ export default defineComponent({
             }
         }
     }
-}
 </style>

@@ -1,6 +1,6 @@
 <template>
     <q-layout view="hHh lpR fFf">
-        <q-header elevated class="bg-primary text-white">
+        <q-header elevated class="text-white" :class="$q.dark.isActive ? 'header_dark' : 'header_normal'">
             <q-toolbar>
                 <q-btn
                     flat
@@ -8,7 +8,7 @@
                     round
                     icon="menu"
                     aria-label="Menu"
-                    @click="toggleLeftDrawer"
+                    @click="drawer = !drawer"
                 />
 
                 <q-toolbar-title>
@@ -25,6 +25,14 @@
                 <q-space />
 
                 <div class="q-gutter-sm row items-center no-wrap">
+                     <q-btn
+                        class="q-mr-xs"
+                        dense
+                        flat
+                        @click="$q.dark.toggle()"
+                        :icon="$q.dark.isActive ? 'nights_stay' : 'wb_sunny'"
+                    />
+                    
                     <a href="https://www.youtube.com/user/kachicho100" target="_blank">
                         <q-btn
                             dense
@@ -65,13 +73,14 @@
         </q-header>
 
         <q-drawer
-            v-model="leftDrawerOpen"
+            v-model="drawer"
             show-if-above
             bordered
             side="left"
-            class="bg-primary text-white"
+            class="left-navigation text-white"
+            :class="$q.dark.isActive ? 'drawer_dark' : 'drawer_normal'"
         >
-            <div id="profile" class="row">
+            <div id="profile" class="row" v-if="true == false">
                 <div class="col-4">
                     <q-img
                         src="https://cdn.quasar.dev/img/boy-avatar.png"
@@ -100,16 +109,12 @@
             </div>
 
             <q-list>
-                    <q-item-label header class="text-white">
-                        Navegación
-                    </q-item-label>
-
-                    <EssentialLink
-                        v-for="link in essentialLinks"
-                        :key="link.title"
-                        v-bind="link"
-                    />
-                </q-list>
+                <EssentialLink
+                    v-for="link in essentialLinks"
+                    :key="link.title"
+                    v-bind="link"
+                />
+            </q-list>
         </q-drawer>
 
         <q-page-container>
@@ -123,7 +128,7 @@ import EssentialLink from "components/EssentialLink.vue";
 
 const linksList = [
     {
-        title: "Dashboard",
+        title: "Home",
         icon: "home",
         link: "/",
     },
@@ -150,14 +155,11 @@ export default defineComponent({
     },
     setup() {
         const $q = useQuasar();
-        const leftDrawerOpen = ref(false);
 
         return {
             essentialLinks: linksList,
-            leftDrawerOpen,
-            toggleLeftDrawer() {
-                leftDrawerOpen.value = !leftDrawerOpen.value;
-            },
+            drawer: ref(false),
+            miniState: ref(true),
         };
     },
     methods: {
@@ -168,14 +170,36 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #avatar {
     padding: 20px;
 }
-
 #profile {
     height: 130px;
     padding: 20px;
     background-color: #009688;
+}
+
+.q-header {
+  background: linear-gradient(145deg, rgb(32, 106, 80) 15%, rgb(21, 57, 102) 70%);
+}
+.q-drawer {
+  background: url("~assets/images/drawer_bg_light.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.q-drawer__content {
+  background-color: rgba(1, 1, 1, 0.75);
+}
+
+.body--dark {
+    .q-header {
+        background: linear-gradient(145deg, rgb(61, 14, 42) 15%, rgb(14, 43, 78) 70%);
+    }
+    .q-drawer {
+        background-image: url("~assets/images/drawer_bg_dark.jpg");
+    }
 }
 </style>
