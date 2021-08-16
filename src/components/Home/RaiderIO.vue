@@ -5,11 +5,7 @@
                 <q-tabs
                     v-model="raidTab"
                     dense
-                    class="text-grey"
-                    active-color="primary"
-                    indicator-color="primary"
                     align="justify"
-                    narrow-indicator
                 >
                     <q-tab
                         v-for="raid in guildInfo.raids"
@@ -72,18 +68,19 @@
                 </q-tab-panels>
 
                 <div class="q-pb-md q-px-md text-subtitle2 text-center">
-                    <a :href="guildInfo.url" target="_blank">
-                        <q-btn
-                            size="sm"
-                            flat
-                            color="primary"
-                            label="Más info en RaiderIO"
-                        />
-                    </a>
-                    <q-btn dense flat color="grey" size="12px" icon="autorenew" @click="callAPI" v-if="1==0">
-                        <q-tooltip>Recargar</q-tooltip>
-                    </q-btn>
+                    <q-btn 
+                        flat
+                        size="sm"
+                        type="a"
+                        :href="guildInfo.url"
+                        target="__blank"
+                        label="Más info en RaiderIO"
+                    />
+                    
                 </div>
+                <q-btn class="reload" dense flat size="12px" icon="autorenew" @click="callAPI">
+                    <q-tooltip>Recargar</q-tooltip>
+                </q-btn>
             </q-card>
         </div>
     </div>
@@ -105,12 +102,11 @@ export default {
         return {
             guildInfo: "",
             raidTab: "sanctum-of-domination",
+            $q: useQuasar()
         };
     },
-    setup() {},
     mounted() {
-        const $q = useQuasar();
-        const savedGuildInfo = $q.localStorage.getItem("savedGuildInfo");
+        const savedGuildInfo = this.$q.localStorage.getItem("savedGuildInfo");
 
         if (savedGuildInfo === null) {
             this.callAPI();
@@ -127,8 +123,6 @@ export default {
     },
     methods: {
         async callAPI() {
-            const $q = useQuasar();
-
             // Send a POST request
             axios({
                 method: "get",
@@ -142,7 +136,7 @@ export default {
             }).then(
                 (response) => {
                     let guild_info = this.processInfo(response);
-                    $q.localStorage.set("savedGuildInfo", guild_info);
+                    this.$q.localStorage.set("savedGuildInfo", guild_info);
                     this.guildInfo = guild_info;
                 },
                 (error) => {
@@ -304,6 +298,12 @@ export default {
                 }
             }
         }
+    }
+
+    .reload {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
     }
 }
 </style>
