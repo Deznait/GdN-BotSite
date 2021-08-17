@@ -14,7 +14,11 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@firebase/app": "^0.6.29",
+    "@firebase/auth": "^0.16.8",
+    "@firebase/firestore": "^2.3.10",
     "@quasar/extras": "^1.0.0",
+    "@vueuse/firebase": "^6.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "firebase": "^8.7.0",

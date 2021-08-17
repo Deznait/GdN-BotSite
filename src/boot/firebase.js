@@ -1,7 +1,8 @@
-//import firebase from "firebase/app"
-//import "firebase/firestore"
+import firebase from "firebase/app"
+import "firebase/firestore"
+import "firebase/auth"
 
-console.info("firebase boot");
+console.info("Firebase boot");
 
 // firebase init - add your own config here
 const firebaseConfig = {
@@ -14,15 +15,11 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APPID,
   measurementId: process.env.FIREBASE_MEASUREMENTID
 }
-//firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig)
 
 // Utils
-//const db = firebase.firestore();
-//const auth = firebase.auth();
-//const marcaTiempo = firebase.firestore.FieldValue.serverTimestamp;
-
-const db = "firebase.firestore()";
-const auth = "firebase.auth()";
-const marcaTiempo = "firebase.firestore.FieldValue.serverTimestamp";
+const db = firebase.firestore();
+const auth = firebase.auth();
+const marcaTiempo = firebase.firestore.FieldValue.serverTimestamp;
 
 export { db, auth, marcaTiempo };
