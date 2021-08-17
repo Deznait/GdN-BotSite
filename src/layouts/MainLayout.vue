@@ -85,34 +85,6 @@
             side="left"
             class="text-white"
         >
-            <div id="profile" class="row" v-if="true == false">
-                <div class="col-4">
-                    <q-img
-                        src="https://cdn.quasar.dev/img/boy-avatar.png"
-                        spinner-color="white"
-                        class="inline-block"
-                        fit="contain"
-                        ratio="1"
-                        height="40px"
-                    />
-                </div>
-                <div class="col-8">
-                    <div id="user-name">
-                        <span class="text-white"> TESTNAME </span>
-                        <hr />
-                    </div>
-                    <div id="user-actions">
-                        <q-btn class="bordered blue small" icon="person" />
-                        <q-btn class="bordered blue small" icon="lock" />
-                        <q-btn
-                            class="bordered blue small"
-                            icon="exit_to_app"
-                            @click="logOut"
-                        />
-                    </div>
-                </div>
-            </div>
-
             <q-list>
                 <EssentialLink
                     v-for="link in essentialLinks"
