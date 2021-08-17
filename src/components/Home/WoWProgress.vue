@@ -171,6 +171,8 @@
                     </q-tab-panel>
                 </q-tab-panels>
 
+<q-space />
+
                 <div class="q-pb-md q-px-md text-subtitle2 text-center">
                     <q-btn 
                         flat
@@ -267,72 +269,9 @@ export default {
         padding: 16px 16px 0 16px;
     }
 
-    .RaidProgress-difficulties {
-        line-height: 1.5;
-        text-transform: uppercase;
-
-        .RaidProgress-difficulty-name {
-            width: 80px;
-        }
-
-        .Progressbar {
-            width: calc(100% - 80px);
-            border: 1px solid hsla(0, 0%, 100%, 0.2);
-            position: relative;
-
-            .q-linear-progress__track {
-                background: #181818 !important;
-            }
-            .q-linear-progress__model {
-                color: transparent;
-            }
-
-            .Progressbar-fraction {
-                text-shadow: 0 0 1px transparent, 0 1px 2px rgba(0, 0, 0, 0.8);
-            }
-
-            &.progresslevel_low {
-                .q-linear-progress__model {
-                    background: #99755c;
-                    background: -webkit-gradient(
-                        linear,
-                        left top,
-                        right top,
-                        from(#69503f),
-                        to(#99755c)
-                    );
-                    background: linear-gradient(90deg, #69503f 0, #99755c);
-                }
-            }
-
-            &.progresslevel_medium {
-                .q-linear-progress__model {
-                    background: #c76700;
-                    background: -webkit-gradient(
-                        linear,
-                        left top,
-                        right top,
-                        from(#7b3f00),
-                        to(#c76700)
-                    );
-                    background: linear-gradient(90deg, #7b3f00 0, #c76700);
-                }
-            }
-
-            &.progresslevel_high {
-                .q-linear-progress__model {
-                    background: #1b9601;
-                    background: -webkit-gradient(
-                        linear,
-                        left top,
-                        right top,
-                        from(#0d4a00),
-                        to(#1b9601)
-                    );
-                    background: linear-gradient(90deg, #0d4a00 0, #1b9601);
-                }
-            }
-        }
+    .q-card {
+        display: flex;
+        flex-direction: column;
     }
 
     .reload {

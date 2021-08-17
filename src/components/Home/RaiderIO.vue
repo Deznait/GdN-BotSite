@@ -76,7 +76,6 @@
                         target="__blank"
                         label="Más info en RaiderIO"
                     />
-                    
                 </div>
                 <q-btn class="reload" dense flat size="12px" icon="autorenew" @click="callAPI">
                     <q-tooltip>Recargar</q-tooltip>
