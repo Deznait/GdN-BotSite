@@ -32,5 +32,12 @@ yarn-error.log*
 *.njsproj
 *.sln
 
+### Firebase ###
+.idea
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
+
 .env
 .env.prod
