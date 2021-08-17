@@ -112,10 +112,6 @@
                                 <ClassIcon :classid="props.row.class" />
                             </q-td>
                         </template>
-
-                        <template v-slot:loading>
-                            <q-inner-loading showing color="primary" />
-                        </template>
                     </q-table>
                 </div>
             </div>
@@ -125,9 +121,9 @@
 
 <script>
 import ClassIcon from "components/ClassIcon";
-
 import { defineComponent } from "vue";
-import dataext from "src/members.json";
+import dataextraw from "src/members-copy-copy.json";
+import { db } from "boot/firebase";
 
 const rankNames = {
     0: "Fundador",
@@ -155,10 +151,9 @@ export default defineComponent({
     },
     data() {
         return {
-            loadingTable: false,
+            loadingTable: true,
             filter: "",
-            members: dataext.members,
-            memberSQL: "",
+            members: [],
             initialPagination: {
                 sortBy: "name",
                 descending: false,
@@ -199,28 +194,17 @@ export default defineComponent({
             ],
         };
     },
-    mounted() {
-        let attributes = ["id", "name", "class", "realm", "rank", "points"];
-        this.members.forEach((member) => {
-            let sql =
-                "(" +
-                member.id +
-                ", " +
-                "'" +
-                member.name +
-                "', " +
-                member.class +
-                ", " +
-                "'" +
-                member.realm +
-                "', " +
-                member.rank +
-                ", " +
-                member.points +
-                "),";
+    created() {
+        //this.addMembersToDB();
 
-            this.memberSQL += sql;
-        });
+        db.collection("characters").get().then((querySnapshot) => {
+            this.members = [];
+            
+            querySnapshot.forEach((doc) => {
+                this.members.push(doc.data());
+            })
+            this.loadingTable = false;
+        })
     },
     methods: {
         rankName: function (value) {
@@ -229,6 +213,28 @@ export default defineComponent({
         realmName: function (value) {
             return realmNames[value];
         },
+
+        addMembersToDB() {
+            let characterRef = db.collection("characters");
+
+            dataextraw.members.forEach(member => {
+                let memberObj = {
+                    "name": member.character.name,
+                    "class": member.character.playable_class.id,
+                    "rank": member.rank,
+                    "realm": member.character.realm.slug,
+                    "points": 0,
+                    "alts": {}
+                }
+                characterRef.doc("_" + member.character.id).set(memberObj).then(() => {
+                    console.info("Document successfully written! => ", doc.data());
+                    console.info(memberObj);
+                })
+                .catch((error) => {
+                    console.error("Error writing document: ", error);
+                })
+            });
+        }
     },
 });
 </script>
