@@ -148,13 +148,12 @@ export default {
                 if (doc.exists) {
                     let guild_info = doc.data()
                     guild_info['date_fetched'] = new Date().getTime();
-                    console.log(guild_info);
                     
                     this.$q.localStorage.set("savedGuildProgress", guild_info);
                     this.guildInfo = guild_info;
                 }
             }).catch((error) => {
-                console.log("Error getting document:", error);
+                console.error("Error getting document:", error);
             })
         }
     },
