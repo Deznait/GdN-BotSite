@@ -6,14 +6,14 @@ console.info("Firebase boot");
 
 // firebase init - add your own config here
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_APIKEY,
-  authDomain: process.env.FIREBASE_AUTHDOMAIN,
-  databaseURL: process.env.FIREBASE_DATABASEURL,
-  projectId: process.env.FIREBASE_PROJECTID,
-  storageBucket: process.env.FIREBASE_STORAGEBUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
-  appId: process.env.FIREBASE_APPID,
-  measurementId: process.env.FIREBASE_MEASUREMENTID
+  apiKey: "AIzaSyBd9H7KVFOp1Qlys5Fm-AdI1vjD4MHrSkM",
+  authDomain: "gdn-bot.firebaseapp.com",
+  databaseURL: "https://gdn-bot-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "gdn-bot",
+  storageBucket: "gdn-bot.appspot.com",
+  messagingSenderId: "621639358864",
+  appId: "1:621639358864:web:de8c59fa5c995c4ad43b15",
+  measurementId: "G-BEQEZF0M15"
 }
 console.info(firebaseConfig);
 firebase.initializeApp(firebaseConfig)
