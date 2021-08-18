@@ -156,7 +156,7 @@ export default defineComponent({
             members: [],
             initialPagination: {
                 sortBy: "rank",
-                descending: true,
+                descending: false,
                 page: 1,
                 rowsPerPage: 20,
             },
