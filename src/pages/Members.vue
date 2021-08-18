@@ -155,7 +155,7 @@ export default defineComponent({
             filter: "",
             members: [],
             initialPagination: {
-                sortBy: "name",
+                sortBy: "rank",
                 descending: false,
                 page: 1,
                 rowsPerPage: 20,
