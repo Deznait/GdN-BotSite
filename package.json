@@ -2,7 +2,7 @@
   "name": "gdn-botsite",
   "version": "0.0.1",
   "description": "Vue website for the Gremio de Nordrassil guild on Sanguino-EU",
-  "productName": "Gremio de Nordrassil - BotSite",
+  "productName": "Gremio de Nordrassil - Web",
   "author": "Alvaro Olea Rojas <alvaroolear@gmail.com>",
   "private": true,
   "scripts": {
