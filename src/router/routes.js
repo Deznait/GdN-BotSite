@@ -12,12 +12,12 @@ const routes = [
       {
         path: "miembros",
         name: 'Miembros',
-        component: () => import("src/pages/Members.vue")
+        component: () => import("pages/Members.vue")
       },
       {
         path: "puntos",
         name: 'Puntos',
-        component: () => import("src/pages/Puntos.vue")
+        component: () => import("pages/Puntos.vue")
       },
     ]
   },

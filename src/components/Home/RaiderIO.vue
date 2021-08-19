@@ -99,7 +99,14 @@ export default {
     props: {},
     data() {
         return {
-            guildInfo: "",
+            guildInfo: {
+                name: "",
+                url: "",
+                realm: "",
+                region: "",
+                raids: {},
+                date_fetched: "",
+            },
             raidTab: "sanctum-of-domination",
             $q: useQuasar()
         };

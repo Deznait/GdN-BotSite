@@ -1,5 +1,5 @@
 <template>
-    <q-layout view="hHh lpR fFf">
+    <q-layout view="lHh Lpr lFf">
         <q-header elevated class="text-white">
             <q-toolbar>
                 <q-btn
@@ -98,9 +98,7 @@
             <q-page class="row no-wrap">
                 <div class="col">
                     <div class="full-height">
-                        <q-scroll-area class="col q-pr-sm full-height" visible>
-                            <router-view />
-                        </q-scroll-area>
+                        <router-view />
                     </div>
                 </div>
             </q-page>
