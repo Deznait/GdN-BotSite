@@ -1,6 +1,91 @@
 <template>
     <q-table class="" :rows="data3" :columns="column" title="Puntos">
-        
+        <template v-slot:body-cell-Name="props">
+            <q-td :props="props" style="max-width: 100px">
+                <q-item>
+                    <q-item-section avatar>
+                        <q-avatar>
+                            <img :src="props.row.avatar" />
+                        </q-avatar>
+                    </q-item-section>
+
+                    <q-item-section>
+                        <q-item-label>{{ props.row.name }}</q-item-label>
+                        <q-item-label caption class="">{{
+                            props.row.des
+                        }}</q-item-label>
+                    </q-item-section>
+                </q-item>
+            </q-td>
+        </template>
+        <template v-slot:body-cell-Task="props">
+            <q-td :props="props">
+                <q-item>
+                    <q-item-section>
+                        <q-item-label>
+                            <span class="text-blue">
+                                <q-icon
+                                    name="bug_report"
+                                    color="blue"
+                                    size="20px"
+                                    v-if="props.row.type == 'error'"
+                                ></q-icon>
+                                <q-icon
+                                    name="settings"
+                                    color="blue"
+                                    size="20px"
+                                    v-if="props.row.type == 'info'"
+                                ></q-icon>
+                                <q-icon
+                                    name="flag"
+                                    color="blue"
+                                    size="20px"
+                                    v-if="props.row.type == 'success'"
+                                ></q-icon>
+                                <q-icon
+                                    name="fireplace"
+                                    color="blue"
+                                    size="20px"
+                                    v-if="props.row.type == 'warning'"
+                                ></q-icon>
+                                {{ props.row.issue }}
+                            </span>
+                            <q-chip
+                                class="float-right text-white text-capitalize"
+                                :label="props.row.type"
+                                color="positive"
+                                v-if="props.row.type == 'success'"
+                            ></q-chip>
+                            <q-chip
+                                class="float-right text-white text-capitalize"
+                                :label="props.row.type"
+                                color="info"
+                                v-if="props.row.type == 'info'"
+                            ></q-chip>
+                            <q-chip
+                                class="float-right text-white text-capitalize"
+                                :label="props.row.type"
+                                color="warning"
+                                v-if="props.row.type == 'warning'"
+                            ></q-chip>
+                            <q-chip
+                                class="float-right text-white text-capitalize"
+                                :label="props.row.type"
+                                color="negative"
+                                v-if="props.row.type == 'error'"
+                            ></q-chip>
+                        </q-item-label>
+                        <q-item-label caption class="">
+                            <q-linear-progress
+                                dark
+                                :color="getColor(props.row.Progress)"
+                                :value="props.row.Progress / 100"
+                            />
+                        </q-item-label>
+                    </q-item-section>
+                </q-item>
+            </q-td>
+        </template>
     </q-table>
 </template>
 
