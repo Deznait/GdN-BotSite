@@ -25,18 +25,24 @@
                                         :props="props"
                                     >
                                         {{ col.label }}
-                                    </q-th> 
+                                    </q-th>
                                 </q-tr>
                             </template>
 
                             <template v-slot:top-right>
-                                <q-input borderless dense debounce="300" v-model="filter" placeholder="Buscar">
-                                <template v-slot:append>
-                                    <q-icon name="search" />
-                                </template>
+                                <q-input
+                                    borderless
+                                    dense
+                                    debounce="300"
+                                    v-model="filter"
+                                    placeholder="Buscar"
+                                >
+                                    <template v-slot:append>
+                                        <q-icon name="search" />
+                                    </template>
                                 </q-input>
                             </template>
-                            
+
                             <template v-slot:body="props">
                                 <q-tr
                                     :props="props"
@@ -72,13 +78,15 @@
                                     <q-td auto-width></q-td>
                                     <q-td colspan="100%">
                                         <div class="text-left">
-                                            Más info para este pj: {{ props.row.name }}.
+                                            Más info para este pj:
+                                            {{ props.row.name }}.
                                             <q-list
                                                 v-if="props.row.alts.length"
                                                 bordered
                                             >
                                                 <q-item
-                                                    v-for="alt in props.row.alts"
+                                                    v-for="alt in props.row
+                                                        .alts"
                                                     :key="alt.id"
                                                     class="q-my-sm"
                                                     clickable
@@ -123,252 +131,108 @@
 </template>
 
 <script>
-import ClassIcon from "components/ClassIcon";
-import { defineComponent } from "vue";
-import dataextraw from "src/members-copy-copy.json";
-import { db } from "boot/firebase";
+import ClassIcon from 'components/ClassIcon'
+import { defineComponent } from 'vue'
+import { db } from 'boot/firebase'
 
 const rankNames = {
-    0: "Fundador",
-    1: "Oficial",
-    2: "Alter Oficial",
-    3: "Líder de banda",
-    4: "Raider",
-    5: "Cantera",
-    6: "Alter",
-    7: "Amigos",
-    8: "Alter amigos",
-    9: "Inactivo",
-};
+    0: 'Fundador',
+    1: 'Oficial',
+    2: 'Alter Oficial',
+    3: 'Líder de banda',
+    4: 'Raider',
+    5: 'Cantera',
+    6: 'Alter',
+    7: 'Amigos',
+    8: 'Alter amigos',
+    9: 'Inactivo',
+}
 const realmNames = {
     zuljin: "Zul'Jin",
-    uldum: "Uldum",
-    sanguino: "Sanguino",
+    uldum: 'Uldum',
+    sanguino: 'Sanguino',
     shendralar: "Shen'dralar",
-};
+}
 
 export default defineComponent({
-    name: "PageMembers",
+    name: 'PageMembers',
     components: {
         ClassIcon,
     },
     data() {
         return {
             loadingTable: true,
-            filter: "",
+            filter: '',
             members: [],
             initialPagination: {
-                sortBy: "rank",
+                sortBy: 'rank',
                 descending: false,
                 page: 1,
                 rowsPerPage: 20,
             },
             columns: [
                 {
-                    name: "name",
+                    name: 'name',
                     required: true,
-                    label: "Nombre",
-                    align: "left",
+                    label: 'Nombre',
+                    align: 'left',
                     field: (row) => row.name,
                     format: (val) => `${val}`,
                     sortable: true,
                 },
                 {
-                    name: "class",
+                    name: 'class',
                     required: true,
-                    label: "Clase",
-                    align: "center",
+                    label: 'Clase',
+                    align: 'center',
                     field: (row) => row.class,
                     sortable: true,
                 },
                 {
-                    name: "rank",
-                    label: "Rango",
+                    name: 'rank',
+                    label: 'Rango',
                     field: (row) => row.rank,
                     format: (val) => this.rankName(val),
                     sortable: true,
                 },
                 {
-                    name: "realm",
-                    label: "Reino",
+                    name: 'realm',
+                    label: 'Reino',
                     field: (row) => row.realm,
                     format: (val) => this.realmName(val),
                 },
             ],
-
-            columnsssss: [
-            {
-                name: 'name',
-                required: true,
-                label: 'Dessert (100g serving)',
-                align: 'left',
-                field: row => row.name,
-                format: val => `${val}`,
-                sortable: true
-            },
-            { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
-            { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
-            { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
-            { name: 'protein', label: 'Protein (g)', field: 'protein' },
-            { name: 'sodium', label: 'Sodium (mg)', field: 'sodium' },
-            { name: 'calcium', label: 'Calcium (%)', field: 'calcium', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
-            { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
-            ],
-            rows: [
-                {
-                    name: 'Frozen Yogurt',
-                    calories: 159,
-                    fat: 6.0,
-                    carbs: 24,
-                    protein: 4.0,
-                    sodium: 87,
-                    calcium: '14%',
-                    iron: '1%'
-                },
-                {
-                    name: 'Ice cream sandwich',
-                    calories: 237,
-                    fat: 9.0,
-                    carbs: 37,
-                    protein: 4.3,
-                    sodium: 129,
-                    calcium: '8%',
-                    iron: '1%'
-                },
-                {
-                    name: 'Eclair',
-                    calories: 262,
-                    fat: 16.0,
-                    carbs: 23,
-                    protein: 6.0,
-                    sodium: 337,
-                    calcium: '6%',
-                    iron: '7%'
-                },
-                {
-                    name: 'Cupcake',
-                    calories: 305,
-                    fat: 3.7,
-                    carbs: 67,
-                    protein: 4.3,
-                    sodium: 413,
-                    calcium: '3%',
-                    iron: '8%'
-                },
-                {
-                    name: 'Gingerbread',
-                    calories: 356,
-                    fat: 16.0,
-                    carbs: 49,
-                    protein: 3.9,
-                    sodium: 327,
-                    calcium: '7%',
-                    iron: '16%'
-                },
-                {
-                    name: 'Jelly bean',
-                    calories: 375,
-                    fat: 0.0,
-                    carbs: 94,
-                    protein: 0.0,
-                    sodium: 50,
-                    calcium: '0%',
-                    iron: '0%'
-                },
-                {
-                    name: 'Lollipop',
-                    calories: 392,
-                    fat: 0.2,
-                    carbs: 98,
-                    protein: 0,
-                    sodium: 38,
-                    calcium: '0%',
-                    iron: '2%'
-                },
-                {
-                    name: 'Honeycomb',
-                    calories: 408,
-                    fat: 3.2,
-                    carbs: 87,
-                    protein: 6.5,
-                    sodium: 562,
-                    calcium: '0%',
-                    iron: '45%'
-                },
-                {
-                    name: 'Donut',
-                    calories: 452,
-                    fat: 25.0,
-                    carbs: 51,
-                    protein: 4.9,
-                    sodium: 326,
-                    calcium: '2%',
-                    iron: '22%'
-                },
-                {
-                    name: 'KitKat',
-                    calories: 518,
-                    fat: 26.0,
-                    carbs: 65,
-                    protein: 7,
-                    sodium: 54,
-                    calcium: '12%',
-                    iron: '6%'
-                }
-                ]
-        };
+        }
     },
     created() {
-        //this.addMembersToDB();
+        db.collection('characters')
+            .get()
+            .then((querySnapshot) => {
+                this.members = []
 
-        db.collection("characters").get().then((querySnapshot) => {
-            this.members = [];
-            
-            querySnapshot.forEach((doc) => {
-                this.members.push(doc.data());
+                querySnapshot.forEach((doc) => {
+                    this.members.push(doc.data())
+                })
+                this.loadingTable = false
             })
-            this.loadingTable = false;
-        })
     },
     methods: {
         rankName: function (value) {
-            return rankNames[value];
+            return rankNames[value]
         },
         realmName: function (value) {
-            return realmNames[value];
+            return realmNames[value]
         },
-
-        addMembersToDB() {
-            let characterRef = db.collection("characters");
-
-            dataextraw.members.forEach(member => {
-                let memberObj = {
-                    "name": member.character.name,
-                    "class": member.character.playable_class.id,
-                    "rank": member.rank,
-                    "realm": member.character.realm.slug,
-                    "points": 0,
-                    "alts": {}
-                }
-                characterRef.doc("_" + member.character.id).set(memberObj).then(() => {
-                    console.info("Document successfully written! => ", doc.data());
-                    console.info(memberObj);
-                })
-                .catch((error) => {
-                    console.error("Error writing document: ", error);
-                })
-            });
-        }
     },
-});
+})
 </script>
 
 <style lang="scss" scoped>
-    #members-table {
-        .q-table__middle { 
-            .q-tr {
-                cursor: pointer;
-            }
+#members-table {
+    .q-table__middle {
+        .q-tr {
+            cursor: pointer;
         }
     }
+}
 </style>

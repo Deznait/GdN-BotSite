@@ -10,6 +10,7 @@
         "dev:win": "cross-env QENV=DEV quasar dev",
         "build": "quasar build",
         "build:pwa": "quasar build -m pwa",
+        "emulators": "firebase emulators:start",
         "deploy-dev": "firebase deploy",
         "deploy-dev:rules": "firebase deploy --only firestore:rules",
         "lint": "eslint --ext .js,.vue ./",
