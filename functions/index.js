@@ -1,12 +1,42 @@
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
 const axios = require("axios").default;
+const url = require("url");
 
 // const express = require("express");
 
 admin.initializeApp(functions.config().firebase);
 
 const dataMembers = require("./members.js");
+
+exports.callBlizzard = functions
+    .region("europe-west1")
+    .https
+    .onRequest((request, response) => {
+      response.send("Blizzard llamado");
+      const params = new url.URLSearchParams({
+        "grant_type": "client_credentials",
+        "scope": "wow.profile",
+      });
+
+      axios.request({
+        method: "POST",
+        baseURL: "https://eu.battle.net",
+        url: "/oauth/token",
+        auth: {
+          username: functions.config().battlenet.id, // This is the client_id
+          password: functions.config().battlenet.secret, // This is the client_secret
+        },
+        data: params.toString(),
+      })
+          .then(function(response) {
+            functions.logger
+                .info("Response - OK", {response: response.data});
+          }).catch(function(error) {
+            functions.logger
+                .error("Response - KO", {error: error});
+          });
+    });
 
 exports.updateMembers = functions
     .region("europe-west1")
@@ -32,7 +62,7 @@ exports.updateMembers = functions
         };
 
         characterRef.doc("_" + member.character.id).update(memberObj).then(() => {
-          // Character exists
+        // Character exists
           console.info("Character successfully updated! => ", memberObj);
         })
             .catch(() => {
