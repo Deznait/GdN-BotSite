@@ -149,9 +149,9 @@ export default defineComponent({
     },
     methods: {
         onRowClick(evt, row) {
-            console.log('clicked on')
-            console.log('row', row)
-            console.log('rowName', row.name)
+            console.info('clicked on')
+            console.info('row', row)
+            console.info('rowName', row.name)
         },
         rankName: function (value) {
             return rankNames[value]
