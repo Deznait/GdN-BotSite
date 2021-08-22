@@ -1,6 +1,6 @@
 <template>
     <q-layout view="lHh Lpr lFf">
-        <q-header elevated class="text-white">
+        <q-header elevated class="background-primary text-white">
             <q-toolbar>
                 <q-btn
                     flat
@@ -163,9 +163,9 @@ export default defineComponent({
     background-color: #009688;
 }
 
-.q-header {
-  background: linear-gradient(145deg, rgb(32, 106, 80) 15%, rgb(21, 57, 102) 70%);
-}
+// .q-header {
+//   background: linear-gradient(145deg, rgb(32, 106, 80) 15%, rgb(21, 57, 102) 70%);
+// }
 .q-drawer {
   background: url("~assets/images/drawer_bg_light.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -178,9 +178,9 @@ export default defineComponent({
 }
 
 .body--dark {
-    .q-header {
-        background: linear-gradient(145deg, rgb(61, 14, 42) 15%, rgb(14, 43, 78) 70%);
-    }
+    // .q-header {
+    //     background: linear-gradient(145deg, rgb(61, 14, 42) 15%, rgb(14, 43, 78) 70%);
+    // }
     .q-drawer {
         background-image: url("~assets/images/drawer_bg_dark.jpg");
     }

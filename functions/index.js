@@ -51,7 +51,7 @@ exports.callBlizzard = functions
 
 const runtimeOpts = {
   timeoutSeconds: 300,
-  memory: "1GB",
+  memory: "512MB",
 };
 
 exports.updateGuildRoster = functions

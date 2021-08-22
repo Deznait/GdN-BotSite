@@ -1,6 +1,9 @@
 // app global css in SCSS form
 body {
-    background: $body-bg !important;
+
+    &.body--dark{
+
+    }
 }
 
 .q-item.q-router-link--active, .q-item--active{
