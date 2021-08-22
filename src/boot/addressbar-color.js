@@ -1,9 +1,5 @@
-import { useQuasar } from 'quasar'
+import { AddressbarColor } from 'quasar'
 
-export default {
-  setup() {
-    // equivalent to calling this on creating the component
-    const $q = useQuasar()
-    $q.addressbarColor.set()
-  }
+export default () => {
+  AddressbarColor.set()
 }
