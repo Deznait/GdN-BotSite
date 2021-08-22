@@ -167,7 +167,8 @@ export default defineComponent({
 //   background: linear-gradient(145deg, rgb(32, 106, 80) 15%, rgb(21, 57, 102) 70%);
 // }
 .q-drawer {
-  background: url("~assets/images/drawer_bg_light.jpg") no-repeat center center fixed;
+  background: url("~assets/images/drawer_bg_light.jpg") no-repeat fixed;
+  background-position: center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
