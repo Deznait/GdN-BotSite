@@ -2,8 +2,6 @@ import firebase from "firebase/app"
 import "firebase/firestore"
 import "firebase/auth"
 
-console.info("Firebase boot");
-
 // firebase init - add your own config here
 const firebaseConfig = {
   apiKey: "AIzaSyBd9H7KVFOp1Qlys5Fm-AdI1vjD4MHrSkM",

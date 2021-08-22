@@ -1,6 +1,6 @@
 <template>
     <q-layout view="lHh Lpr lFf">
-        <q-header class="background-primary text-white">
+        <q-header elevated class="background-primary text-white">
             <q-toolbar>
                 <q-btn
                     flat
@@ -127,7 +127,7 @@ const linksList = [
     },
 ];
 
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch  } from "vue";
 import { useQuasar } from "quasar";
 
 export default defineComponent({
@@ -139,16 +139,15 @@ export default defineComponent({
     setup() {
         const $q = useQuasar();
 
+        watch(() => $q.dark.isActive, val => {
+            $q.localStorage.set("darkMode", val);
+        })
+
         return {
             essentialLinks: linksList,
             drawer: ref(false),
             miniState: ref(true),
         };
-    },
-    methods: {
-        logOut() {
-            console.warn("logOut TEST");
-        }
     }
 });
 </script>
@@ -164,7 +163,7 @@ export default defineComponent({
 }
 
 .q-header {
-
+    
 //   background: linear-gradient(145deg, rgb(32, 106, 80) 15%, rgb(21, 57, 102) 70%);
 }
 .q-drawer {
