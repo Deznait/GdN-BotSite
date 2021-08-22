@@ -94,36 +94,42 @@ exports.updateGuildRoster = functions
       });
 
       const characterRef = admin.firestore().collection("characters");
+      const FieldValue = admin.firestore.FieldValue;
       guild.data.members.forEach(async (member) => {
         try {
           const memberObj = {
-            "id": member.character.id,
-            "name": member.character.name,
-            "class": member.character.playable_class.id,
-            "race": member.character.playable_race.id,
-            "rank": member.rank,
-            "realm": member.character.realm.slug,
-            "assets": {},
+            name: member.character.name,
+            race: member.character.playable_race.id,
+            rank: member.rank,
+            realm: member.character.realm.slug,
           };
 
           characterRef.doc("_" + member.character.id).update(memberObj).then(() => {
-          // Character exists
+            // Character exists
             console.info("Character successfully updated! => ", memberObj.name);
           })
               .catch(() => {
-                // Character does not exist
+              // Character does not exist
+                memberObj.id = member.character.id;
+                memberObj.class = member.character.playable_class.id;
+                memberObj.assets = {};
                 memberObj.alts = {};
                 memberObj.points_total = 0;
+
                 characterRef.doc("_" + member.character.id).set(memberObj, {merge: true}).then(() => {
                   console.info("Character successfully created! => ", memberObj.name);
-                  characterRef.doc("_" + member.character.id).collection("points");
+                  characterRef.doc("_" + member.character.id).collection("points").add({
+                    value: 0,
+                    type: "init",
+                    label: "Valor inicial",
+                    timestamp: FieldValue.serverTimestamp(),
+                  });
                 });
               });
         } catch (error) {
           console.error("Error! => ", error);
         }
       });
-
 
       console.info("Finished updating the roster!");
     });
