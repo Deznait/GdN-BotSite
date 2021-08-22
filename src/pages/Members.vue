@@ -7,6 +7,7 @@
                         <q-table
                             id="members-table"
                             title="Miembros"
+                            :grid="mode=='grid'"
                             :rows="members"
                             :columns="columns"
                             row-key="name"
@@ -15,23 +16,11 @@
                             :rows-per-page-options="[10, 20, 40, 100]"
                             :loading="loadingTable"
                             :filter="filter"
+                            @row-click="onRowClick"
                         >
-                            <template v-slot:header="props">
-                                <q-tr :props="props">
-                                    <q-th auto-width />
-                                    <q-th
-                                        v-for="col in props.cols"
-                                        :key="col.name"
-                                        :props="props"
-                                    >
-                                        {{ col.label }}
-                                    </q-th>
-                                </q-tr>
-                            </template>
-
                             <template v-slot:top-right>
                                 <q-input
-                                    borderless
+                                    outlined 
                                     dense
                                     debounce="300"
                                     v-model="filter"
@@ -41,80 +30,21 @@
                                         <q-icon name="search" />
                                     </template>
                                 </q-input>
-                            </template>
-
-                            <template v-slot:body="props">
-                                <q-tr
-                                    :props="props"
-                                    @click="props.expand = !props.expand"
+                                
+                                <q-btn
+                                    flat
+                                    round
+                                    dense
+                                    :icon="mode === 'grid' ? 'list' : 'grid_on'"
+                                    class="gt-xs"
+                                    @click="mode = mode === 'grid' ? 'list' : 'grid'; separator = mode === 'grid' ? 'none' : 'horizontal'"
                                 >
-                                    <q-td auto-width>
-                                        <q-btn
-                                            size="md"
-                                            text-color="grey"
-                                            unelevated
-                                            flat
-                                            dense
-                                            :icon="
-                                                props.expand
-                                                    ? 'expand_less'
-                                                    : 'expand_more'
-                                            "
-                                        />
-                                    </q-td>
-                                    <q-td
-                                        v-for="col in props.cols"
-                                        :key="col.name"
-                                        :props="props"
-                                    >
-                                        <ClassIcon
-                                            v-if="col.name === 'class'"
-                                            :classid="props.row.class"
-                                        />
-                                        <span v-else>{{ col.value }}</span>
-                                    </q-td>
-                                </q-tr>
-                                <q-tr v-show="props.expand" :props="props">
-                                    <q-td auto-width></q-td>
-                                    <q-td colspan="100%">
-                                        <div class="text-left">
-                                            Más info para este pj:
-                                            {{ props.row.name }}.
-                                            <q-list
-                                                v-if="props.row.alts.length"
-                                                bordered
-                                            >
-                                                <q-item
-                                                    v-for="alt in props.row
-                                                        .alts"
-                                                    :key="alt.id"
-                                                    class="q-my-sm"
-                                                    clickable
-                                                    v-ripple
-                                                >
-                                                    <q-item-section avatar>
-                                                        <ClassIcon
-                                                            :classid="alt.class"
-                                                        />
-                                                    </q-item-section>
-
-                                                    <q-item-section>
-                                                        <q-item-label>{{
-                                                            alt.name
-                                                        }}</q-item-label>
-                                                        <q-item-label
-                                                            caption
-                                                            lines="1"
-                                                            >{{
-                                                                alt.email
-                                                            }}</q-item-label
-                                                        >
-                                                    </q-item-section>
-                                                </q-item>
-                                            </q-list>
-                                        </div>
-                                    </q-td>
-                                </q-tr>
+                                    <q-tooltip
+                                        :disable="$q.platform.is.mobile"
+                                        v-close-popup
+                                        >{{mode==='grid' ? 'List' : 'Grid'}}
+                                    </q-tooltip>
+                                </q-btn>
                             </template>
 
                             <template v-slot:body-cell-class="props">
@@ -162,6 +92,7 @@ export default defineComponent({
     data() {
         return {
             loadingTable: true,
+            mode: "list",
             filter: '',
             members: [],
             initialPagination: {
@@ -207,16 +138,21 @@ export default defineComponent({
     created() {
         db.collection('characters')
             .get()
-            .then((querySnapshot) => {
+            .then((query) => {
                 this.members = []
 
-                querySnapshot.forEach((doc) => {
+                query.forEach((doc) => {
                     this.members.push(doc.data())
                 })
                 this.loadingTable = false
             })
     },
     methods: {
+        onRowClick(evt, row) {
+            console.log('clicked on')
+            console.log('row', row)
+            console.log('rowName', row.name)
+        },
         rankName: function (value) {
             return rankNames[value]
         },
@@ -227,11 +163,14 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #members-table {
     .q-table__middle {
-        .q-tr {
-            cursor: pointer;
+        .q-table {
+            tr,
+            .q-tr {
+                cursor: pointer;
+            }
         }
     }
 }

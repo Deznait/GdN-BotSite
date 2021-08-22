@@ -38,7 +38,6 @@
                         flat
                         size="16px"
                         icon="mdi-youtube"
-
                         class="gt-xs"
                         type="a"
                         href="https://www.youtube.com/user/kachicho100"
@@ -52,7 +51,6 @@
                         flat
                         size="16px"
                         icon="mdi-twitter"
-                        color="white"
                         class="gt-xs"
                         type="a"
                         href="https://twitter.com/gremionord"
@@ -66,7 +64,6 @@
                         flat
                         size="16px"
                         icon="mdi-facebook"
-                        color="white"
                         class="gt-xs"
                         type="a"
                         href="https://www.facebook.com/gremionord"

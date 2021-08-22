@@ -6,11 +6,17 @@ const blizzard = require("blizzard.js");
 
 admin.initializeApp(functions.config().firebase);
 
+const runtimeOpts = {
+  timeoutSeconds: 300,
+  memory: "512MB",
+};
+
 exports.callBlizzard = functions
+    .runWith(runtimeOpts)
     .region("europe-west1")
     .https
     .onRequest(async (req, res) => {
-      res.send("Blizzard llamado");
+      console.info("Start updating the roster!");
 
       const wowClient = await blizzard.wow.createInstance({
         key: functions.config().battlenet.id,
@@ -18,8 +24,6 @@ exports.callBlizzard = functions
         origin: "eu",
         locale: "es_ES",
       });
-      functions.logger
-          .info("wowClient", {response: wowClient});
 
       const guild = await wowClient.guild({
         realm: "sanguino",
@@ -27,32 +31,46 @@ exports.callBlizzard = functions
         resource: "roster",
       });
 
+      const characterRef = admin.firestore().collection("characters");
+      const FieldValue = admin.firestore.FieldValue;
       guild.data.members.forEach(async (member) => {
-        functions.logger
-            .info("member", {name: member});
+        try {
+          const memberObj = {
+            name: member.character.name,
+            race: member.character.playable_race.id,
+            rank: member.rank,
+            realm: member.character.realm.slug,
+          };
 
-        const characterMedia = await wowClient.characterMedia({
-          realm: member.character.realm.slug,
-          name: member.character.name.toLowerCase(),
-        });
-        const memberObj = {
-          "id": member.character.id,
-          "name": member.character.name,
-          "class": member.character.playable_class.id,
-          "race": member.character.playable_race.id,
-          "rank": member.rank,
-          "realm": member.character.realm.slug,
-          "assets": characterMedia.data.assets,
-        };
-        functions.logger
-            .info("memberObj", {response: memberObj});
+          characterRef.doc("_" + member.character.id).update(memberObj).then(() => {
+          // Character exists
+            console.info("Character successfully updated! => ", memberObj.name);
+          })
+              .catch(() => {
+                // Character does not exist
+                memberObj.id = member.character.id;
+                memberObj.class = member.character.playable_class.id;
+                memberObj.assets = {};
+                memberObj.alts = {};
+                memberObj.points_total = 0;
+
+                characterRef.doc("_" + member.character.id).set(memberObj, {merge: true}).then(() => {
+                  console.info("Character successfully created! => ", memberObj.name);
+                  characterRef.doc("_" + member.character.id).collection("points").add({
+                    value: 0,
+                    type: "init",
+                    label: "Valor inicial",
+                    timestamp: FieldValue.serverTimestamp(),
+                  });
+                });
+              });
+        } catch (error) {
+          console.error("Error! => ", error);
+        }
       });
-    });
 
-const runtimeOpts = {
-  timeoutSeconds: 300,
-  memory: "512MB",
-};
+      console.info("Finished updating the roster!");
+    });
 
 exports.updateGuildRoster = functions
     .runWith(runtimeOpts)
@@ -78,11 +96,6 @@ exports.updateGuildRoster = functions
       const characterRef = admin.firestore().collection("characters");
       guild.data.members.forEach(async (member) => {
         try {
-          // const characterMedia = await wowClient.characterMedia({
-          //   realm: member.character.realm.slug,
-          //   name: member.character.name.toLowerCase(),
-          // });
-
           const memberObj = {
             "id": member.character.id,
             "name": member.character.name,
@@ -94,16 +107,16 @@ exports.updateGuildRoster = functions
           };
 
           characterRef.doc("_" + member.character.id).update(memberObj).then(() => {
-            // Character exists
+          // Character exists
             console.info("Character successfully updated! => ", memberObj.name);
           })
               .catch(() => {
-              // Character does not exist
+                // Character does not exist
                 memberObj.alts = {};
-                memberObj.points = {};
                 memberObj.points_total = 0;
                 characterRef.doc("_" + member.character.id).set(memberObj, {merge: true}).then(() => {
                   console.info("Character successfully created! => ", memberObj.name);
+                  characterRef.doc("_" + member.character.id).collection("points");
                 });
               });
         } catch (error) {
