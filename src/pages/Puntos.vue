@@ -111,40 +111,6 @@ export default {
                     align: 'left',
                 },
             ],
-            data3: [
-                {
-                    name: 'Yaaaeeeeeeee',
-                    rank: 0,
-                    points_total: 70,
-                    type: 'info',
-                    issue: '#125',
-                    avatar: 'https://avatars3.githubusercontent.com/u/34883558?s=400&u=09455019882ac53dc69b23df570629fd84d37dd1&v=4',
-                },
-                {
-                    name: 'Yooooo',
-                    rank: 0,
-                    points_total: 60,
-                    type: 'success',
-                    issue: '#1425',
-                    avatar: 'https://avatars2.githubusercontent.com/u/27857088?s=400&u=a898efbc753d93cf4c2070a7cf3b05544b50deea&v=4',
-                },
-                {
-                    name: 'Wololoooo',
-                    rank: 0,
-                    points_total: 30,
-                    type: 'warning',
-                    issue: '#1475',
-                    avatar: 'https://avatars0.githubusercontent.com/u/55240045?s=400&u=cf9bffc2bd2d8e42ca6e5abf40ddd6c1a03ce2860&v=4',
-                },
-                {
-                    name: 'Pikaaaachu',
-                    rank: 0,
-                    points_total: 100,
-                    type: 'success',
-                    issue: '#134',
-                    avatar: 'https://avatars1.githubusercontent.com/u/10262924?s=400&u=9f601b344d597ed76581e3a6a10f3c149cb5f6dc&v=4',
-                },
-            ],
         }
     },
     created() {
@@ -170,9 +136,6 @@ export default {
         },
         rankName: function (value) {
             return rankNames[value]
-        },
-        realmName: function (value) {
-            return realmNames[value]
         },
     },
 }
