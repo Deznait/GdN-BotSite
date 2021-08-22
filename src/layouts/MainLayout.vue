@@ -1,6 +1,6 @@
 <template>
     <q-layout view="lHh Lpr lFf">
-        <q-header elevated class="background-primary text-white">
+        <q-header class="background-primary text-white">
             <q-toolbar>
                 <q-btn
                     flat
@@ -163,9 +163,10 @@ export default defineComponent({
     background-color: #009688;
 }
 
-// .q-header {
+.q-header {
+
 //   background: linear-gradient(145deg, rgb(32, 106, 80) 15%, rgb(21, 57, 102) 70%);
-// }
+}
 .q-drawer {
   background: url("~assets/images/drawer_bg_light.jpg") no-repeat fixed;
   background-position: center;
