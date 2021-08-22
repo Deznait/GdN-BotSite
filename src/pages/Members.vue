@@ -62,7 +62,6 @@
 
 <script>
 import ClassIcon from 'components/ClassIcon'
-import { defineComponent } from 'vue'
 import { db } from 'boot/firebase'
 
 const rankNames = {
@@ -84,7 +83,7 @@ const realmNames = {
     shendralar: "Shen'dralar",
 }
 
-export default defineComponent({
+export default {
     name: 'PageMembers',
     components: {
         ClassIcon,
@@ -160,7 +159,7 @@ export default defineComponent({
             return realmNames[value]
         },
     },
-})
+}
 </script>
 
 <style lang="scss">
