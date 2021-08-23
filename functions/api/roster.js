@@ -18,10 +18,7 @@ router.get("/roster", async (req, res) => {
     const querySnapshot = await query.get();
     const docs = querySnapshot.docs;
 
-    const response = docs.map((doc) => ({
-      id: doc.id,
-      name: doc.data().name,
-    }));
+    const response = docs.map((doc) => (doc.data()));
 
     return res.status(200).json(response);
   } catch (error) {

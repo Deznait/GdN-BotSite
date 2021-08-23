@@ -2,6 +2,7 @@ const functions = require("firebase-functions");
 
 const admin = require("firebase-admin");
 const db = admin.firestore();
+const FieldValue = db.FieldValue;
 
 const blizzard = require("blizzard.js");
 const axios = require("axios").default;
@@ -32,7 +33,6 @@ exports.manualUpdateRoster = functions
       });
 
       const characterRef = db.collection("characters");
-      const FieldValue = db.FieldValue;
       guild.data.members.forEach(async (member) => {
         try {
           const memberObj = {
@@ -99,7 +99,6 @@ exports.updateGuildRoster = functions
       });
 
       const characterRef = db.collection("characters");
-      const FieldValue = admin.firestore.FieldValue;
       guild.data.members.forEach(async (member) => {
         try {
           const memberObj = {

@@ -11,7 +11,7 @@
                             :rows="members"
                             :columns="columns"
                             row-key="name"
-                            :pagination="initialPagination"
+                            :pagination="pagination"
                             rows-per-page-label="Por página"
                             :rows-per-page-options="[10, 20, 40, 100]"
                             :loading="loadingTable"
@@ -94,11 +94,11 @@ export default {
             mode: "list",
             filter: '',
             members: [],
-            initialPagination: {
+            pagination: {
                 sortBy: 'rank',
                 descending: false,
                 page: 1,
-                rowsPerPage: 20,
+                rowsPerPage: 20
             },
             columns: [
                 {
