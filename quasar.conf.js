@@ -136,7 +136,10 @@ module.exports = configure(function (ctx) {
         // https://v2.quasar.dev/quasar-cli/developing-pwa/configuring-pwa
         pwa: {
             workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
-            workboxOptions: {}, // only for GenerateSW
+            workboxOptions: {
+                skipWaiting: true,
+                clientsClaim: true
+            }, // only for GenerateSW
 
             // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
             // if using workbox in InjectManifest mode
@@ -147,31 +150,36 @@ module.exports = configure(function (ctx) {
 
             manifest: {
                 name: `Gremio de Nordrassil`,
-                short_name: `Gremio de Nordrassil`,
-                description: `Vue website for the Gremio de Nordrassil guild on Sanguino-EU`,
+                short_name: `GdN Site`,
+                description: `Quasar website for the Gremio de Nordrassil guild on Sanguino-EU`,
                 display: 'standalone',
                 orientation: 'portrait',
                 background_color: '#ffffff',
                 theme_color: '#003582',
                 icons: [
                     {
-                        src: 'icons/icon-16x16.png',
-                        sizes: '16x16',
-                        type: 'image/png'
-                    },
-                    {
-                        src: 'icons/icon-32x32.png',
-                        sizes: '32x32',
-                        type: 'image/png'
-                    },
-                    {
-                        src: 'icons/icon-96x96.png',
-                        sizes: '96x96',
-                        type: 'image/png'
-                    },
-                    {
                         src: 'icons/icon-128x128.png',
                         sizes: '128x128',
+                        type: 'image/png'
+                    },
+                    {
+                        src: 'icons/icon-192x192.png',
+                        sizes: '192x192',
+                        type: 'image/png'
+                    },
+                    {
+                        src: 'icons/icon-256x256.png',
+                        sizes: '256x256',
+                        type: 'image/png'
+                    },
+                    {
+                        src: 'icons/icon-384x384.png',
+                        sizes: '384x384',
+                        type: 'image/png'
+                    },
+                    {
+                        src: 'icons/icon-512x512.png',
+                        sizes: '512x512',
                         type: 'image/png'
                     }
                 ]
