@@ -1,7 +1,7 @@
 <template>
     <div class="WowProgress full-height">
         <div class="q-gutter-y-md full-height">
-            <q-card class="full-height">
+            <q-card flat bordered class="shadow full-height">
                 <q-tabs
                     v-model="progressTab"
                     dense

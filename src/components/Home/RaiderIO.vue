@@ -1,7 +1,7 @@
 <template>
     <div class="RaiderIO">
         <div class="q-gutter-y-md">
-            <q-card>
+            <q-card flat bordered class="shadow">
                 <q-tabs
                     v-model="raidTab"
                     dense

@@ -1,12 +1,53 @@
 // app global css in SCSS form
 body {
+	background-color: $light-page;
+}
 
-    &.body--dark{
+.main-wrapper {
+	max-width: 1780px;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+}
 
+.q-drawer {
+    .q-item {
+        transition: all .3s ease 0s;
+        opacity: 0.7;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &.q-router-link--active {
+            opacity: 1;
+            color: #FFFFFF;
+            background-color: $primary;
+        }
     }
 }
 
-.q-item.q-router-link--active, .q-item--active{
-    color: #FFFFFF;
-    background: rgba(255, 255, 255, 0.15); 
+// Dark Mode
+.q-dark {
+	color: $dark-font;
+}
+
+// Extra Small
+@media screen and (max-width: 599px) {
+}
+
+// Small
+@media screen and (max-width: 1023px) {
+}
+
+// Medium
+@media screen and (max-width: 1439px) {
+}
+
+// Large
+@media screen and (max-width: 1919px) {
+}
+
+// Extra Large
+@media screen and (min-width: 1920px) {
 }

@@ -1,5 +1,5 @@
 <template>
-    <q-layout view="lHh Lpr lFf">
+    <q-layout view="hHh Lpr lFf">
         <q-header elevated class="background-primary text-white">
             <q-toolbar>
                 <q-btn
@@ -8,7 +8,17 @@
                     round
                     icon="menu"
                     aria-label="Menu"
+                    class="lt-md"
                     @click="drawer = !drawer"
+                />
+                <q-btn
+                    flat
+                    dense
+                    round
+                    icon="menu"
+                    aria-label="Menu"
+                    class="gt-sm"
+                    @click="miniState = !miniState"
                 />
 
                 <q-toolbar-title>
@@ -79,9 +89,16 @@
         <q-drawer
             v-model="drawer"
             show-if-above
+
+            :mini="miniState"
+            @mouseover="miniState = false"
+            @mouseout="miniState = true"
+            mini-to-overlay
+
+            :width="260"
+            :breakpoint="1040"
             elevated
-            side="left"
-            class="text-white"
+            class="bg-dark text-white"
         >
             <q-list>
                 <EssentialLink
@@ -93,7 +110,7 @@
         </q-drawer>
 
         <q-page-container>
-            <q-page class="row no-wrap">
+            <q-page class="main-wrapper row no-wrap">
                 <div class="col">
                     <div class="full-height">
                         <router-view />
@@ -144,6 +161,7 @@ export default defineComponent({
         return {
             essentialLinks: linksList,
             drawer: ref(false),
+            bigDrawer: ref(false),
             miniState: ref(true),
         };
     }
@@ -158,30 +176,5 @@ export default defineComponent({
     height: 130px;
     padding: 20px;
     background-color: #009688;
-}
-
-.q-header {
-    
-//   background: linear-gradient(145deg, rgb(32, 106, 80) 15%, rgb(21, 57, 102) 70%);
-}
-.q-drawer {
-  background: url("~assets/images/drawer_bg_light.jpg") no-repeat fixed;
-  background-position: center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.q-drawer__content {
-  background-color: rgba(1, 1, 1, 0.75);
-}
-
-.body--dark {
-    // .q-header {
-    //     background: linear-gradient(145deg, rgb(61, 14, 42) 15%, rgb(14, 43, 78) 70%);
-    // }
-    .q-drawer {
-        background-image: url("~assets/images/drawer_bg_dark.jpg");
-    }
 }
 </style>
