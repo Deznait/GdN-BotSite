@@ -154,7 +154,7 @@ module.exports = configure(function (ctx) {
                 description: `Quasar website for the Gremio de Nordrassil guild on Sanguino-EU`,
                 display: 'standalone',
                 orientation: 'portrait',
-                background_color: '#ffffff',
+                background_color: '#313131',
                 theme_color: '#003582',
                 icons: [
                     {
@@ -180,7 +180,8 @@ module.exports = configure(function (ctx) {
                     {
                         src: 'icons/icon-512x512.png',
                         sizes: '512x512',
-                        type: 'image/png'
+                        type: 'image/png',
+                        purpose: "any maskable"
                     }
                 ]
             }

@@ -38,9 +38,8 @@
                             </div>
                             <q-linear-progress
                                 class="Progressbar"
-                                :class="
-                                    'progresslevel_' + difficulty.progress_level
-                                "
+                                :class="'progresslevel_' + difficulty.progress_level"
+                                :aria-label="'Progress Bar Level' + difficulty.progress_level"
                                 size="30px"
                                 :value="
                                     difficulty.bosses_killed /
@@ -77,7 +76,7 @@
                         label="Más info en RaiderIO"
                     />
                 </div>
-                <q-btn class="reload" dense flat size="12px" icon="autorenew" @click="callAPI">
+                <q-btn class="reload" dense flat size="12px" icon="autorenew" @click="callAPI" aria-label="Recargar">
                     <q-tooltip>Recargar</q-tooltip>
                 </q-btn>
             </q-card>

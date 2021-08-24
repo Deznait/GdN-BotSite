@@ -95,7 +95,7 @@
                         label="Más info en WowProgress"
                     />
                 </div>
-                <q-btn class="reload" dense flat size="12px" icon="autorenew" @click="getWowProgressData">
+                <q-btn class="reload" dense flat size="12px" icon="autorenew" @click="getWowProgressData" aria-label="Recargar">
                     <q-tooltip>Recargar</q-tooltip>
                 </q-btn>
             </q-card>
@@ -117,7 +117,11 @@ export default {
     props: {},
     data() {
         return {
-            guildInfo: "",
+            guildInfo: {
+                world_rank: "",
+                area_rank: "",
+                realm_rank: ""
+            },
             guild_url: "https://www.wowprogress.com/guild/eu/sanguino/Gremio+de+Nordrassil",
             progressTab: "avance",
             $q: useQuasar()

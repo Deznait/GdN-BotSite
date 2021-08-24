@@ -29,8 +29,9 @@
                         dense
                         flat
                         size="16px"
-                        :icon="$q.dark.isActive ? 'nights_stay' : 'wb_sunny'"
+                        :icon="$q.dark.isActive ? 'wb_sunny' : 'nights_stay'"
                         @click="$q.dark.toggle()"
+                        aria-label="Cambiar modo oscuro"
                     />
                     
                     <q-btn
