@@ -3,10 +3,6 @@ body {
 	background-color: $light-page;
 }
 
-.q-header {
-    background: linear-gradient(90deg,$header-bg1 0,$header-bg2 60%,$header-bg3);
-}
-
 .main-wrapper {
 	max-width: 1780px;
 	width: 100%;
@@ -41,22 +37,14 @@ body {
 	color: $dark-font;
 }
 
-// Extra Small
-@media screen and (max-width: 599px) {
+body.desktop {
+    .q-header {
+        background: linear-gradient(90deg,$header-bg1 0,$header-bg2 60%,$header-bg3);
+    }
 }
 
-// Small
-@media screen and (max-width: 1023px) {
-}
-
-// Medium
-@media screen and (max-width: 1439px) {
-}
-
-// Large
-@media screen and (max-width: 1919px) {
-}
-
-// Extra Large
-@media screen and (min-width: 1920px) {
+body.mobile {
+    .q-header {
+        background: $primary;
+    }
 }
