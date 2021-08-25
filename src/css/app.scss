@@ -3,6 +3,10 @@ body {
 	background-color: $light-page;
 }
 
+.q-header {
+    background: linear-gradient(90deg,$header-bg1 0,$header-bg2 60%,$header-bg3);
+}
+
 .main-wrapper {
 	max-width: 1780px;
 	width: 100%;
@@ -11,6 +15,11 @@ body {
 }
 
 .q-drawer {
+    .logo {
+        position: relative;
+        padding: .5rem .7rem;
+        z-index: 4;
+    }
     .q-item {
         transition: all .3s ease 0s;
         opacity: 0.7;
