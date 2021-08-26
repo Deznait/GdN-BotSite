@@ -42,7 +42,7 @@
 			:width="300"
 			:mini-width="70"
 			:breakpoint="1040"
-
+			:elevated="pinned ? true : !miniState"
 			class="bg-dark text-white"
 		>
 			<div class="drawer_normal full-height">
