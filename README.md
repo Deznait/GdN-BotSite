@@ -4,7 +4,7 @@ Vue website for the Gremio de Nordrassil guild on Sanguino-EU. It's a work in pr
 
 ## Install the dependencies
 ```bash
-yarn
+npm install
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
@@ -14,7 +14,7 @@ quasar dev
 
 ### Lint the files
 ```bash
-yarn run lint
+npm run lint
 ```
 
 ### Build the app for production
