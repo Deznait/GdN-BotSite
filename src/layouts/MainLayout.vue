@@ -2,7 +2,7 @@
 	<q-layout view="lHh Lpr lFf">
 		<q-header elevated class="background-primary text-white">
 			<q-toolbar>
-                <div class="navbar-minimize" v-if="$q.platform.is.mobile">
+				<div class="navbar-minimize" v-if="$q.platform.is.mobile">
 					<q-btn
 						flat
 						dense
@@ -28,45 +28,6 @@
 						@click="$q.dark.toggle()"
 						aria-label="Cambiar modo oscuro"
 					/>
-
-					<q-btn
-						dense
-						flat
-						size="16px"
-						icon="mdi-youtube"
-						class="gt-xs"
-						type="a"
-						href="https://www.youtube.com/user/kachicho100"
-						target="__blank"
-					>
-						<q-tooltip>Síguenos en Youtube</q-tooltip>
-					</q-btn>
-
-					<q-btn
-						dense
-						flat
-						size="16px"
-						icon="mdi-twitter"
-						class="gt-xs"
-						type="a"
-						href="https://twitter.com/gremionord"
-						target="__blank"
-					>
-						<q-tooltip>Síguenos en Twitter</q-tooltip>
-					</q-btn>
-
-					<q-btn
-						dense
-						flat
-						size="16px"
-						icon="mdi-facebook"
-						class="gt-xs"
-						type="a"
-						href="https://www.facebook.com/gremionord"
-						target="__blank"
-					>
-						<q-tooltip>Síguenos en Facebook</q-tooltip>
-					</q-btn>
 				</div>
 			</q-toolbar>
 		</q-header>
@@ -74,49 +35,84 @@
 		<q-drawer
 			v-model="drawer"
 			show-if-above
-
 			:mini="pinned ? false : miniState"
 			@mouseover="miniState = false"
 			@mouseout="miniState = true"
 			:mini-to-overlay="!pinned"
-
 			:width="300"
+			:mini-width="70"
 			:breakpoint="1040"
-			:elevated="pinned ? false : !miniState"
+
 			class="bg-dark text-white"
-			:class="miniState ? 'sidebar-mini' : ''"
 		>
-			<q-toolbar class="bg-primary text-white">
-				<q-avatar>
-					<q-img
-						src="~assets/logo.png"
-						spinner-color="white"
-						:ratio="1"
-					/>
-				</q-avatar>
-				<q-toolbar-title>Gremio de Nordrassil</q-toolbar-title>
-				<div class="navbar-minimize" v-if="$q.platform.is.desktop">
+			<div class="drawer_normal full-height">
+				<q-toolbar class="bg-primary">
+					<q-avatar
+					>
+						<q-img
+							src="~assets/logo.png"
+							spinner-color="white"
+							:ratio="1"
+						
+						/>
+					</q-avatar>
+					<q-toolbar-title>Gremio de Nordrassil</q-toolbar-title>
+					<div class="navbar-minimize" v-if="$q.platform.is.desktop">
+						<q-btn
+							flat
+							dense
+							:icon="pinned ? 'chevron_left' : 'chevron_right'"
+							aria-label="Menu"
+							@click="pinned = !pinned"
+						/>
+					</div>
+				</q-toolbar>
+
+				<q-separator inset color="grey-3" />
+
+				<q-toolbar>
+					<q-avatar>
+					<img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+					</q-avatar>
+
+					<q-toolbar-title>NOMBRE USUARIO</q-toolbar-title>
+				</q-toolbar>
+
+				<q-separator inset color="grey-3" />
+
+				<q-scroll-area >
+					<q-list>
+						<EssentialLink
+							v-for="link in essentialLinks"
+							:key="link.title"
+							v-bind="link"
+						/>
+					</q-list>
+				</q-scroll-area>
+
+				<q-separator inset color="grey-3" />
+
+				<q-toolbar
+					class="social-drawer q-gutter-sm row no-wrap"
+					:class="(!pinned && miniState) ? '' : 'justify-around'"
+				>
 					<q-btn
-						flat
-						dense
-						round
-						:icon="pinned ? 'chevron_left' : 'chevron_right'"
-						aria-label="Menu"
-						class="visible-on-sidebar-regular"
-						@click="pinned = !pinned"
-					/>
-				</div>
-			</q-toolbar>
-
-			<q-separator />
-
-			<q-list>
-					<EssentialLink
-						v-for="link in essentialLinks"
+						v-for="link in socialLinks"
 						:key="link.title"
-						v-bind="link"
-					/>
-				</q-list>
+						dense
+						flat
+						size="16px"
+						:icon="link.icon"
+						type="a"
+						:href="link.link"
+						target="__blank"
+					>
+						<q-tooltip anchor="top middle" self="bottom middle"
+							>Síguenos en {{ link.title }}</q-tooltip
+						>
+					</q-btn>
+				</q-toolbar>
+			</div>
 		</q-drawer>
 
 		<q-page-container>
@@ -150,10 +146,105 @@ const linksList = [
 		icon: 'format_list_numbered',
 		link: '/puntos',
 	},
+
+
+	{
+		title: 'Home',
+		icon: 'home',
+		link: '/s',
+	},
+	{
+		title: 'Miembros',
+		icon: 'groups',
+		link: '/miembross',
+	},
+	{
+		title: 'Puntos',
+		icon: 'format_list_numbered',
+		link: '/puntoss',
+	},
+	{
+		title: 'Home',
+		icon: 'home',
+		link: '/s',
+	},
+	{
+		title: 'Miembros',
+		icon: 'groups',
+		link: '/miembross',
+	},
+	{
+		title: 'Puntos',
+		icon: 'format_list_numbered',
+		link: '/puntoss',
+	},
+	{
+		title: 'Home',
+		icon: 'home',
+		link: '/s',
+	},
+	{
+		title: 'Miembros',
+		icon: 'groups',
+		link: '/miembross',
+	},
+	{
+		title: 'Puntos',
+		icon: 'format_list_numbered',
+		link: '/puntoss',
+	},
+	{
+		title: 'Home',
+		icon: 'home',
+		link: '/s',
+	},
+	{
+		title: 'Miembros',
+		icon: 'groups',
+		link: '/miembross',
+	},
+	{
+		title: 'Puntos',
+		icon: 'format_list_numbered',
+		link: '/puntoss',
+	},
+	{
+		title: 'Home',
+		icon: 'home',
+		link: '/s',
+	},
+	{
+		title: 'Miembros',
+		icon: 'groups',
+		link: '/miembross',
+	},
+	{
+		title: 'Puntos',
+		icon: 'format_list_numbered',
+		link: '/puntoss',
+	},
+]
+
+const socialLinksList = [
+	{
+		title: 'Youtube',
+		icon: 'mdi-youtube',
+		link: 'https://www.youtube.com/user/kachicho100',
+	},
+	{
+		title: 'Twitter',
+		icon: 'mdi-twitter',
+		link: 'https://twitter.com/gremionord',
+	},
+	{
+		title: 'Facebook',
+		icon: 'mdi-facebook',
+		link: 'https://www.facebook.com/gremionord',
+	},
 ]
 
 import { defineComponent, ref, watch } from 'vue'
-import { useQuasar } from "quasar"
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
 	name: 'MainLayout',
@@ -164,6 +255,7 @@ export default defineComponent({
 	setup() {
 		const $q = useQuasar()
 		const essentialLinks = linksList
+		const socialLinks = socialLinksList
 		const drawer = ref(false)
 		const pinned = ref(true)
 		const miniState = ref(false)
@@ -177,9 +269,10 @@ export default defineComponent({
 
 		return {
 			essentialLinks,
+			socialLinks,
 			drawer,
 			pinned,
-			miniState,
+			miniState: ref(false),
 		}
 	},
 })

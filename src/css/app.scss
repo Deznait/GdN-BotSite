@@ -11,9 +11,29 @@ body {
 }
 
 .q-drawer {
-    .q-toolbar__title {
-        font-size: 1.17rem;
-        line-height: 1.75rem;
+    .drawer_normal {
+        display: flex;
+        flex-direction: column;
+
+        .q-scrollarea {
+            flex-grow: 1;
+        }
+
+        .social-drawer {
+            align-self:flex-end;
+        }
+    }
+
+    .q-toolbar {
+        .q-avatar {
+            font-size: 42px;
+            margin: 0 2px;
+        }
+
+        .q-toolbar__title {
+            font-size: 1.12rem;
+            line-height: 1.75rem;
+        }
     }
 
     .q-item {
@@ -30,6 +50,23 @@ body {
             background-color: $primary;
         }
     }
+
+    .social-drawer {
+        // position: absolute;
+        // bottom: 0;
+        // overflow: hidden;
+    }
+
+    &.q-drawer--mini {
+        .q-item {
+            &.q-router-link--active {
+                &::before,
+                &::after {
+                    border-right-width: 10px;
+                }
+            }
+        }
+    }
 }
 
 // Dark Mode
@@ -39,7 +76,13 @@ body {
 
 body.desktop {
     .q-header {
-        background: linear-gradient(90deg,$header-bg1 0,$header-bg2 60%,$header-bg3);
+        background: linear-gradient(90deg, $primary 0, $secondary);
+    }
+
+    .q-item {
+        &.q-router-link--active {
+            
+        }
     }
 }
 
