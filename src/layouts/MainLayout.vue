@@ -175,28 +175,11 @@ export default defineComponent({
 			}
 		)
 
-		const drawerClick = (e) => {
-			console.log("drawerClick");
-			// if in "mini" state and user
-			// click on drawer, we switch it to "normal" mode
-				console.log(miniState.value);
-			if (miniState.value) {
-				console.log(miniState.value);
-				miniState.value = false
-
-				// notice we have registered an event with capture flag;
-				// we need to stop further propagation as this click is
-				// intended for switching drawer to "normal" mode only
-				e.stopPropagation()
-			}
-		}
-
 		return {
 			essentialLinks,
 			drawer,
 			pinned,
-			miniState: ref(false),
-			drawerClick,
+			miniState,
 		}
 	},
 })
