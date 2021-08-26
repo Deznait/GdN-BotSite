@@ -272,7 +272,7 @@ export default defineComponent({
 			socialLinks,
 			drawer,
 			pinned,
-			miniState: ref(false),
+			miniState,
 		}
 	},
 })
