@@ -74,13 +74,17 @@
 		<q-drawer
 			v-model="drawer"
 			show-if-above
+
+			:mini="pinned ? false : miniState"
+			@mouseover="miniState = false"
+			@mouseout="miniState = true"
+			:mini-to-overlay="!pinned"
+
 			:width="300"
 			:breakpoint="1040"
-			elevated
-
-
-
+			:elevated="pinned ? false : !miniState"
 			class="bg-dark text-white"
+			:class="miniState ? 'sidebar-mini' : ''"
 		>
 			<q-toolbar class="bg-primary text-white">
 				<q-avatar>
@@ -96,19 +100,10 @@
 						flat
 						dense
 						round
-						icon="menu"
+						:icon="pinned ? 'chevron_left' : 'chevron_right'"
 						aria-label="Menu"
 						class="visible-on-sidebar-regular"
-						@click="drawer = !drawer"
-					/>
-					<q-btn
-						flat
-						dense
-						round
-						icon="menu"
-						aria-label="Menu"
-						class="visible-on-sidebar-mini"
-						@click="miniState = !miniState"
+						@click="pinned = !pinned"
 					/>
 				</div>
 			</q-toolbar>
@@ -116,12 +111,12 @@
 			<q-separator />
 
 			<q-list>
-				<EssentialLink
-					v-for="link in essentialLinks"
-					:key="link.title"
-					v-bind="link"
-				/>
-			</q-list>
+					<EssentialLink
+						v-for="link in essentialLinks"
+						:key="link.title"
+						v-bind="link"
+					/>
+				</q-list>
 		</q-drawer>
 
 		<q-page-container>
@@ -158,7 +153,7 @@ const linksList = [
 ]
 
 import { defineComponent, ref, watch } from 'vue'
-import { useQuasar } from 'quasar'
+import { useQuasar } from "quasar"
 
 export default defineComponent({
 	name: 'MainLayout',
@@ -168,6 +163,10 @@ export default defineComponent({
 	},
 	setup() {
 		const $q = useQuasar()
+		const essentialLinks = linksList
+		const drawer = ref(false)
+		const pinned = ref(true)
+		const miniState = ref(false)
 
 		watch(
 			() => $q.dark.isActive,
@@ -176,11 +175,28 @@ export default defineComponent({
 			}
 		)
 
+		const drawerClick = (e) => {
+			console.log("drawerClick");
+			// if in "mini" state and user
+			// click on drawer, we switch it to "normal" mode
+				console.log(miniState.value);
+			if (miniState.value) {
+				console.log(miniState.value);
+				miniState.value = false
+
+				// notice we have registered an event with capture flag;
+				// we need to stop further propagation as this click is
+				// intended for switching drawer to "normal" mode only
+				e.stopPropagation()
+			}
+		}
+
 		return {
-			essentialLinks: linksList,
-			drawer: ref(false),
-			bigDrawer: ref(false),
+			essentialLinks,
+			drawer,
+			pinned,
 			miniState: ref(false),
+			drawerClick,
 		}
 	},
 })

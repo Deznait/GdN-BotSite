@@ -1,5 +1,5 @@
 <template>
-	<q-item clickable exact tag="a" target="_self" :to="link">
+	<q-item clickable v-ripple exact tag="a" target="_self" :to="link">
 		<q-item-section v-if="icon" avatar>
 			<q-icon :name="icon" />
 		</q-item-section>

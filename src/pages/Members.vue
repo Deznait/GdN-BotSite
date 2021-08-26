@@ -7,6 +7,7 @@
                         <q-table
                             id="members-table"
                             title="Miembros"
+                            dense
                             :grid="mode=='grid'"
                             :rows="members"
                             :columns="columns"
@@ -37,7 +38,7 @@
                                     dense
                                     :icon="mode === 'grid' ? 'list' : 'grid_on'"
                                     class="gt-xs"
-                                    @click="mode = mode === 'grid' ? 'list' : 'grid'; separator = mode === 'grid' ? 'none' : 'horizontal'"
+                                    @click="mode = mode === 'grid' ? 'list' : 'grid'"
                                 >
                                     <q-tooltip
                                         :disable="$q.platform.is.mobile"
