@@ -51,12 +51,6 @@ body {
         }
     }
 
-    .social-drawer {
-        // position: absolute;
-        // bottom: 0;
-        // overflow: hidden;
-    }
-
     &.q-drawer--mini {
         .q-item {
             &.q-router-link--active {
@@ -79,11 +73,6 @@ body.desktop {
         background: linear-gradient(90deg, $primary 0, $secondary);
     }
 
-    .q-item {
-        &.q-router-link--active {
-            
-        }
-    }
 }
 
 body.mobile {
