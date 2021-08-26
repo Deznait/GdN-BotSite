@@ -5,6 +5,7 @@ const db = admin.firestore();
 const FieldValue = admin.firestore.FieldValue;
 
 const blizzard = require("blizzard.js");
+const cheerio = require("cheerio");
 const axios = require("axios").default;
 
 const runtimeOpts = {
@@ -43,7 +44,7 @@ exports.manualUpdateRoster = functions
           };
 
           characterRef.doc("_" + member.character.id).update(memberObj).then(() => {
-            // Character exists
+          // Character exists
             console.info("Character successfully updated! => ", memberObj.name);
           })
               .catch(() => {
@@ -74,6 +75,7 @@ exports.manualUpdateRoster = functions
         }
       });
 
+      res.send("Finished updating the roster!");
       console.info("Finished updating the roster!");
     });
 
@@ -109,7 +111,7 @@ exports.updateGuildRoster = functions
           };
 
           characterRef.doc("_" + member.character.id).update(memberObj).then(() => {
-            // Character exists
+          // Character exists
             console.info("Character successfully updated! => ", memberObj.name);
           })
               .catch(() => {
@@ -138,23 +140,104 @@ exports.updateGuildRoster = functions
       console.info("Finished updating the roster!");
     });
 
+exports.manualupdateWowProgress = functions
+    .runWith(runtimeOpts)
+    .region("europe-west1")
+    .https
+    .onRequest(async (request, response) => {
+      console.info("Start updating WowProgress!");
+
+      const res = await axios.get("https://www.wowprogress.com/guild/eu/sanguino/Gremio+de+Nordrassil");
+      const $ = cheerio.load(res.data);
+
+      const arrayMap = ["world_rank", "area_rank", "region_rank", "realm_rank"];
+      const guildData = {
+        world_rank: {
+          progress: "",
+          ilvl: "",
+        },
+        area_rank: {
+          progress: "",
+          ilvl: "",
+        },
+        region_rank: {
+          progress: "",
+          ilvl: "",
+        },
+        realm_rank: {
+          progress: "",
+          ilvl: "",
+        },
+      };
+      const progressValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
+      const ilvlValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
+
+      progressValues.each((index, element) => {
+        guildData[arrayMap[index]].progress = $(element).text();
+      });
+      ilvlValues.each((index, element) => {
+        guildData[arrayMap[index]].ilvl = $(element).text();
+      });
+
+      db.collection("wowprogress").doc("data").set(guildData)
+          .then(() => {
+            functions.logger
+                .info("WowProgress_Update - OK", {wp_update: guildData});
+          }).catch((error) => {
+            functions.logger
+                .error("WowProgress_Update - KO", {error: guildData});
+          });
+
+      response.send("Finished updating WowProgress!");
+      console.info("Finished updating WowProgress!");
+    });
+
 exports.updateWowProgress = functions
     .region("europe-west1")
     .pubsub.schedule("30 2 * * *")
     .timeZone("Europe/Madrid")
-    .onRun(() => {
+    .onRun(async () => {
       console.info("Start updating WowProgress!");
 
-      axios.get("https://www.wowprogress.com/guild/eu/sanguino/Gremio+de+Nordrassil/json_rank/")
-          .then(function(response) {
-            db.collection("wowprogress").doc("data").set(response.data)
-                .then(() => {
-                  functions.logger
-                      .info("WowProgress_Update - OK", {wp_update: response.data});
-                }).catch((error) => {
-                  functions.logger
-                      .error("WowProgress_Update - KO", {error: error});
-                });
+      const res = await axios.get("https://www.wowprogress.com/guild/eu/sanguino/Gremio+de+Nordrassil");
+      const $ = cheerio.load(res.data);
+
+      const arrayMap = ["world_rank", "area_rank", "region_rank", "realm_rank"];
+      const guildData = {
+        world_rank: {
+          progress: "",
+          ilvl: "",
+        },
+        area_rank: {
+          progress: "",
+          ilvl: "",
+        },
+        region_rank: {
+          progress: "",
+          ilvl: "",
+        },
+        realm_rank: {
+          progress: "",
+          ilvl: "",
+        },
+      };
+      const progressValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
+      const ilvlValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
+
+      progressValues.each((index, element) => {
+        guildData[arrayMap[index]].progress = $(element).text();
+      });
+      ilvlValues.each((index, element) => {
+        guildData[arrayMap[index]].ilvl = $(element).text();
+      });
+
+      db.collection("wowprogress").doc("data").set(guildData)
+          .then(() => {
+            functions.logger
+                .info("WowProgress_Update - OK", {wp_update: guildData});
+          }).catch((error) => {
+            functions.logger
+                .error("WowProgress_Update - KO", {error: guildData});
           });
 
       console.info("Finished updating WowProgress!");

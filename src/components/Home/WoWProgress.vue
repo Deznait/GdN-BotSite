@@ -4,8 +4,6 @@
 			<q-tab key="avance" name="avance" label="Avance" />
 		</q-tabs>
 
-
-
 		<q-tab-panels v-model="progressTab" animated>
 			<q-tab-panel key="avance" name="avance">
 				<div class="container with-header with-footer">
@@ -65,7 +63,35 @@
 																			"
 																		>
 																			{{
-																				guildInfo.world_rank
+																				guildInfo
+																					.world_rank
+																					.progress
+																			}}
+																		</span>
+																	</span>
+																</div>
+																<div
+																	class="
+																		wowprogress_area
+																		wowprogress_box
+																	"
+																>
+																	<span
+																		class="
+																			rank_title
+																		"
+																	>
+																		Rango
+																		area
+																		<span
+																			class="
+																				rank_value
+																			"
+																		>
+																			{{
+																				guildInfo
+																					.area_rank
+																					.progress
 																			}}
 																		</span>
 																	</span>
@@ -89,7 +115,9 @@
 																			"
 																		>
 																			{{
-																				guildInfo.area_rank
+																				guildInfo
+																					.region_rank
+																					.progress
 																			}}
 																		</span>
 																	</span>
@@ -113,7 +141,9 @@
 																			"
 																		>
 																			{{
-																				guildInfo.realm_rank
+																				guildInfo
+																					.realm_rank
+																					.progress
 																			}}
 																		</span>
 																	</span>
@@ -172,9 +202,22 @@ export default {
 	data() {
 		return {
 			guildInfo: {
-				world_rank: '',
-				area_rank: '',
-				realm_rank: '',
+				world_rank: {
+					progress: '',
+					ilvl: '',
+				},
+				area_rank: {
+					progress: '',
+					ilvl: '',
+				},
+				region_rank: {
+					progress: '',
+					ilvl: '',
+				},
+				realm_rank: {
+					progress: '',
+					ilvl: '',
+				},
 			},
 			guild_url:
 				'https://www.wowprogress.com/guild/eu/sanguino/Gremio+de+Nordrassil',
