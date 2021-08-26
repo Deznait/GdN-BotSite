@@ -147,45 +147,49 @@ exports.manualupdateWowProgress = functions
     .onRequest(async (request, response) => {
       console.info("Start updating WowProgress!");
 
-      const res = await axios.get("https://www.wowprogress.com/guild/eu/sanguino/Gremio+de+Nordrassil");
-      const $ = cheerio.load(res.data);
+      axios.get("https://www.wowprogress.com/guild/eu/sanguino/Gremio+de+Nordrassil")
+          .then(function(res) {
+            const $ = cheerio.load(res.data);
+            const arrayMap = ["world_rank", "area_rank", "region_rank", "realm_rank"];
+            const guildData = {
+              world_rank: {
+                progress: "",
+                ilvl: "",
+              },
+              area_rank: {
+                progress: "",
+                ilvl: "",
+              },
+              region_rank: {
+                progress: "",
+                ilvl: "",
+              },
+              realm_rank: {
+                progress: "",
+                ilvl: "",
+              },
+            };
+            const progressValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
+            const ilvlValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
 
-      const arrayMap = ["world_rank", "area_rank", "region_rank", "realm_rank"];
-      const guildData = {
-        world_rank: {
-          progress: "",
-          ilvl: "",
-        },
-        area_rank: {
-          progress: "",
-          ilvl: "",
-        },
-        region_rank: {
-          progress: "",
-          ilvl: "",
-        },
-        realm_rank: {
-          progress: "",
-          ilvl: "",
-        },
-      };
-      const progressValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
-      const ilvlValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
+            progressValues.each((index, element) => {
+              guildData[arrayMap[index]].progress = $(element).text();
+            });
+            ilvlValues.each((index, element) => {
+              guildData[arrayMap[index]].ilvl = $(element).text();
+            });
 
-      progressValues.each((index, element) => {
-        guildData[arrayMap[index]].progress = $(element).text();
-      });
-      ilvlValues.each((index, element) => {
-        guildData[arrayMap[index]].ilvl = $(element).text();
-      });
-
-      db.collection("wowprogress").doc("data").set(guildData)
-          .then(() => {
-            functions.logger
-                .info("WowProgress_Update - OK", {wp_update: guildData});
+            db.collection("wowprogress").doc("data").set(guildData)
+                .then(() => {
+                  functions.logger
+                      .info("WowProgress_Update - OK", {wp_update: guildData});
+                }).catch((error) => {
+                  functions.logger
+                      .error("WowProgress_Update - KO", {error: error});
+                });
           }).catch((error) => {
             functions.logger
-                .error("WowProgress_Update - KO", {error: guildData});
+                .error("Axios Get - KO", {error: error});
           });
 
       response.send("Finished updating WowProgress!");
@@ -199,45 +203,49 @@ exports.updateWowProgress = functions
     .onRun(async () => {
       console.info("Start updating WowProgress!");
 
-      const res = await axios.get("https://www.wowprogress.com/guild/eu/sanguino/Gremio+de+Nordrassil");
-      const $ = cheerio.load(res.data);
+      axios.get("https://www.wowprogress.com/guild/eu/sanguino/Gremio+de+Nordrassil")
+          .then(function(res) {
+            const $ = cheerio.load(res.data);
+            const arrayMap = ["world_rank", "area_rank", "region_rank", "realm_rank"];
+            const guildData = {
+              world_rank: {
+                progress: "",
+                ilvl: "",
+              },
+              area_rank: {
+                progress: "",
+                ilvl: "",
+              },
+              region_rank: {
+                progress: "",
+                ilvl: "",
+              },
+              realm_rank: {
+                progress: "",
+                ilvl: "",
+              },
+            };
+            const progressValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
+            const ilvlValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
 
-      const arrayMap = ["world_rank", "area_rank", "region_rank", "realm_rank"];
-      const guildData = {
-        world_rank: {
-          progress: "",
-          ilvl: "",
-        },
-        area_rank: {
-          progress: "",
-          ilvl: "",
-        },
-        region_rank: {
-          progress: "",
-          ilvl: "",
-        },
-        realm_rank: {
-          progress: "",
-          ilvl: "",
-        },
-      };
-      const progressValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
-      const ilvlValues = $(".primary > table:nth-child(9) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > table:nth-child(2) > tbody:nth-child(1) > tr td + td");
+            progressValues.each((index, element) => {
+              guildData[arrayMap[index]].progress = $(element).text();
+            });
+            ilvlValues.each((index, element) => {
+              guildData[arrayMap[index]].ilvl = $(element).text();
+            });
 
-      progressValues.each((index, element) => {
-        guildData[arrayMap[index]].progress = $(element).text();
-      });
-      ilvlValues.each((index, element) => {
-        guildData[arrayMap[index]].ilvl = $(element).text();
-      });
-
-      db.collection("wowprogress").doc("data").set(guildData)
-          .then(() => {
-            functions.logger
-                .info("WowProgress_Update - OK", {wp_update: guildData});
+            db.collection("wowprogress").doc("data").set(guildData)
+                .then(() => {
+                  functions.logger
+                      .info("WowProgress_Update - OK", {wp_update: guildData});
+                }).catch((error) => {
+                  functions.logger
+                      .error("WowProgress_Update - KO", {error: error});
+                });
           }).catch((error) => {
             functions.logger
-                .error("WowProgress_Update - KO", {error: guildData});
+                .error("Axios Get - KO", {error: error});
           });
 
       console.info("Finished updating WowProgress!");
