@@ -1,20 +1,24 @@
 <template>
   <router-view />
 </template>
+
 <script>
 import { defineComponent } from 'vue';
+import { useQuasar } from 'quasar';
 
 export default defineComponent({
   name: 'App',
-  created() {
-    const darkMode = this.$q.localStorage.getItem("darkMode");
+  setup() {
+    const $q = useQuasar();
+
+    const darkMode = $q.localStorage.getItem("darkMode");
 
     if(darkMode == null){
-      this.$q.dark.set(true)
-      this.$q.localStorage.set("darkMode", $q.dark.isActive);
+      $q.dark.set(true);
+      $q.localStorage.set("darkMode", $q.dark.isActive);
     }else {
-      this.$q.dark.set(darkMode)
+      $q.dark.set(darkMode);
     }
   }
-})
+});
 </script>

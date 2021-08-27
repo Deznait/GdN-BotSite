@@ -8,9 +8,10 @@
 			<q-tab-panel key="avance" name="avance" class="row q-col-gutter-sm">
 				<div v-for="rank in guildInfo" :key="rank.label" class="col-6">
 					<q-card flat bordered class="text-center">
-						<q-card-section>
+						<q-card-section class="q-pa-none">
 							<q-btn
 								flat
+								padding="none"
 								type="a"
 								:href="rank.url"
 								target="__blank"
@@ -21,12 +22,18 @@
 
 						<q-separator inset />
 
-						<q-card-section>
-							<div class="text-h6" :class="progressRankColor(rank.progress)">
+						<q-card-section  class="q-pa-sm">
+							<div
+								class="text-h6"
+								:class="progressRankColor(rank.progress)"
+							>
 								{{ rank.progress }}
 							</div>
 							<div v-if="!hideIlvl" class="text-subtitle2">
-								ilvl: <span :class="progressRankColor(rank.ilvl)">{{ rank.ilvl }}</span>
+								ilvl:
+								<span :class="progressRankColor(rank.ilvl)">{{
+									rank.ilvl
+								}}</span>
 							</div>
 						</q-card-section>
 					</q-card>
@@ -50,8 +57,8 @@
 			flat
 			size="12px"
 			icon="autorenew"
-			@click="getWowProgressData"
 			aria-label="Recargar"
+			@click="getWowProgressData"
 		>
 			<q-tooltip>Recargar</q-tooltip>
 		</q-btn>
@@ -59,27 +66,20 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from 'vue'
-import { useQuasar } from 'quasar'
-import { db } from 'boot/firebase'
-
-const raidNames = {
-	'castle-nathria': 'Castillo de Nathria',
-	'sanctum-of-domination': 'Sagrario de Dominación',
-}
-
-
+import { defineComponent, ref } from 'vue';
+import { useQuasar } from 'quasar';
+import { db } from 'boot/firebase';
 
 export default defineComponent({
 	name: 'WoWProgress',
 	props: {
 		hideIlvl: {
 			type: Boolean,
-			default: false
-		}
+			default: false,
+		},
 	},
-	setup(props) {
-		const $q = useQuasar()
+	setup() {
+		const $q = useQuasar();
 
 		let guildInfo = ref({
 			0: {
@@ -98,81 +98,81 @@ export default defineComponent({
 				progress: '',
 				ilvl: '',
 			},
-		})
+		});
 		const guild_url = ref(
 			'https://www.wowprogress.com/guild/eu/sanguino/Gremio+de+Nordrassil'
-		)
-		const progressTab = ref('avance')
+		);
+		const progressTab = ref('avance');
 
-		const getWowProgressData = () => {
-			db.collection('wowprogress')
+		const getWowProgressData = async () => {
+			let guild_info = {};
+
+			const guild_info_remote = await db
+				.collection('wowprogress')
 				.doc('data')
-				.get()
-				.then((doc) => {
-					if (doc.exists) {
-						let guild_info_remote = doc.data()
-						guild_info_remote['date_fetched'] = new Date().getTime()
+				.get();
+			if (guild_info_remote.exists) {
+				guild_info = guild_info_remote.data();
+				guild_info['date_fetched'] = new Date().getTime();
 
-						$q.localStorage.set( 'savedGuildProgress', guild_info_remote)
+				$q.localStorage.set('savedGuildProgress', guild_info);
+			}
 
-						return guild_info_remote;
-					}
-				})
-				.catch((error) => {
-					console.error('Error getting document:', error)
-				})
-		}
+			return guild_info;
+		};
 
-		const loadWowProgressData = () => {
-			let guildInfoData;
-			const savedGuildProgress = $q.localStorage.getItem('savedGuildProgress')
+		const loadWowProgressData = async () => {
+			let guildInfoData = {};
+			const savedGuildProgress =
+				$q.localStorage.getItem('savedGuildProgress');
 
 			if (savedGuildProgress === null) {
-				guildInfoData = getWowProgressData()
+				guildInfoData = await getWowProgressData();
 			} else {
-				const date = new Date()
+				const date = new Date();
 				const Difference_In_Days =
 					(date.getTime() - savedGuildProgress.date_fetched) /
-					(1000 * 3600 * 24)
+					(1000 * 3600 * 24);
 
 				if (Difference_In_Days >= 1.0) {
-					guildInfoData = getWowProgressData()
-				}else{
-					guildInfoData = savedGuildProgress
+					guildInfoData = await getWowProgressData();
+				} else {
+					guildInfoData = savedGuildProgress;
 				}
 			}
-		
+
 			guildInfo.value[3] = guildInfoData.realm_rank;
 			guildInfo.value[2] = guildInfoData.region_rank;
 			guildInfo.value[1] = guildInfoData.area_rank;
 			guildInfo.value[0] = guildInfoData.world_rank;
-		}
-		onMounted(loadWowProgressData)
+		};
 
 		const progressRankColor = (value) => {
-			let rankColor = "rank rank";
+			let rankColor = 'rank rank';
 
-			if(value <= 10){
-				rankColor += "_legendary";		
-			}else if(value > 10 && value <= 100){
-				rankColor += "_epic";	
-			}else if(value > 100 && value <= 2500){
-				rankColor += "_rare";	
-			}else{
-				rankColor += "_uncommon";	
+			if (value <= 10) {
+				rankColor += '_legendary';
+			} else if (value > 10 && value <= 100) {
+				rankColor += '_epic';
+			} else if (value > 100 && value <= 2500) {
+				rankColor += '_rare';
+			} else {
+				rankColor += '_uncommon';
 			}
 
 			return rankColor;
-		}
+		};
+
+		loadWowProgressData();
 		return {
 			guildInfo,
 			guild_url,
 			progressTab,
 			getWowProgressData,
-			progressRankColor
-		}
+			progressRankColor,
+		};
 	},
-})
+});
 </script>
 
 <style lang="scss">
@@ -196,19 +196,19 @@ export default defineComponent({
 		font-weight: bold;
 
 		&_legendary {
-			color: #FF8000;
+			color: #ff8000;
 		}
 
 		&_epic {
-			color: #A335EE;
+			color: #a335ee;
 		}
 
 		&_rare {
-			color: #0070DD;
+			color: #0070dd;
 		}
 
 		&_uncommon {
-			color: #16BB00;
+			color: #16bb00;
 		}
 	}
 }

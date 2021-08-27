@@ -2,7 +2,7 @@
 	<q-layout view="lHh Lpr lFf">
 		<q-header elevated class="background-primary text-white">
 				<q-toolbar>
-					<div class="navbar-minimize" v-if="$q.platform.is.mobile">
+					<div v-if="$q.platform.is.mobile" class="navbar-minimize">
 						<q-btn
 							flat
 							dense
@@ -25,8 +25,8 @@
 							flat
 							size="16px"
 							:icon="$q.dark.isActive ? 'wb_sunny' : 'nights_stay'"
-							@click="$q.dark.toggle()"
 							aria-label="Cambiar modo oscuro"
+							@click="$q.dark.toggle()"
 						/>
 					</div>
 				</q-toolbar>
@@ -36,14 +36,14 @@
 			v-model="drawer"
 			show-if-above
 			:mini="pinned ? false : miniState"
-			@mouseover="miniState = false"
-			@mouseout="miniState = true"
 			:mini-to-overlay="!pinned"
 			:width="300"
 			:mini-width="70"
 			:breakpoint="1040"
 			:elevated="pinned ? true : !miniState"
 			class="bg-dark text-white"
+			@mouseover="miniState = false"
+			@mouseout="miniState = true"
 		>
 			<div class="drawer_normal full-height">
 				<q-toolbar class="drawer-header bg-primary">
@@ -57,7 +57,7 @@
 						/>
 					</q-avatar>
 					<q-toolbar-title>Gremio de Nordrassil</q-toolbar-title>
-					<div class="navbar-minimize" v-if="$q.platform.is.desktop">
+					<div v-if="$q.platform.is.desktop" class="navbar-minimize">
 						<q-btn
 							flat
 							dense
@@ -128,9 +128,9 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
-import { defineComponent, ref, watch } from 'vue'
-import { useQuasar } from 'quasar'
+import EssentialLink from 'components/EssentialLink.vue';
+import { defineComponent, ref, watch } from 'vue';
+import { useQuasar } from 'quasar';
 
 const linksList = [
 	{
@@ -148,7 +148,7 @@ const linksList = [
 		icon: 'format_list_numbered',
 		link: '/puntos',
 	},
-]
+];
 
 const socialLinksList = [
 	{
@@ -166,7 +166,7 @@ const socialLinksList = [
 		icon: 'mdi-facebook',
 		link: 'https://www.facebook.com/gremionord',
 	},
-]
+];
 
 
 export default defineComponent({
@@ -176,19 +176,19 @@ export default defineComponent({
 		EssentialLink,
 	},
 	setup() {
-		const $q = useQuasar()
-		const essentialLinks = linksList
-		const socialLinks = socialLinksList
-		const drawer = ref(false)
-		const pinned = ref(true)
-		const miniState = ref(false)
+		const $q = useQuasar();
+		const essentialLinks = linksList;
+		const socialLinks = socialLinksList;
+		const drawer = ref(false);
+		const pinned = ref(true);
+		const miniState = ref(false);
 
 		watch(
 			() => $q.dark.isActive,
 			(val) => {
-				$q.localStorage.set('darkMode', val)
+				$q.localStorage.set('darkMode', val);
 			}
-		)
+		);
 
 		return {
 			essentialLinks,
@@ -196,9 +196,9 @@ export default defineComponent({
 			drawer,
 			pinned,
 			miniState,
-		}
+		};
 	},
-})
+});
 </script>
 
 <style lang="scss">
