@@ -19,15 +19,15 @@
                             :filter="filter"
                             @row-click="onRowClick"
                         >
-                            <template v-slot:top-right>
+                            <template #top-right>
                                 <q-input
-                                    outlined 
+                                    v-model="filter" 
+                                    outlined
                                     dense
                                     debounce="300"
-                                    v-model="filter"
                                     placeholder="Buscar"
                                 >
-                                    <template v-slot:append>
+                                    <template #append>
                                         <q-icon name="search" />
                                     </template>
                                 </q-input>
@@ -41,14 +41,14 @@
                                     @click="mode = mode === 'grid' ? 'list' : 'grid'"
                                 >
                                     <q-tooltip
-                                        :disable="$q.platform.is.mobile"
                                         v-close-popup
+                                        :disable="$q.platform.is.mobile"
                                         >{{mode==='grid' ? 'List' : 'Grid'}}
                                     </q-tooltip>
                                 </q-btn>
                             </template>
 
-                            <template v-slot:body-cell-class="props">
+                            <template #body-cell-class="props">
                                 <q-td class="vertical-middle" :props="props">
                                     <ClassIcon :classid="props.row.class" />
                                 </q-td>
@@ -62,9 +62,9 @@
 </template>
 
 <script>
-import ClassIcon from 'components/ClassIcon'
-import { useStore } from 'vuex'
-import { db } from 'boot/firebase'
+import ClassIcon from 'components/ClassIcon';
+// import { useStore } from 'vuex';
+import { db } from 'boot/firebase';
 
 const rankNames = {
     0: 'Fundador',
@@ -77,13 +77,13 @@ const rankNames = {
     7: 'Amigos',
     8: 'Alter amigos',
     9: 'Inactivo',
-}
+};
 const realmNames = {
     zuljin: "Zul'Jin",
     uldum: 'Uldum',
     sanguino: 'Sanguino',
     shendralar: "Shen'dralar",
-}
+};
 
 export default {
     name: 'PageMembers',
@@ -134,34 +134,34 @@ export default {
                     format: (val) => this.realmName(val),
                 },
             ],
-        }
+        };
     },
     created() {
         db.collection('characters')
             .get()
             .then((query) => {
-                this.members = []
+                this.members = [];
 
                 query.forEach((doc) => {
-                    this.members.push(doc.data())
-                })
-                this.loadingTable = false
-            })
+                    this.members.push(doc.data());
+                });
+                this.loadingTable = false;
+            });
     },
     methods: {
         onRowClick(evt, row) {
-            console.info('clicked on')
-            console.info('row', row)
-            console.info('rowName', row.name)
+            console.info('clicked on');
+            console.info('row', row);
+            console.info('rowName', row.name);
         },
         rankName: function (value) {
-            return rankNames[value]
+            return rankNames[value];
         },
         realmName: function (value) {
-            return realmNames[value]
+            return realmNames[value];
         },
     },
-}
+};
 </script>
 
 <style lang="scss">

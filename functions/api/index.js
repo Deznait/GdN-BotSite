@@ -3,9 +3,8 @@ const functions = require("firebase-functions");
 const express = require("express");
 const app = express();
 
-const admin = require("firebase-admin");
-const db = admin.firestore();
-
+// const admin = require("firebase-admin");
+// const db = admin.firestore();
 const cors = require("cors");
 
 const setCache = function(req, res, next) {

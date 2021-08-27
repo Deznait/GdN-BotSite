@@ -4,6 +4,5 @@ export default function () {
     error: null,
     entities: [],
     selectedEntity: null,
-    entities: []
-  }
+  };
 }

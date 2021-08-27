@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
     getAll(ctx) {
@@ -7,15 +7,15 @@ export default {
         });
     },
     get(id) {
-        return axios.get(api_url + user_role + "/customers/" + id);
+        return axios.get(process.env.API_URL + process.env.API_ENDPOINT + "/roster" + id);
     },
     create(params) {
-        return axios.post(api_url + user_role + "/customers", params);
+        return axios.post(process.env.API_URL + process.env.API_ENDPOINT + "/roster", params);
     },
     update(params) {
-        return axios.post(api_url + user_role + "/customers/" + params.id, params.data);
+        return axios.post(process.env.API_URL + process.env.API_ENDPOINT + "/roster" + params.id, params.data);
     },
     delete(id) {
-        return axios.delete(api_url + user_role + "/customers/" + id);
+        return axios.delete(process.env.API_URL + process.env.API_ENDPOINT + "/roster" + id);
     }
-}
+};

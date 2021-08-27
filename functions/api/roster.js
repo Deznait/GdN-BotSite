@@ -5,12 +5,12 @@ const router = Router();
 const admin = require("firebase-admin");
 const db = admin.firestore();
 
-const blizzard = require("blizzard.js");
+// const blizzard = require("blizzard.js");
 
-const runtimeOpts = {
-    timeoutSeconds: 300,
-    memory: "512MB",
-};
+// const runtimeOpts = {
+//   timeoutSeconds: 300,
+//   memory: "512MB",
+// };
 
 router.get("/roster", async (req, res) => {
   try {

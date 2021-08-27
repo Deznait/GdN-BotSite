@@ -16,7 +16,7 @@
                             :loading="loadingTable"
                             :filter="filter"
                         >
-                            <template v-slot:body-cell-name="props">
+                            <template #body-cell-name="props">
                                 <q-td :props="props" style="max-width: 100px">
                                     <q-item>
                                         <!-- <q-item-section avatar>
@@ -37,7 +37,7 @@
                                 </q-td>
                             </template>
 
-                            <template v-slot:body-cell-points_total="props">
+                            <template #body-cell-points_total="props">
                                 <q-td :props="props">
                                     <q-item>
                                         <q-item-section>
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { db } from 'boot/firebase'
+import { db } from 'boot/firebase';
 
 const rankNames = {
     0: 'Fundador',
@@ -81,7 +81,7 @@ const rankNames = {
     7: 'Amigos',
     8: 'Alter amigos',
     9: 'Inactivo',
-}
+};
 export default {
     name: 'PagePuntos',
     data() {
@@ -111,32 +111,32 @@ export default {
                     align: 'left',
                 },
             ],
-        }
+        };
     },
     created() {
         db.collection('characters')
             .get()
             .then((query) => {
-                this.members = []
+                this.members = [];
 
                 query.forEach((doc) => {
-                    this.members.push(doc.data())
-                })
-                this.loadingTable = false
-            })
+                    this.members.push(doc.data());
+                });
+                this.loadingTable = false;
+            });
     },
     methods: {
         getColor(val) {
             if (val > 70 && val <= 100) {
-                return 'green'
+                return 'green';
             } else if (val > 50 && val <= 70) {
-                return 'blue'
+                return 'blue';
             }
-            return 'red'
+            return 'red';
         },
         rankName: function (value) {
-            return rankNames[value]
+            return rankNames[value];
         },
     },
-}
+};
 </script>

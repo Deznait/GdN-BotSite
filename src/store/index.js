@@ -1,7 +1,7 @@
-import { store } from 'quasar/wrappers'
-import { createStore } from 'vuex'
+import { store } from 'quasar/wrappers';
+import { createStore } from 'vuex';
 
-import guildRoster from './guildRoster'
+import guildRoster from './guildRoster';
 
 /*
  * If not building with SSR mode, you can
@@ -21,7 +21,7 @@ export default store(function (/* { ssrContext } */) {
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only
     strict: process.env.DEBUGGING
-  })
+  });
 
-  return Store
-})
+  return Store;
+});

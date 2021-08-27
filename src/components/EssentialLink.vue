@@ -1,5 +1,5 @@
 <template>
-	<q-item clickable v-ripple exact :to="link" class="q-ma-sm navigation-item">
+	<q-item v-ripple clickable exact :to="link" class="q-ma-sm navigation-item">
 		<q-item-section v-if="icon" avatar>
 			<q-icon :name="icon" />
 		</q-item-section>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 
 export default defineComponent({
 	name: 'EssentialLink',
@@ -45,5 +45,5 @@ export default defineComponent({
 			default: false,
 		},
 	},
-})
+});
 </script>

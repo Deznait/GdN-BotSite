@@ -69,8 +69,8 @@
 			flat
 			size="12px"
 			icon="autorenew"
-			@click="callAPI"
 			aria-label="Recargar"
+			@click="callAPI"
 		>
 			<q-tooltip>Recargar</q-tooltip>
 		</q-btn>
@@ -78,14 +78,14 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from 'vue'
-import { useQuasar } from 'quasar'
-import axios from 'axios'
+import { defineComponent } from 'vue';
+import { useQuasar } from 'quasar';
+import axios from 'axios';
 
 const realmNames = {
 	'castle-nathria': 'Castillo de Nathria',
 	'sanctum-of-domination': 'Sagrario de Dominación',
-}
+};
 
 export default defineComponent({
 	name: 'RaiderIo',
@@ -102,24 +102,24 @@ export default defineComponent({
 			},
 			raidTab: 'sanctum-of-domination',
 			$q: useQuasar(),
-		}
+		};
 	},
 	mounted() {
-		const savedGuildInfo = this.$q.localStorage.getItem('savedGuildInfo')
+		const savedGuildInfo = this.$q.localStorage.getItem('savedGuildInfo');
 
 		if (savedGuildInfo === null) {
-			this.callAPI()
+			this.callAPI();
 		} else {
-			const date = new Date()
+			const date = new Date();
 			const Difference_In_Days =
 				(date.getTime() - savedGuildInfo.date_fetched) /
-				(1000 * 3600 * 24)
+				(1000 * 3600 * 24);
 
 			if (Difference_In_Days >= 2.0) {
-				this.callAPI()
+				this.callAPI();
 			}
 
-			this.guildInfo = savedGuildInfo
+			this.guildInfo = savedGuildInfo;
 		}
 	},
 	methods: {
@@ -136,14 +136,14 @@ export default defineComponent({
 				},
 			}).then(
 				(response) => {
-					let guild_info = this.processInfo(response)
-					this.$q.localStorage.set('savedGuildInfo', guild_info)
-					this.guildInfo = guild_info
+					let guild_info = this.processInfo(response);
+					this.$q.localStorage.set('savedGuildInfo', guild_info);
+					this.guildInfo = guild_info;
 				},
 				(error) => {
-					console.error(error)
+					console.error(error);
 				}
-			)
+			);
 		},
 		processInfo(response) {
 			let guild_info = {
@@ -153,7 +153,7 @@ export default defineComponent({
 				region: response.data.region,
 				raids: {},
 				date_fetched: new Date().getTime(),
-			}
+			};
 
 			// Add the raid to the object, and add the guild progression
 			for (var [key, raid_prog] of Object.entries(
@@ -187,43 +187,43 @@ export default defineComponent({
 							),
 						},
 					},
-				}
-				Object.assign(guild_info.raids, { [key]: { prog: prog } })
+				};
+				Object.assign(guild_info.raids, { [key]: { prog: prog } });
 			}
 
 			// Add the guild rank
-			for (var [key, raid_rank] of Object.entries(
+			for (var [rank_key, raid_rank] of Object.entries(
 				response.data.raid_rankings
 			)) {
-				Object.assign(guild_info.raids[key], { rank: raid_rank })
+				Object.assign(guild_info.raids[rank_key], { rank: raid_rank });
 			}
 
 			// Assing nmaes to the raids, based on a array
-			for (var [key, raid] of Object.entries(guild_info.raids)) {
-				Object.assign(guild_info.raids[key], {
-					name: realmNames[key],
-					slug: key,
-				})
+			for (var [raid_key] of Object.entries(guild_info.raids)) {
+				Object.assign(guild_info.raids[raid_key], {
+					name: realmNames[raid_key],
+					slug: raid_key,
+				});
 			}
 
-			return guild_info
+			return guild_info;
 		},
 		progressionLevel(bosses_killed, total_bosses) {
-			let progress_level
-			let progressRatio = bosses_killed / total_bosses
+			let progress_level;
+			let progressRatio = bosses_killed / total_bosses;
 
 			if (progressRatio >= 0.66) {
-				progress_level = 'high'
+				progress_level = 'high';
 			} else if (progressRatio >= 0.33) {
-				progress_level = 'medium'
+				progress_level = 'medium';
 			} else {
-				progress_level = 'low'
+				progress_level = 'low';
 			}
 
-			return progress_level
+			return progress_level;
 		},
 	},
-})
+});
 </script>
 
 <style lang="scss">

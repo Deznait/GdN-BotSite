@@ -80,18 +80,6 @@ export default {
             },
         };
     },
-    mounted() {
-        var tooltip = document.querySelectorAll('.ClassIcon-tooltip');
-
-        document.addEventListener('mousemove', fn, false);
-
-        function fn(e) {
-            for (var i=tooltip.length; i--;) {
-                tooltip[i].style.left = e.layerX + 'px';
-                tooltip[i].style.top = e.layerY + 'px';
-            }
-        }
-    },
     computed: {
         iconSize() {
             return "ClassIcon--" + this.size;
@@ -105,6 +93,18 @@ export default {
         iconLabel() {
             return this.classData[this.classid].label;
         },
+    },
+    mounted() {
+        var tooltip = document.querySelectorAll('.ClassIcon-tooltip');
+
+        document.addEventListener('mousemove', fn, false);
+
+        function fn(e) {
+            for (var i=tooltip.length; i--;) {
+                tooltip[i].style.left = e.layerX + 'px';
+                tooltip[i].style.top = e.layerY + 'px';
+            }
+        }
     },
 };
 
