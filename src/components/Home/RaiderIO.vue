@@ -1,95 +1,93 @@
 <template>
 	<q-card flat bordered class="RaiderIO shadow full-width">
-                <q-tabs
-                    v-model="raidTab"
-                    dense
-                    align="justify"
-                >
-                    <q-tab
-                        v-for="raid in guildInfo.raids"
-                        :key="raid.slug"
-                        :name="raid.slug"
-                        :label="raid.name"
-                    />
-                </q-tabs>
+		<q-tabs v-model="raidTab" dense align="justify">
+			<q-tab
+				v-for="raid in guildInfo.raids"
+				:key="raid.slug"
+				:name="raid.slug"
+				:label="raid.name"
+			/>
+		</q-tabs>
 
-                <q-separator />
+		<q-separator />
 
-                <q-tab-panels v-model="raidTab" animated>
-                    <q-tab-panel
-                        v-for="raid in guildInfo.raids"
-                        :key="raid.slug"
-                        :name="raid.slug"
-                    >
-                        <div class="text-h6">{{ raid.name }}</div>
-                        <div
-                            v-for="difficulty in raid.prog.difficulty"
-                            :key="difficulty.name"
-                            class="
-                                RaidProgress-difficulties
-                                flex flex-center
-                                q-my-md
-                            "
-                        >
-                            <div class="RaidProgress-difficulty-name">
-                                {{ difficulty.name }}
-                            </div>
-                            <q-linear-progress
-                                class="Progressbar"
-                                :class="'progresslevel_' + difficulty.progress_level"
-                                :aria-label="'Progress Bar Level' + difficulty.progress_level"
-                                size="30px"
-                                :value="
-                                    difficulty.bosses_killed /
-                                    raid.prog.total_bosses
-                                "
-                                track-color="red"
-                            >
-                                <q-badge
-                                    class="
-                                        Progressbar-fraction
-                                        absolute-full
-                                        flex
-                                    "
-                                    color="transparent"
-                                    text-color="white"
-                                    :label="
-                                        difficulty.bosses_killed +
-                                        '/' +
-                                        raid.prog.total_bosses
-                                    "
-                                />
-                            </q-linear-progress>
-                        </div>
-                    </q-tab-panel>
-                </q-tab-panels>
+		<q-tab-panels v-model="raidTab" animated>
+			<q-tab-panel
+				v-for="raid in guildInfo.raids"
+				:key="raid.slug"
+				:name="raid.slug"
+			>
+				<div class="text-h6">{{ raid.name }}</div>
+				<div
+					v-for="difficulty in raid.prog.difficulty"
+					:key="difficulty.name"
+					class="RaidProgress-difficulties flex flex-center q-my-md"
+				>
+					<div class="RaidProgress-difficulty-name">
+						{{ difficulty.name }}
+					</div>
+					<q-linear-progress
+						class="Progressbar"
+						:class="'progresslevel_' + difficulty.progress_level"
+						:aria-label="
+							'Progress Bar Level' + difficulty.progress_level
+						"
+						size="30px"
+						:value="
+							difficulty.bosses_killed / raid.prog.total_bosses
+						"
+						track-color="red"
+					>
+						<q-badge
+							class="Progressbar-fraction absolute-full flex"
+							color="transparent"
+							text-color="white"
+							:label="
+								difficulty.bosses_killed +
+								'/' +
+								raid.prog.total_bosses
+							"
+						/>
+					</q-linear-progress>
+				</div>
+			</q-tab-panel>
+		</q-tab-panels>
 
-                <div class="q-pb-md q-px-md text-subtitle2 text-center">
-                    <q-btn 
-                        flat
-                        size="sm"
-                        type="a"
-                        :href="guildInfo.url"
-                        target="__blank"
-                        label="Más info en RaiderIO"
-                    />
-                </div>
-                <q-btn class="reload" dense flat size="12px" icon="autorenew" @click="callAPI" aria-label="Recargar">
-                    <q-tooltip>Recargar</q-tooltip>
-                </q-btn>
-            </q-card>
+		<div class="q-pb-md q-px-md text-subtitle2 text-center">
+			<q-btn
+				flat
+				size="sm"
+				type="a"
+				:href="guildInfo.url"
+				target="__blank"
+				label="Más info en RaiderIO"
+			/>
+		</div>
+		<q-btn
+			class="reload"
+			dense
+			flat
+			size="12px"
+			icon="autorenew"
+			@click="callAPI"
+			aria-label="Recargar"
+		>
+			<q-tooltip>Recargar</q-tooltip>
+		</q-btn>
+	</q-card>
 </template>
 
 <script>
-import axios from 'axios'
+import { defineComponent, ref, onMounted } from 'vue'
 import { useQuasar } from 'quasar'
+import axios from 'axios'
 
 const realmNames = {
 	'castle-nathria': 'Castillo de Nathria',
 	'sanctum-of-domination': 'Sagrario de Dominación',
 }
 
-export default {
+export default defineComponent({
 	name: 'RaiderIo',
 	props: {},
 	data() {
@@ -225,7 +223,7 @@ export default {
 			return progress_level
 		},
 	},
-}
+})
 </script>
 
 <style lang="scss">

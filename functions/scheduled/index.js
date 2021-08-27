@@ -153,18 +153,26 @@ exports.manualupdateWowProgress = functions
             const arrayMap = ["world_rank", "area_rank", "region_rank", "realm_rank"];
             const guildData = {
               world_rank: {
+                label: "World",
+                url: "https://www.wowprogress.com/pve/world",
                 progress: "",
                 ilvl: "",
               },
               area_rank: {
+                label: "EU",
+                url: "https://www.wowprogress.com/pve/eu",
                 progress: "",
                 ilvl: "",
               },
               region_rank: {
+                label: "ES",
+                url: "https://www.wowprogress.com/pve/es",
                 progress: "",
                 ilvl: "",
               },
               realm_rank: {
+                label: "Realm",
+                url: "https://www.wowprogress.com/pve/eu/connected-sanguino",
                 progress: "",
                 ilvl: "",
               },
@@ -209,18 +217,26 @@ exports.updateWowProgress = functions
             const arrayMap = ["world_rank", "area_rank", "region_rank", "realm_rank"];
             const guildData = {
               world_rank: {
+                label: "World",
+                url: "https://www.wowprogress.com/pve/world",
                 progress: "",
                 ilvl: "",
               },
               area_rank: {
+                label: "EU",
+                url: "https://www.wowprogress.com/pve/eu",
                 progress: "",
                 ilvl: "",
               },
               region_rank: {
+                label: "ES",
+                url: "https://www.wowprogress.com/pve/es",
                 progress: "",
                 ilvl: "",
               },
               realm_rank: {
+                label: "Realm",
+                url: "https://www.wowprogress.com/pve/eu/connected-sanguino",
                 progress: "",
                 ilvl: "",
               },

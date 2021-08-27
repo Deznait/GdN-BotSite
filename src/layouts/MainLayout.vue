@@ -1,36 +1,36 @@
 <template>
 	<q-layout view="lHh Lpr lFf">
 		<q-header elevated class="background-primary text-white">
-			<q-toolbar>
-				<div class="navbar-minimize" v-if="$q.platform.is.mobile">
-					<q-btn
-						flat
-						dense
-						round
-						icon="menu"
-						aria-label="Menu"
-						@click="drawer = !drawer"
-					/>
-				</div>
+				<q-toolbar>
+					<div class="navbar-minimize" v-if="$q.platform.is.mobile">
+						<q-btn
+							flat
+							dense
+							round
+							icon="menu"
+							aria-label="Menu"
+							@click="drawer = !drawer"
+						/>
+					</div>
 
-				<q-toolbar-title>
-					{{ $route.name }}
-				</q-toolbar-title>
+					<q-toolbar-title>
+						{{ $route.name }}
+					</q-toolbar-title>
 
-				<q-space class="gt-sm" />
+					<q-space class="gt-sm" />
 
-				<div class="q-gutter-sm row items-center no-wrap">
-					<q-btn
-						dense
-						flat
-						size="16px"
-						:icon="$q.dark.isActive ? 'wb_sunny' : 'nights_stay'"
-						@click="$q.dark.toggle()"
-						aria-label="Cambiar modo oscuro"
-					/>
-				</div>
-			</q-toolbar>
-		</q-header>
+					<div class="q-gutter-sm row items-center no-wrap">
+						<q-btn
+							dense
+							flat
+							size="16px"
+							:icon="$q.dark.isActive ? 'wb_sunny' : 'nights_stay'"
+							@click="$q.dark.toggle()"
+							aria-label="Cambiar modo oscuro"
+						/>
+					</div>
+				</q-toolbar>
+			</q-header>
 
 		<q-drawer
 			v-model="drawer"
@@ -46,7 +46,7 @@
 			class="bg-dark text-white"
 		>
 			<div class="drawer_normal full-height">
-				<q-toolbar class="bg-primary">
+				<q-toolbar class="drawer-header bg-primary">
 					<q-avatar
 					>
 						<q-img
@@ -80,7 +80,7 @@
 
 				<q-separator inset color="grey-3" />
 
-				<q-scroll-area >
+				<q-scroll-area :visible="false">
 					<q-list>
 						<EssentialLink
 							v-for="link in essentialLinks"
@@ -129,6 +129,8 @@
 
 <script>
 import EssentialLink from 'components/EssentialLink.vue'
+import { defineComponent, ref, watch } from 'vue'
+import { useQuasar } from 'quasar'
 
 const linksList = [
 	{
@@ -145,83 +147,6 @@ const linksList = [
 		title: 'Puntos',
 		icon: 'format_list_numbered',
 		link: '/puntos',
-	},
-
-
-	{
-		title: 'Home',
-		icon: 'home',
-		link: '/s',
-	},
-	{
-		title: 'Miembros',
-		icon: 'groups',
-		link: '/miembross',
-	},
-	{
-		title: 'Puntos',
-		icon: 'format_list_numbered',
-		link: '/puntoss',
-	},
-	{
-		title: 'Home',
-		icon: 'home',
-		link: '/s',
-	},
-	{
-		title: 'Miembros',
-		icon: 'groups',
-		link: '/miembross',
-	},
-	{
-		title: 'Puntos',
-		icon: 'format_list_numbered',
-		link: '/puntoss',
-	},
-	{
-		title: 'Home',
-		icon: 'home',
-		link: '/s',
-	},
-	{
-		title: 'Miembros',
-		icon: 'groups',
-		link: '/miembross',
-	},
-	{
-		title: 'Puntos',
-		icon: 'format_list_numbered',
-		link: '/puntoss',
-	},
-	{
-		title: 'Home',
-		icon: 'home',
-		link: '/s',
-	},
-	{
-		title: 'Miembros',
-		icon: 'groups',
-		link: '/miembross',
-	},
-	{
-		title: 'Puntos',
-		icon: 'format_list_numbered',
-		link: '/puntoss',
-	},
-	{
-		title: 'Home',
-		icon: 'home',
-		link: '/s',
-	},
-	{
-		title: 'Miembros',
-		icon: 'groups',
-		link: '/miembross',
-	},
-	{
-		title: 'Puntos',
-		icon: 'format_list_numbered',
-		link: '/puntoss',
 	},
 ]
 
@@ -243,8 +168,6 @@ const socialLinksList = [
 	},
 ]
 
-import { defineComponent, ref, watch } from 'vue'
-import { useQuasar } from 'quasar'
 
 export default defineComponent({
 	name: 'MainLayout',
@@ -286,5 +209,58 @@ export default defineComponent({
 	height: 130px;
 	padding: 20px;
 	background-color: #009688;
+}
+
+.q-drawer {
+    .drawer_normal {
+        display: flex;
+        flex-direction: column;
+
+        .q-scrollarea {
+            flex-grow: 1;
+        }
+
+        .social-drawer {
+            align-self:flex-end;
+        }
+    }
+
+    .q-toolbar {
+        .q-avatar {
+            font-size: 42px;
+            margin: 0 2px;
+        }
+
+        .q-toolbar__title {
+            font-size: 1.12rem;
+            line-height: 1.75rem;
+        }
+    }
+
+    .q-item {
+        transition: all .3s ease 0s;
+        opacity: 0.7;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &.q-router-link--active {
+            opacity: 1;
+            color: #FFFFFF;
+            background-color: $primary;
+        }
+    }
+
+    &.q-drawer--mini {
+        .q-item {
+            &.q-router-link--active {
+                &::before,
+                &::after {
+                    border-right-width: 10px;
+                }
+            }
+        }
+    }
 }
 </style>

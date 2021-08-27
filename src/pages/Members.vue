@@ -63,6 +63,7 @@
 
 <script>
 import ClassIcon from 'components/ClassIcon'
+import { useStore } from 'vuex'
 import { db } from 'boot/firebase'
 
 const rankNames = {

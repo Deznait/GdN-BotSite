@@ -27,6 +27,8 @@ $dark-font: hsla(0,0%,100%,.8);
 $header-bg1: #00265f;
 $header-bg2: #204065;
 $header-bg3: #2a5788;
+$header-bg: linear-gradient(90deg, $primary 0, $secondary);
+$header-drawer: linear-gradient(90deg, $secondary 0, $primary);
 
 $positive: #21ba45;
 $negative: #c10015;
