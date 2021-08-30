@@ -47,26 +47,26 @@ export default defineComponent({
 			.signInWithPopup(provider)
 			.then((result) => {
 				console.info(result);
-				/** @type {firebase.auth.OAuthCredential} */
-				var credential = result.credential;
-				console.info("credential", credential);
-				// This gives you a Google Access Token. You can use it to access the Google API.
-				var token = credential.accessToken;
-				console.info("token", token);
-				// The signed-in user info.
-				var user = result.user;
-				console.info("user", user);
+				// /** @type {firebase.auth.OAuthCredential} */
+				// var credential = result.credential;
+				// console.info("credential", credential);
+				// // This gives you a Google Access Token. You can use it to access the Google API.
+				// var token = credential.accessToken;
+				// console.info("token", token);
+				// // The signed-in user info.
+				// var user = result.user;
+				// console.info("user", user);
 				// ...
 			}).catch((error) => {
 				console.error(error);
-				// Handle Errors here.
-				var errorCode = error.code;
-				var errorMessage = error.message;
-				// The email of the user's account used.
-				var email = error.email;
-				// The firebase.auth.AuthCredential type that was used.
-				var credential = error.credential;
-				// ...
+				// // Handle Errors here.
+				// var errorCode = error.code;
+				// var errorMessage = error.message;
+				// // The email of the user's account used.
+				// var email = error.email;
+				// // The firebase.auth.AuthCredential type that was used.
+				// var credential = error.credential;
+				// // ...
 			});
       
 			console.info("googleLogin END");
@@ -85,12 +85,12 @@ export default defineComponent({
 			// console.info('process.env', process.env);
 
 			const codeUri =
-			`https://${AuthCredentials.value.region}.battle.net/oauth/authorize?` +
+			`https://eu.battle.net/oauth/authorize?` +
 			`scope=wow.profile&` +
 			`response_type=code&` +
-			`redirect_uri=${AuthCredentials.value.redirect}&` +
+			`redirect_uri=https://gdn-bot.web.app/login&` +
 			`state=yRn12MdWki1QTLk7ActjFNtu&` +
-			`client_id=${AuthCredentials.value.clientid}`;
+			`client_id=b355ae655a474459aa6264c30aca4e86`;
 
 			console.info(codeUri);
       
