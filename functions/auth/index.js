@@ -84,9 +84,10 @@ exports.battlenetToken = functions.region("europe-west1").https.onRequest((req, 
 
       // Create a Firebase account and get the Custom Auth Token.
       const firebaseToken = await createFirebaseAccount(battleNetUserID);
+      const token = await admin.auth().createCustomToken(`battlenet:${battleNetUserID}`);
       functions.logger.log("firebaseToken", firebaseToken);
 
-      return res.jsonp({token: firebaseToken});
+      return res.jsonp({token: firebaseToken, custom_token_id: token});
     });
   } catch (error) {
     res.jsonp({error: error.toString()});
