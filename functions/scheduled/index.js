@@ -152,7 +152,6 @@ exports.updateGuildRoster = functions
     });
 
 exports.manualupdateWowProgress = functions
-    .runWith(runtimeOpts)
     .region("europe-west1")
     .https
     .onRequest(async () => {

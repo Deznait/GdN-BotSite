@@ -20,5 +20,6 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+const BattleAuthProvider = new firebase.auth.OAuthProvider("https://eu.battle.net").addScope("wow.profile");
 
-export { db, auth, serverTimestamp, googleAuthProvider };
+export { db, auth, serverTimestamp, googleAuthProvider, BattleAuthProvider };

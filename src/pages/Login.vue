@@ -30,7 +30,7 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
-import { auth, db, googleAuthProvider } from 'boot/firebase';
+import { auth, db, googleAuthProvider, BattleAuthProvider } from 'boot/firebase';
 
 export default defineComponent({
 	name: 'LoginPage',
@@ -38,62 +38,34 @@ export default defineComponent({
 		const email = ref('');
 		const password = ref('');
 		const acceder = ref(true);
-		const provider = googleAuthProvider;
 
     	const googleLogin = async () => {
 			console.info('googleLogin INI');
 
 			auth
-			.signInWithPopup(provider)
+			.signInWithPopup(googleAuthProvider)
 			.then((result) => {
 				console.info(result);
-				// /** @type {firebase.auth.OAuthCredential} */
-				// var credential = result.credential;
-				// console.info("credential", credential);
-				// // This gives you a Google Access Token. You can use it to access the Google API.
-				// var token = credential.accessToken;
-				// console.info("token", token);
-				// // The signed-in user info.
-				// var user = result.user;
-				// console.info("user", user);
-				// ...
 			}).catch((error) => {
 				console.error(error);
-				// // Handle Errors here.
-				// var errorCode = error.code;
-				// var errorMessage = error.message;
-				// // The email of the user's account used.
-				// var email = error.email;
-				// // The firebase.auth.AuthCredential type that was used.
-				// var credential = error.credential;
-				// // ...
 			});
       
 			console.info("googleLogin END");
 		};
-
-		const AuthCredentials = ref({
-				clientid: process.env.BNET_CLIENT_ID.replace(/['"]+/g, ''),
-				redirect: process.env.BNET_CLIENT_REDIRECT_URI.replace(/['"]+/g, ''),
-				region: process.env.BNET_CLIENT_REGION.replace(/['"]+/g, ''),
-			});
 
 		//https://eu.battle.net/oauth/authorize?scope=wow.profile&response_type=code&redirect_uri=https%3A%2F%2Fwww.wowhead.com%2Faccount%3Dbattlenet&state=yRn12MdWki1QTLk7ActjFNtu&client_id=c9b67224c7ab42768f5727fa05b427b4
 		//https://eu.battle.net/oauth/authorize?scope=wow.profile&response_type=code&redirect_uri=https://gdn-bot.web.app/login&state=49d8b2ac46441e03ad9b47e28c386d94bbf03184client_id=b355ae655a474459aa6264c30aca4e86
 		//https://eu.battle.net/oauth/authorize?scope=wow.profile&response_type=code&redirect_uri=https://europe-west1-gdn-bot.cloudfunctions.net/auth-battlenetToken&state=f3163eeff9aaef0c3f2958eae35ab05fcbaabcb4&client_id=b355ae655a474459aa6264c30aca4e86
 		const battleNetLogin = async () => {
 			console.info('battleNetLogin INI');
-			// console.info('process.env', process.env);
 
-			const codeUri =
-			`https://eu.battle.net/oauth/authorize?` +
-			`scope=wow.profile&` +
-			`response_type=code&` +
-			`redirect_uri=https://gdn-bot.web.app/login&` +
-			`state=yRn12MdWki1QTLk7ActjFNtu&` +
-			`client_id=b355ae655a474459aa6264c30aca4e86`;
-
-			console.info(codeUri);
+			auth
+			.signInWithPopup(BattleAuthProvider)
+			.then((result) => {
+				console.info(result);
+			}).catch((error) => {
+				console.error(error);
+			});
       
 			console.info('battleNetLogin END');
 		};
@@ -133,7 +105,7 @@ export default defineComponent({
 				console.info(error);
 			}
 		};
-		return { email, password, registro, acceder, googleLogin,battleNetLogin, AuthCredentials };
+		return { email, password, registro, acceder, googleLogin,battleNetLogin };
 	},
 });
 </script>
