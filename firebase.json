@@ -10,18 +10,11 @@
 	"hosting": {
 		"public": "dist/pwa",
 		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+		"cleanUrls": true,
 		"headers": [
 			{ "source":"/service-worker.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}] }
 		],
 		"rewrites": [
-			{
-				"source": "/auth",
-				"function": "auth-battlenetRedirect"
-			},
-			{
-				"source": "/token",
-				"function": "auth-battlenetToken"
-			},
 			{
 				"source": "**",
 				"destination": "/index.html"

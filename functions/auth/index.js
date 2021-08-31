@@ -10,7 +10,7 @@ const crypto = require("crypto");
 
 // const blizzard = require("blizzard.js");
 
-const OAUTH_REDIRECT_URI = "https://gdn-bot.web.app/token";
+const OAUTH_REDIRECT_URI = "https://us-central1-gdn-bot.cloudfunctions.net/auth-battlenetToken";
 const OAUTH_SCOPES = "wow.profile";
 const OAUTH_GRANT_TYPE = "client_credentials";
 
@@ -51,8 +51,8 @@ exports.battlenetRedirect = functions
 
         const authorizeURL =
           "https://eu.battle.net/oauth/authorize?" +
-          `grant_type=${OAUTH_GRANT_TYPE}&` +
           `scope=${OAUTH_SCOPES}&` +
+          "response_type=code&" +
           `redirect_uri=${OAUTH_REDIRECT_URI}&` +
           `state=${state}&` +
           `client_id=${functions.config().battlenet.id}`;
@@ -69,6 +69,9 @@ exports.battlenetRedirect = functions
 */
 exports.battlenetToken = functions.https.onRequest((req, res) => {
   try {
+    functions.logger.log("battlenetToken INI req", req);
+    functions.logger.log("battlenetToken INI res", res);
+
     cookieParser()(req, res, () => {
       functions.logger.log("Received verification state:", req.cookies.state);
       functions.logger.log("Received state:", req.query.state);
