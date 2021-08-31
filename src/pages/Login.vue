@@ -18,10 +18,10 @@
 			<q-btn v-else color="negative" outline @click="acceder = false">
 				¿No tienes cuenta?
 			</q-btn>
-			<q-btn icon="mdi-google" @click="googleLogin">
+			<q-btn icon="fab fa-google" @click="googleLogin">
 				¿No tienes cuenta?
 			</q-btn>
-			<q-btn icon="mdi-account" @click="battleNetLogin">
+			<q-btn icon="fab fa-battle-net" @click="battleNetLogin">
 				¿No tienes cuenta? Registrate con BattleNet
 			</q-btn>
 		</q-form>
@@ -80,6 +80,7 @@ export default defineComponent({
 
 		//https://eu.battle.net/oauth/authorize?scope=wow.profile&response_type=code&redirect_uri=https%3A%2F%2Fwww.wowhead.com%2Faccount%3Dbattlenet&state=yRn12MdWki1QTLk7ActjFNtu&client_id=c9b67224c7ab42768f5727fa05b427b4
 		//https://eu.battle.net/oauth/authorize?scope=wow.profile&response_type=code&redirect_uri=https://gdn-bot.web.app/login&state=yRn12MdWki1QTLk7ActjFNtu&client_id=b355ae655a474459aa6264c30aca4e86
+		//https://eu.battle.net/oauth/authorize?scope=wow.profile&response_type=code&redirect_uri=https://gdn-bot.web.app/login&state=49d8b2ac46441e03ad9b47e28c386d94bbf03184client_id=b355ae655a474459aa6264c30aca4e86
 		const battleNetLogin = async () => {
 			console.info('battleNetLogin INI');
 			// console.info('process.env', process.env);

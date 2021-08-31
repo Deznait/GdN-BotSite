@@ -153,17 +153,17 @@ const linksList = [
 const socialLinksList = [
 	{
 		title: 'Youtube',
-		icon: 'mdi-youtube',
+		icon: 'fab fa-youtube',
 		link: 'https://www.youtube.com/user/kachicho100',
 	},
 	{
 		title: 'Twitter',
-		icon: 'mdi-twitter',
+		icon: 'fab fa-twitter',
 		link: 'https://twitter.com/gremionord',
 	},
 	{
 		title: 'Facebook',
-		icon: 'mdi-facebook',
+		icon: 'fab fa-facebook',
 		link: 'https://www.facebook.com/gremionord',
 	},
 ];

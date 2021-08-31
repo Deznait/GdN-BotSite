@@ -36,7 +36,7 @@
                                     flat
                                     round
                                     dense
-                                    :icon="mode === 'grid' ? 'list' : 'grid_on'"
+                                    :icon="mode === 'grid' ? 'list' : 'grid_view'"
                                     class="gt-xs"
                                     @click="mode = mode === 'grid' ? 'list' : 'grid'"
                                 >

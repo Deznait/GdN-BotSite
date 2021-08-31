@@ -17,7 +17,7 @@ const runtimeOpts = {
  *
  */
 async function executeUpdateGuildRoster() {
-  console.info("Start updating the roster!");
+  functions.logger.log("Start updating the roster!");
 
   const wowClient = await blizzard.wow.createInstance({
     key: functions.config().battlenet.id,
@@ -44,7 +44,7 @@ async function executeUpdateGuildRoster() {
 
       characterRef.doc("_" + member.character.id).update(memberObj).then(() => {
         // Character exists
-        console.info("Character successfully updated! => ", memberObj.name);
+        functions.logger.log("Character successfully updated! => ", memberObj.name);
       })
           .catch(() => {
           // Character does not exist
@@ -55,7 +55,7 @@ async function executeUpdateGuildRoster() {
             memberObj.points_total = 0;
 
             characterRef.doc("_" + member.character.id).set(memberObj, {merge: true}).then(() => {
-              console.info("Character successfully created! => ", memberObj.name);
+              functions.logger.log("Character successfully created! => ", memberObj.name);
               characterRef.doc("_" + member.character.id).collection("points").add({
                 value: 0,
                 type: "init",
@@ -65,18 +65,18 @@ async function executeUpdateGuildRoster() {
             });
           });
     } catch (error) {
-      console.error("Error! => ", error);
+      functions.logger.error("Error! => ", error);
     }
   });
 
-  console.info("Finished updating the roster!");
+  functions.logger.log("Finished updating the roster!");
 }
 
 /**
  *
  */
 async function executeUpdateWowProgress() {
-  console.info("Start updating WowProgress!");
+  functions.logger.log("Start updating WowProgress!");
 
   axios.get("https://www.wowprogress.com/guild/eu/sanguino/Gremio+de+Nordrassil")
       .then(function(res) {
@@ -121,7 +121,7 @@ async function executeUpdateWowProgress() {
         db.collection("wowprogress").doc("data").set(guildData)
             .then(() => {
               functions.logger
-                  .info("WowProgress_Update - OK", {wp_update: guildData});
+                  .log("WowProgress_Update - OK", {wp_update: guildData});
             }).catch((error) => {
               functions.logger
                   .error("WowProgress_Update - KO", {error: error});
@@ -131,7 +131,7 @@ async function executeUpdateWowProgress() {
             .error("Axios Get - KO", {error: error});
       });
 
-  console.info("Finished updating WowProgress!");
+  functions.logger.log("Finished updating WowProgress!");
 }
 
 exports.manualUpdateRoster = functions
