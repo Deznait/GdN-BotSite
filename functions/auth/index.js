@@ -10,7 +10,7 @@ const crypto = require("crypto");
 
 // const blizzard = require("blizzard.js");
 
-const OAUTH_REDIRECT_URI = "https://us-central1-gdn-bot.cloudfunctions.net/auth-battlenetToken";
+const OAUTH_REDIRECT_URI = "https://europe-west1-gdn-bot.cloudfunctions.net/auth-battlenetToken";
 const OAUTH_SCOPES = "wow.profile";
 const OAUTH_GRANT_TYPE = "client_credentials";
 
@@ -40,26 +40,24 @@ const OAUTH_GRANT_TYPE = "client_credentials";
  * Redirects the User to the BattleNet authentication consent screen. Also the 'state' cookie is set for later state
  * verification.
  */
-exports.battlenetRedirect = functions
-    .https
-    .onRequest(async (req, res) => {
-      cookieParser()(req, res, () => {
-        const state = req.cookies.state || crypto.randomBytes(20).toString("hex");
-        functions.logger.log("Setting verification state:", state);
+exports.battlenetRedirect = functions.region("europe-west1").https.onRequest((req, res) => {
+  cookieParser()(req, res, () => {
+    const state = req.cookies.state || crypto.randomBytes(20).toString("hex");
+    functions.logger.log("Setting verification state:", state);
 
-        res.cookie("state", state.toString(), {maxAge: 3600000, secure: true, httpOnly: true});
+    res.cookie("state", state.toString(), {maxAge: 3600000, secure: true, httpOnly: true});
 
-        const authorizeURL =
+    const authorizeURL =
           "https://eu.battle.net/oauth/authorize?" +
           `scope=${OAUTH_SCOPES}&` +
           "response_type=code&" +
           `redirect_uri=${OAUTH_REDIRECT_URI}&` +
           `state=${state}&` +
           `client_id=${functions.config().battlenet.id}`;
-        functions.logger.log("authorizeURL", authorizeURL);
-        res.redirect(authorizeURL);
-      });
-    });
+    functions.logger.log("authorizeURL", authorizeURL);
+    res.redirect(authorizeURL);
+  });
+});
 
 /**
 * Exchanges a given BattleNet auth code passed in the 'code' URL query parameter for a Firebase auth token.
@@ -67,7 +65,7 @@ exports.battlenetRedirect = functions
 * The Firebase custom auth token is sent back in a JSONP callback function with function name defined by the
 * 'callback' query parameter.
 */
-exports.battlenetToken = functions.https.onRequest((req, res) => {
+exports.battlenetToken = functions.region("europe-west1").https.onRequest((req, res) => {
   try {
     functions.logger.log("battlenetToken INI req", req);
     functions.logger.log("battlenetToken INI res", res);
