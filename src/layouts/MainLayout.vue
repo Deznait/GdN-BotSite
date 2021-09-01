@@ -1,36 +1,36 @@
 <template>
 	<q-layout view="lHh Lpr lFf">
 		<q-header elevated class="background-primary text-white">
-				<q-toolbar>
-					<div v-if="$q.platform.is.mobile" class="navbar-minimize">
-						<q-btn
-							flat
-							dense
-							round
-							icon="menu"
-							aria-label="Menu"
-							@click="drawer = !drawer"
-						/>
-					</div>
+			<q-toolbar>
+				<div v-if="$q.platform.is.mobile" class="navbar-minimize">
+					<q-btn
+						flat
+						dense
+						round
+						icon="menu"
+						aria-label="Menu"
+						@click="drawer = !drawer"
+					/>
+				</div>
 
-					<q-toolbar-title>
-						{{ $route.name }}
-					</q-toolbar-title>
+				<q-toolbar-title>
+					{{ $route.name }}
+				</q-toolbar-title>
 
-					<q-space class="gt-sm" />
+				<q-space class="gt-sm" />
 
-					<div class="q-gutter-sm row items-center no-wrap">
-						<q-btn
-							dense
-							flat
-							size="16px"
-							:icon="$q.dark.isActive ? 'wb_sunny' : 'nights_stay'"
-							aria-label="Cambiar modo oscuro"
-							@click="$q.dark.toggle()"
-						/>
-					</div>
-				</q-toolbar>
-			</q-header>
+				<div class="q-gutter-sm row items-center no-wrap">
+					<q-btn
+						dense
+						flat
+						size="16px"
+						:icon="$q.dark.isActive ? 'wb_sunny' : 'nights_stay'"
+						aria-label="Cambiar modo oscuro"
+						@click="$q.dark.toggle()"
+					/>
+				</div>
+			</q-toolbar>
+		</q-header>
 
 		<q-drawer
 			v-model="drawer"
@@ -47,13 +47,11 @@
 		>
 			<div class="drawer_normal full-height">
 				<q-toolbar class="drawer-header bg-primary">
-					<q-avatar
-					>
+					<q-avatar>
 						<q-img
 							src="~assets/logo.png"
 							spinner-color="white"
 							:ratio="1"
-						
 						/>
 					</q-avatar>
 					<q-toolbar-title>Gremio de Nordrassil</q-toolbar-title>
@@ -70,31 +68,23 @@
 
 				<q-separator inset color="grey-3" />
 
-				<q-toolbar>
-					<q-avatar>
-					<img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-					</q-avatar>
-
-					<q-toolbar-title>NOMBRE USUARIO</q-toolbar-title>
-				</q-toolbar>
+				<login-menu></login-menu>
 
 				<q-separator inset color="grey-3" />
 
-				<q-scroll-area :visible="false">
-					<q-list>
-						<EssentialLink
-							v-for="link in essentialLinks"
-							:key="link.title"
-							v-bind="link"
-						/>
-					</q-list>
-				</q-scroll-area>
+				<q-list>
+					<EssentialLink
+						v-for="link in essentialLinks"
+						:key="link.title"
+						v-bind="link"
+					/>
+				</q-list>
 
 				<q-separator inset color="grey-3" />
 
 				<q-toolbar
-					class="social-drawer q-gutter-sm row no-wrap"
-					:class="(!pinned && miniState) ? '' : 'justify-around'"
+					class="social-drawer row no-wrap"
+					:class="!pinned && miniState ? '' : 'justify-around'"
 				>
 					<q-btn
 						v-for="link in socialLinks"
@@ -129,6 +119,7 @@
 
 <script>
 import EssentialLink from 'components/EssentialLink.vue';
+import LoginMenu from 'components/LoginMenu.vue';
 import { defineComponent, ref, watch } from 'vue';
 import { useQuasar } from 'quasar';
 
@@ -168,12 +159,12 @@ const socialLinksList = [
 	},
 ];
 
-
 export default defineComponent({
 	name: 'MainLayout',
 
 	components: {
 		EssentialLink,
+		LoginMenu,
 	},
 	setup() {
 		const $q = useQuasar();
@@ -212,55 +203,60 @@ export default defineComponent({
 }
 
 .q-drawer {
-    .drawer_normal {
-        display: flex;
-        flex-direction: column;
+	.drawer_normal {
+		display: flex;
+		flex-direction: column;
 
-        .q-scrollarea {
-            flex-grow: 1;
-        }
+		.q-scrollarea {
+			flex-grow: 1;
+		}
 
-        .social-drawer {
-            align-self:flex-end;
-        }
-    }
+		.social-drawer {
+			bottom: 0;
+			position: absolute;
+		}
+	}
 
-    .q-toolbar {
-        .q-avatar {
-            font-size: 42px;
-            margin: 0 2px;
-        }
+	.q-toolbar {
+		.q-avatar {
+			font-size: 42px;
+			margin: 0 2px;
+		}
 
-        .q-toolbar__title {
-            font-size: 1.12rem;
-            line-height: 1.75rem;
-        }
-    }
+		.q-toolbar__title {
+			font-size: 1.12rem;
+			line-height: 1.75rem;
+		}
+	}
 
-    .q-item {
-        transition: all .3s ease 0s;
-        opacity: 0.7;
+	.q-item {
+		transition: all 0.3s ease 0s;
+		opacity: 0.7;
 
-        &:hover {
-            opacity: 1;
-        }
+		&:hover {
+			opacity: 1;
+		}
 
-        &.q-router-link--active {
-            opacity: 1;
-            color: #FFFFFF;
-            background-color: $primary;
-        }
-    }
+		&.q-router-link--active {
+			opacity: 1;
+			color: #ffffff;
+			background-color: $primary;
+		}
+	}
 
-    &.q-drawer--mini {
-        .q-item {
-            &.q-router-link--active {
-                &::before,
-                &::after {
-                    border-right-width: 10px;
-                }
-            }
-        }
-    }
+	&.q-drawer--mini {
+		.q-item {
+			&.q-router-link--active {
+				&::before,
+				&::after {
+					border-right-width: 10px;
+				}
+			}
+		}
+
+		.social-drawer {
+			display: none;
+		}
+	}
 }
 </style>

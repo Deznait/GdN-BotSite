@@ -1,14 +1,16 @@
 <template>
-	<q-page padding>
-		<h5>Login</h5>
-		<q-form class="q-gutter-md">
-			<q-btn icon="fab fa-google" @click="googleLogin">
-				¿No tienes cuenta?
-			</q-btn>
-			<q-btn icon="fab fa-battle-net" @click="battleNetLogin">
-				¿No tienes cuenta? Registrate con BattleNet
-			</q-btn>
-		</q-form>
+	<q-page class="q-pt-xs">
+		<div class="q-ma-md">
+			<h5>Login</h5>
+			<q-form class="q-gutter-md">
+				<q-btn icon="fab fa-google" @click="googleLogin">
+					Entra con Google
+				</q-btn>
+				<q-btn icon="fab fa-battle-net" @click="battleNetLogin">
+					Entra con BattleNet
+				</q-btn>
+			</q-form>
+		</div>
 	</q-page>
 </template>
 
@@ -22,32 +24,32 @@ export default defineComponent({
 		const googleLogin = async () => {
 			console.info('googleLogin INI');
 
-			auth
-			.signInWithPopup(googleAuthProvider)
-			.then((result) => {
-				console.info(result);
-			}).catch((error) => {
-				console.error(error);
-			});
-      
-			console.info("googleLogin END");
+			auth.signInWithPopup(googleAuthProvider)
+				.then((result) => {
+					console.info(result);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+
+			console.info('googleLogin END');
 		};
 
 		const battleNetLogin = async () => {
 			console.info('battleNetLogin INI');
 
-			auth
-			.signInWithPopup(BattleNetAuthProvider)
-			.then((result) => {
-				console.info(result);
-			}).catch((error) => {
-				console.error(error);
-			});
-      
+			auth.signInWithPopup(BattleNetAuthProvider)
+				.then((result) => {
+					console.info(result);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+
 			console.info('battleNetLogin END');
 		};
 
-		return {googleLogin, battleNetLogin };
+		return { googleLogin, battleNetLogin };
 	},
 });
 </script>

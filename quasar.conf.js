@@ -26,6 +26,7 @@ module.exports = configure(function (ctx) {
             'addressbar-color',
             'axios',
             'firebase',
+            'router',
         ],
 
         // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
