@@ -42,7 +42,7 @@
 	<q-item
 		v-else
 		v-ripple
-		to="/login"
+		to="https://europe-west1-gdn-bot.cloudfunctions.net/auth-battlenetRedirect"
 		active-class="q-item-no-link-highlighting"
 		class="q-ma-sm login"
 		clickable
