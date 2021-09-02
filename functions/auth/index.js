@@ -9,7 +9,7 @@ const admin = require("firebase-admin");
 const db = admin.firestore();
 // const blizzard = require("blizzard.js");
 
-const OAUTH_REDIRECT_URI = "https://europe-west1-gdn-bot.cloudfunctions.net/auth-battlenetToken";
+const OAUTH_REDIRECT_URI = "https://${process.env.GCLOUD_PROJECT}.web.app/popup.html";
 const OAUTH_SCOPES = "wow.profile";
 // const OAUTH_GRANT_TYPE = "authorization_code";
 
@@ -84,10 +84,9 @@ exports.battlenetToken = functions.region("europe-west1").https.onRequest((req, 
 
       // Create a Firebase account and get the Custom Auth Token.
       const firebaseToken = await createFirebaseAccount(battleNetUserID);
-      const token = await admin.auth().createCustomToken(`battlenet:${battleNetUserID}`);
       functions.logger.log("firebaseToken", firebaseToken);
 
-      return res.jsonp({token: firebaseToken, custom_token_id: token});
+      return res.jsonp({token: firebaseToken});
     });
   } catch (error) {
     res.jsonp({error: error.toString()});
@@ -108,29 +107,48 @@ async function createFirebaseAccount(battleNetUserID) {
 
   // TODO Recover the user info from Blizz
   const battletag = "XXXXX#1234";
+  const photoURL = "";
+  const email = "";
 
   functions.logger.log("Creating user (firestore):", uid);
   // Save the access token to the Firestore Database.
-  await db.collection("users").doc(uid).set({
+  const databaseTask = db.collection("users").doc(uid).set({
     uid: uid,
     characters: {},
     battletag: battletag,
   });
 
   // Create or update the user account.
-  try {
-    functions.logger.log("Updating user:", uid + " + " + battletag);
-    return await admin.auth().updateUser(
-        uid,
-        {
-          displayName: battletag,
-        });
-  } catch (err) {
-    functions.logger.log("Creating user:", uid + " + " + battletag);
-    // new user
-    return await admin.auth().createUser({
-      uid: uid,
-      displayName: battletag,
-    });
-  }
+  const userCreationTask = admin.auth().updateUser(uid, {
+    displayName: battletag,
+    photoURL: photoURL,
+    email: email,
+    emailVerified: true,
+  }).catch((error) => {
+    // If user does not exists we create it.
+    if (error.code === "auth/user-not-found") {
+      return admin.auth().createUser({
+        uid: uid,
+        displayName: battletag,
+        photoURL: photoURL,
+        email: email,
+        emailVerified: true,
+      });
+    }
+    throw error;
+  });
+
+
+  // Wait for all async tasks to complete, then generate and return a custom auth token.
+  await Promise.all([userCreationTask, databaseTask]);
+  // Create a Firebase custom auth token.
+  const token = await admin.auth().createCustomToken(uid);
+  functions.logger.log(
+      "Created Custom token for UID \"",
+      uid,
+      "\" Token:",
+      token,
+  );
+
+  return token;
 }

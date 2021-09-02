@@ -39,15 +39,7 @@
 			</q-item>
 		</q-list>
 	</q-expansion-item>
-	<q-item
-		v-else
-		v-ripple
-		href="https://europe-west1-gdn-bot.cloudfunctions.net/auth-battlenetRedirect"
-		tag="a"
-    	target="_self"
-		class="q-ma-sm login"
-		clickable
-	>
+	<q-item v-else v-ripple class="q-ma-sm login" clickable @click="logIn">
 		<q-item-section avatar>
 			<q-icon name="fab fa-battle-net" />
 		</q-item-section>
@@ -69,6 +61,10 @@ export default defineComponent({
 		const { user, isAuthenticated } = useAuth(auth);
 		const $q = useQuasar();
 
+		const logIn = async () => {
+			window.open('popup.html', 'name', 'height=585,width=400');
+		};
+
 		const logOut = async () => {
 			try {
 				await auth.signOut();
@@ -86,6 +82,7 @@ export default defineComponent({
 			user,
 			isAuthenticated,
 			logOut,
+			logIn,
 		};
 	},
 });
