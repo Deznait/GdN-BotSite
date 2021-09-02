@@ -9,9 +9,8 @@ const admin = require("firebase-admin");
 const db = admin.firestore();
 // const blizzard = require("blizzard.js");
 
-const OAUTH_REDIRECT_URI = "https://${process.env.GCLOUD_PROJECT}.web.app/popup.html";
+const OAUTH_REDIRECT_URI = `https://${process.env.GCLOUD_PROJECT}.web.app/popup.html`;
 const OAUTH_SCOPES = "wow.profile";
-// const OAUTH_GRANT_TYPE = "authorization_code";
 
 
 /**
@@ -108,9 +107,7 @@ async function createFirebaseAccount(battleNetUserID) {
   // TODO Recover the user info from Blizz
   const battletag = "XXXXX#1234";
   const photoURL = "";
-  const email = "";
 
-  functions.logger.log("Creating user (firestore):", uid);
   // Save the access token to the Firestore Database.
   const databaseTask = db.collection("users").doc(uid).set({
     uid: uid,
@@ -122,7 +119,7 @@ async function createFirebaseAccount(battleNetUserID) {
   const userCreationTask = admin.auth().updateUser(uid, {
     displayName: battletag,
     photoURL: photoURL,
-    email: email,
+    email: battleNetUserID,
     emailVerified: true,
   }).catch((error) => {
     // If user does not exists we create it.
@@ -131,7 +128,7 @@ async function createFirebaseAccount(battleNetUserID) {
         uid: uid,
         displayName: battletag,
         photoURL: photoURL,
-        email: email,
+        email: battleNetUserID,
         emailVerified: true,
       });
     }
