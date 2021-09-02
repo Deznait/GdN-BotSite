@@ -9,7 +9,7 @@ const admin = require("firebase-admin");
 const db = admin.firestore();
 // const blizzard = require("blizzard.js");
 
-const OAUTH_REDIRECT_URI = `https://${process.env.GCLOUD_PROJECT}.web.app/popup.html`;
+const OAUTH_REDIRECT_URI = `https://${process.env.GCLOUD_PROJECT}.web.app/popup`;
 const OAUTH_SCOPES = "wow.profile";
 
 
@@ -119,8 +119,6 @@ async function createFirebaseAccount(battleNetUserID) {
   const userCreationTask = admin.auth().updateUser(uid, {
     displayName: battletag,
     photoURL: photoURL,
-    email: battleNetUserID,
-    emailVerified: true,
   }).catch((error) => {
     // If user does not exists we create it.
     if (error.code === "auth/user-not-found") {
@@ -128,8 +126,6 @@ async function createFirebaseAccount(battleNetUserID) {
         uid: uid,
         displayName: battletag,
         photoURL: photoURL,
-        email: battleNetUserID,
-        emailVerified: true,
       });
     }
     throw error;

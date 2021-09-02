@@ -31,6 +31,7 @@ export default defineComponent({
 		 * This callback is called by the JSONP callback of the 'token' Firebase Function with the Firebase auth token.
 		 */
 		function tokenReceived(data) {
+			console.info(data);
 			if (data.token) {
 				auth.signInWithCustomToken(data.token).then(function () {
 					window.close();
@@ -75,7 +76,7 @@ export default defineComponent({
 				tokenReceived.name;
 			document.head.appendChild(script);
 		}
-		
+
 		return {};
 	},
 });
