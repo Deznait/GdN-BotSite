@@ -4,6 +4,7 @@
 
 <script>
 import { defineComponent } from 'vue';
+import { axios } from 'boot/axios';
 import { auth } from 'boot/firebase';
 
 export default defineComponent({
@@ -47,10 +48,6 @@ export default defineComponent({
 		var state = getURLParameter('state');
 		var error = getURLParameter('error');
 
-		console.info(code);
-		console.info(state);
-		console.info(error);
-
 		if (error) {
 			document.body.innerText =
 				'Error back from the BattleNet auth page: ' + error;
@@ -60,21 +57,23 @@ export default defineComponent({
 				'https://europe-west1-gdn-bot.cloudfunctions.net/auth-battlenetRedirect';
 		} else {
 			// Use JSONP to load the 'token' Firebase Function to exchange the auth code against a Firebase custom token.
-			const script = document.createElement('script');
-			script.type = 'text/javascript';
-			// This is the URL to the HTTP triggered 'token' Firebase Function.
-			// See https://firebase.google.com/docs/functions.
-			var tokenFunctionURL =
-				'https://europe-west1-gdn-bot.cloudfunctions.net/auth-battlenetToken';
-			script.src =
-				tokenFunctionURL +
-				'?code=' +
-				encodeURIComponent(code) +
-				'&state=' +
-				encodeURIComponent(state) +
-				'&callback=' +
-				tokenReceived.name;
-			document.head.appendChild(script);
+			const tokenFunctionURL = 'https://europe-west1-gdn-bot.cloudfunctions.net/auth-battlenetToken';
+
+			axios
+				.get(tokenFunctionURL, {
+					params: {
+						code: code,
+						state: state,
+					},
+				})
+				.then((response) => {
+					// handle success
+					tokenReceived(response.data);
+				})
+				.catch((error) => {
+					// handle error
+					console.error(error);
+				});
 		}
 
 		return {};
