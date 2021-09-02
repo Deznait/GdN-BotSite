@@ -1,5 +1,10 @@
 const admin = require("firebase-admin");
-admin.initializeApp();
+const serviceAccount = require("./service-account.json");
+admin.initializeApp(
+    {
+      credential: admin.credential.cert(serviceAccount),
+    },
+);
 
 // Scheduled functions (Execute X timed a day, at specific times...)
 exports.scheduled = require("./scheduled/index");
