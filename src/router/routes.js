@@ -2,12 +2,12 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import("layouts/MainLayout.vue"),
     children: [
       {
         path: '',
         name: 'Homepage',
-        component: () => import('pages/Index.vue')
+        component: () => import("pages/Index.vue")
       },
       {
         path: "miembros",
@@ -28,7 +28,7 @@ const routes = [
   },
   {
     path: '/popup',
-    component: () => import("layouts/LoginLayout.vue")
+    component: () => import("layouts/LoginPopup.vue")
   },
 
   // Always leave this as last one,
