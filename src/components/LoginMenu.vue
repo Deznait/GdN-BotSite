@@ -62,7 +62,7 @@ export default defineComponent({
 		const $q = useQuasar();
 
 		const logIn = async () => {
-			window.open('popup.html', 'name', 'height=585,width=400');
+			window.open('popup', 'name', 'height=585,width=400');
 		};
 
 		const logOut = async () => {
