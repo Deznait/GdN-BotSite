@@ -13,6 +13,7 @@ const cors = require("cors")({origin: true});
 const OAUTH_HOST = "https://eu.battle.net";
 const OAUTH_REDIRECT_URI = `https://${process.env.GCLOUD_PROJECT}.web.app/popup`;
 const OAUTH_SCOPES = "wow.profile";
+const OAUTH_LOCALE = "es_ES";
 
 
 /**
@@ -46,6 +47,7 @@ exports.battlenetRedirect = functions.region("europe-west1").https.onRequest((re
     redirect_uri: OAUTH_REDIRECT_URI,
     scope: OAUTH_SCOPES,
     state: state,
+    locale: OAUTH_LOCALE,
   });
 
   res.redirect(redirectUri);
@@ -66,6 +68,7 @@ exports.battlenetToken = functions.region("europe-west1").https.onRequest(async 
         redirect_uri: OAUTH_REDIRECT_URI,
         scope: OAUTH_SCOPES,
         code: req.query.code,
+        locale: OAUTH_LOCALE,
       });
       functions.logger.log("Auth code exchange result received:", results);
 
@@ -174,7 +177,7 @@ async function getBattlenetAccountInfo(accessToken) {
 
 
 exports.testing = functions.region("europe-west1").https.onRequest(async (req, res) => {
-  const accessToken = "EUmNvDD0cm6wBmL1QH12Jga74AaXYMZMT3";
+  const accessToken = functions.config().battlenet.testtoken;
   const battleNetUserID = 924502;
   const accountProfile = await createFirebaseAccount(accessToken, battleNetUserID);
   functions.logger.log("accountProfile (testing)", accountProfile);
