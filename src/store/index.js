@@ -1,7 +1,8 @@
 import { store } from 'quasar/wrappers';
 import { createStore } from 'vuex';
 
-import guildRoster from './guildRoster';
+// import guildRoster from './guildRoster';
+import guildRoster from './guild-roster';
 
 /*
  * If not building with SSR mode, you can
