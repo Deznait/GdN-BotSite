@@ -197,15 +197,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-#avatar {
-	padding: 20px;
-}
-#profile {
-	height: 130px;
-	padding: 20px;
-	background-color: #009688;
-}
-
 .q-drawer {
 	.drawer_normal {
 		display: flex;
@@ -265,7 +256,7 @@ export default defineComponent({
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.1s ease;
 }
 
 

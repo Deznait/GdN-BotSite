@@ -18,7 +18,7 @@
 		<q-list class="q-pl-lg">
 			<q-item
 				v-ripple
-				to="/MapMarker"
+				to="/perfil"
 				active-class="q-item-no-link-highlighting"
 				clickable
 			>
