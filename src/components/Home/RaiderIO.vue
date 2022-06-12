@@ -82,9 +82,10 @@ import { defineComponent } from 'vue';
 import { useQuasar } from 'quasar';
 import axios from 'axios';
 
-const realmNames = {
+const raidNames = {
 	'castle-nathria': 'Castillo de Nathria',
 	'sanctum-of-domination': 'Sagrario de Dominación',
+	'sepulcher-of-the-first-ones': 'Sepulcro de los Primeros'
 };
 
 export default defineComponent({
@@ -100,7 +101,7 @@ export default defineComponent({
 				raids: {},
 				date_fetched: '',
 			},
-			raidTab: 'sanctum-of-domination',
+			raidTab: 'sepulcher-of-the-first-ones',
 			$q: useQuasar(),
 		};
 	},
@@ -201,7 +202,7 @@ export default defineComponent({
 			// Assing nmaes to the raids, based on a array
 			for (var [raid_key] of Object.entries(guild_info.raids)) {
 				Object.assign(guild_info.raids[raid_key], {
-					name: realmNames[raid_key],
+					name: raidNames[raid_key],
 					slug: raid_key,
 				});
 			}
