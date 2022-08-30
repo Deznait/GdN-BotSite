@@ -12,17 +12,13 @@
 							:rows="members"
 							:columns="columns"
 							row-key="name"
-							:pagination="initialPagination"
+							:pagination="pagination"
 							rows-per-page-label="Por página"
 							:rows-per-page-options="[10, 20, 40, 100]"
-							:loading="loading"
+							:loading="loadingTable"
 							:filter="filter"
 							@row-click="onRowClick"
 						>
-                            <template #loading>
-                                <q-inner-loading showing color="primary" />
-                            </template>
-
 							<template #top-right>
 								<q-input
 									v-model="filter"
@@ -61,18 +57,6 @@
 									<ClassIcon :classid="props.row.class" />
 								</q-td>
 							</template>
-
-                            <template #body-cell-rank="props">
-								<q-td :props="props">
-                                    {{ rankName(props.row.rank) }}
-								</q-td>
-							</template>
-
-                            <template #body-cell-realm="props">
-								<q-td :props="props">
-                                    {{ realmName(props.row.realm) }}
-								</q-td>
-							</template>
 						</q-table>
 					</q-card>
 				</div>
@@ -82,9 +66,9 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed } from 'vue';
 import ClassIcon from 'components/ClassIcon';
-import { useStore } from 'vuex';
+// import { useStore } from 'vuex';
+import { db } from 'boot/firebase';
 
 const rankNames = {
 	0: 'Fundador',
@@ -104,99 +88,84 @@ const realmNames = {
 	sanguino: 'Sanguino',
 	shendralar: "Shen'dralar",
 };
-const columns = [
-	{
-		name: 'name',
-		required: true,
-		label: 'Nombre',
-		align: 'left',
-		field: (row) => row.name,
-		sortable: true,
-	},
-	{
-		name: 'class',
-		required: true,
-		label: 'Clase',
-		align: 'center',
-		field: (row) => row.class,
-		sortable: true,
-	},
-	{
-		name: 'rank',
-		label: 'Rango',
-		field: (row) => row.rank,
-		sortable: true,
-	},
-	{
-		name: 'realm',
-		label: 'Reino',
-		field: (row) => row.realm,
-	},
-];
 
-export default defineComponent({
+export default {
 	name: 'PageMembers',
 	components: {
 		ClassIcon,
 	},
-	setup() {
-        const $store = useStore();
+	data() {
+		return {
+			loadingTable: true,
+			mode: 'list',
+			filter: '',
+			members: [],
+			pagination: {
+				sortBy: 'rank',
+				descending: false,
+				page: 1,
+				rowsPerPage: 20,
+			},
+			columns: [
+				{
+					name: 'name',
+					required: true,
+					label: 'Nombre',
+					align: 'left',
+					field: (row) => row.name,
+					format: (val) => `${val}`,
+					sortable: true,
+				},
+				{
+					name: 'class',
+					required: true,
+					label: 'Clase',
+					align: 'center',
+					field: (row) => row.class,
+					sortable: true,
+				},
+				{
+					name: 'rank',
+					label: 'Rango',
+					field: (row) => row.rank,
+					format: (val) => this.rankName(val),
+					sortable: true,
+				},
+				{
+					name: 'realm',
+					label: 'Reino',
+					field: (row) => row.realm,
+					format: (val) => this.realmName(val),
+				},
+			],
+		};
+	},
+	created() {
+		db.collection('characters')
+			.get()
+			.then((query) => {
+				this.members = [];
 
-        const mode = ref('list');
-        const filter = ref('');
-        const loading = computed({
-            get: () => $store.state.guildRoster.isLoading,
-            set: val => {
-                $store.commit('showcase/updateDrawerState', val);
-            },
-        });
-
-        $store.dispatch("guildRoster/getAll");
-        const members = computed(() => $store.getters['guildRoster/roster']);
-
-
-        const onRowClick = (evt, row) => {
-            console.info('clicked on');
+				query.forEach((doc) => {
+					this.members.push(doc.data());
+				});
+				this.loadingTable = false;
+			});
+	},
+	methods: {
+		onRowClick(evt, row) {
+			console.info('clicked on');
 			console.info('row', row);
 			console.info('rowName', row.name);
-        };
-        const rankName = (value) => {
-            return rankNames[value];
-        };
-        const realmName = (value) => {
-            return realmNames[value];
-        };
-
-        return {
-            initialPagination: {
-                sortBy: 'rank',
-                descending: false,
-                page: 1,
-                rowsPerPage: 20
-            },
-            columns,
-			mode,
-            filter,
-            loading,
-            members,
-            onRowClick,
-            rankName,
-            realmName
-        };
-    },
-	// created() {
-	// 	db.collection('characters')
-	// 		.get()
-	// 		.then((query) => {
-	// 			this.members = [];
-
-	// 			query.forEach((doc) => {
-	// 				this.members.push(doc.data());
-	// 			});
-	// 			this.loadingTable = false;
-	// 		});
-	// },
-});
+		},
+		rankName: function (value) {
+			return rankNames[value];
+		},
+		realmName: function (value) {
+			return realmNames[value];
+		},
+	},
+};
 </script>
 
 <style lang="scss">

@@ -12,7 +12,7 @@
 		"build": "quasar build",
 		"build:pwa": "quasar build -m pwa",
 		"emulators": "firebase emulators:start",
-		"emulators:functions": "firebase emulators:start --only functions",
+		"emulators:functions": "firebase emulators:start --only functions,firestore",
 		"firebase:deploy": "firebase deploy",
 		"firebase:deploy:rules": "firebase deploy --only firestore:rules",
 		"lint": "eslint --ext .js,.vue ./",
